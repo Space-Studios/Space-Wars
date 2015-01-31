@@ -1,2 +1,2 @@
 # Space-Studios
-A stratey game
+A very stratey game
