@@ -12,7 +12,7 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = 'space studios game'
+        appName = 'my-gdx-game'
         gdxVersion = '1.5.3'
         roboVMVersion = '1.0.0-beta-03'
         box2DLightsVersion = '1.3'
