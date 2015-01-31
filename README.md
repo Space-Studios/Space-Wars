@@ -4,5 +4,5 @@ Use github for windows as it is simpler than Egit.Can someone email me or commit
 because netbook will not let me download.
 # Importing or building on school laptops or networks will not work
 
-[Group chat here](http://webchat.esper.net/?nick=&channels=Space-Studios-Chat")
+[Group chat here](https://test-chat-nikola-bojanic.c9.io/") NOTE: a few others know about this so there may be random visitors.
 
