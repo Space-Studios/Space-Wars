@@ -1,2 +1,3 @@
 # Space-Studios
-A very stratey game
+The stratiest game of all time.
+Use github for windows as it is simpler than Egit.
