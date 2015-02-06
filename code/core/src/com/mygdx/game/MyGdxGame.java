@@ -31,10 +31,17 @@ public class MyGdxGame extends ApplicationAdapter {
 		//background(hope you like it!!!)
 		private Texture tex_space;
 		private Sprite spr_space;
+		//lanes
+		private int lane1 = 480-32;//y value
+		private int lane2 = 480; //y value
+		private int lane3 = 480+32;//y value
+		//Make Ship Variable:
 		
 		
 		
-		// EPIC TIP: 0,0 is the lower left hand corner (I hope)
+		
+		
+		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
 			//call the Init function for all the class variables
