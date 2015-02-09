@@ -4,9 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.objects.BaseshipObject;
 
 public class ShooterShip extends BaseshipObject {
 
+	public ShipTypes getType() {
+		return ShipTypes.ShooterShip; 
+	}
+	
 	public ShooterShip() {
 		super();
 	}

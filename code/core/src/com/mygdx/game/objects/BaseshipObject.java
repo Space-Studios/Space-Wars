@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class BaseshipObject {
+	
 	protected Rectangle Mask;
 	protected Sprite Sprite;
 	protected Texture Texture;
@@ -18,8 +19,14 @@ public class BaseshipObject {
 	protected Boolean Created;
 	protected int Damage;
 	protected Boolean Blue;
+	protected int ShotTime = 60; //Shot cooldown
+	protected int Shot; // the cooldown counter. if it equals ShotTime, it shoots.
 	
 	//getters and setters for all variables
+	public ShipTypes getType() {
+		return ShipTypes.BaseshipObject; 
+	}
+	
 	public Rectangle getMask() {
 		return Mask;
 	}
@@ -100,13 +107,9 @@ public class BaseshipObject {
 
 	public void Init() {};
 	
-	public int hits(Rectangle r) {
-		if (Mask.overlaps(r)) {
-			return 1;
-		} 
-		else {
-			return -1;
-		}
+	public Boolean hits(Rectangle r) {
+		Boolean rc = Mask.overlaps(r);
+		return rc;
 	}
 	
 	//action
@@ -128,7 +131,7 @@ public class BaseshipObject {
 			//this sets the ship variable to the current one
 			BaseshipObject otherShip = otherShips.get(i);
 			// this checks if it is colliding and the ship is of a different color
-			if (this.hits(otherShip.Mask) == -1 && otherShip.Blue!=this.Blue){
+			if (this.hits(otherShip.Mask) && otherShip.Blue != this.Blue){
 				colliding = true;
 				collider = otherShip;
 				break;
@@ -147,7 +150,12 @@ public class BaseshipObject {
 		//--------Melee Damaging------\\
 		if (collider!=null){
 			this.takeDamage(collider.Damage);
+			if (this.getType() == ShipTypes.SuicideShip){
+				Created = false;
+			}
 		}
+		//-------Shooting------\\
+		
 	}
 	
 	//sets position of the object

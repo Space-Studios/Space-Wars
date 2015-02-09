@@ -1,12 +1,18 @@
 package com.mygdx.game.objects;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.objects.BaseshipObject;
 
 public class SuicideShip extends BaseshipObject {
 
+	public ShipTypes getType() {
+		return ShipTypes.SuicideShip; 
+	}
+	
 	public SuicideShip() {
 		super();
 	}
