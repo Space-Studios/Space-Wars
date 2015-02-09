@@ -23,27 +23,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		//spritebatch for drawing the sprites on
 		private SpriteBatch batch;
 		//----TEXTURES AND SPRITES DEFINED----\\
-		//suicide drone: I called it boomship because it booms
-		private SuicideShip mboomship00 = new SuicideShip();
-		private SuicideShip mboomship01 = new SuicideShip();
-		private SuicideShip mboomship02 = new SuicideShip();
-		private SuicideShip mboomship03 = new SuicideShip();
-		private SuicideShip mboomship04 = new SuicideShip();
-		private SuicideShip mboomship05 = new SuicideShip();
-		private SuicideShip mboomship06 = new SuicideShip();
-		private SuicideShip mboomship07 = new SuicideShip();
-		private SuicideShip mboomship08 = new SuicideShip();
-		private SuicideShip mboomship09 = new SuicideShip();
-		//shooter ship: i called it shootship because it shoots
-		private ShooterShip mshootship00 = new ShooterShip();
-		private ShooterShip mshootship01 = new ShooterShip();
-		private ShooterShip mshootship02 = new ShooterShip();
-		private ShooterShip mshootship03 = new ShooterShip();
-		private ShooterShip mshootship04 = new ShooterShip();
-		//blocker ship: I called it brickship because it is a brick
-		private BlockerShip mbrickship00 = new BlockerShip();
-		private BlockerShip mbrickship01 = new BlockerShip();
-		private BlockerShip mbrickship02 = new BlockerShip();
 		//base
 		private RedBase mRedbase = new RedBase();
 		private BlueBase mBluebase = new BlueBase();
@@ -85,8 +64,8 @@ public class MyGdxGame extends ApplicationAdapter {
 				allShips.add(new ShooterShip());
 			}
 			
-			for(int i = 0; i<10; i++) {
-				allShips.add(new SuicideShip());
+			for(int i = 0; i<3; i++) {
+				allShips.add(new BlockerShip());
 			}
 			
 			// init the ships
