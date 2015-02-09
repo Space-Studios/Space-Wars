@@ -78,7 +78,7 @@ public class ShooterShip {
 	
 	public void create(int ypo){
 		created = true;
-		this.setPlace(736, ypo);
+		this.setPlace(736-128, ypo);
 	}
 	
 }
