@@ -52,9 +52,9 @@ public class ShooterShip {
 				//move this object
 				this.setPlace(x+speed, y);
 			}
-		}
-		else{
-			System.out.print("Suicidal collision between objects");
+			else{
+				System.out.print("Suicidal collision between objects");
+			}
 		}
 	}
 	//sets position of the object
