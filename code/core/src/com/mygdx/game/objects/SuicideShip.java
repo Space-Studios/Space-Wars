@@ -15,6 +15,7 @@ public class SuicideShip {
 	private float x;
 	private float y;
 	private final int speed = 5;
+	private Boolean created;
 	
 	//constructor
 	public SuicideShip() {
@@ -28,6 +29,7 @@ public class SuicideShip {
 		this.setPlace(0, 0);
 		x = 0.0f;
 		y = 0.0f;
+		created = false;
 	}
 	
 	//returns if colliding
@@ -68,7 +70,13 @@ public class SuicideShip {
 	}
 	
 	public void draw(SpriteBatch batch){
-		sprite.draw(batch);
+		if (created == true){
+			sprite.draw(batch);
+		}
+	}
+	public void create(int ypo){
+		created = true;
+		this.setPlace(736, ypo);
 	}
 	
 }
