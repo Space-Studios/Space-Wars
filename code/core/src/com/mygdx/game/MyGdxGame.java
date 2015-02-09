@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -7,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.objects.BaseshipObject;
 import com.mygdx.game.objects.BlockerShip;
 import com.mygdx.game.objects.BlueBase;
 import com.mygdx.game.objects.RedBase;
@@ -70,29 +74,27 @@ public class MyGdxGame extends ApplicationAdapter {
 		public void create () {
 			//call the Init function for all the class variables
 			//suicide ships
-			mboomship00.Init();
-			mboomship01.Init();
-			mboomship02.Init();
-			mboomship03.Init();
-			mboomship04.Init();
-			mboomship05.Init();
-			mboomship06.Init();
-			mboomship07.Init();
-			mboomship08.Init();
-			mboomship09.Init();
-			//shooter ships
-			mshootship00.Init();
-			mshootship01.Init();
-			mshootship02.Init();
-			mshootship03.Init();
-			mshootship04.Init();
-			//blocker ships
-			mbrickship00.Init();
-			mbrickship01.Init();
-			mbrickship02.Init();
-			//bases
-			mRedbase.Init();
-			mBluebase.Init();
+			List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
+			
+			// Create all ships in the game
+			for(int i = 0; i<10; i++) {
+				allShips.add(new SuicideShip());
+			}
+
+			for(int i = 0; i<5; i++) {
+				allShips.add(new ShooterShip());
+			}
+			
+			for(int i = 0; i<10; i++) {
+				allShips.add(new SuicideShip());
+			}
+			
+			// init the ships
+			for(int len = allShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allShips.get(i);
+				ship.Init();
+			}
+			
 			
 			camera=new OrthographicCamera();
 			camera.setToOrtho(false,640,480);
