@@ -103,6 +103,7 @@ public class BaseshipObject {
 		Created = false;
 		X = 0.0f;
 		Y = 0.0f;
+		Shot = 0;
 	}
 
 	public void Init() {};
@@ -154,8 +155,13 @@ public class BaseshipObject {
 				Created = false;
 			}
 		}
-		//-------Shooting------\\
 		
+		//-------Shooting------\\
+		Shot++;
+		if (Shot >= 60){
+			Shot=0;
+			//Code still to be added: making the bullet by the color of the ship.
+		}
 	}
 	
 	//sets position of the object
