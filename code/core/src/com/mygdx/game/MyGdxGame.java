@@ -51,9 +51,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		private Texture tex_space;
 		private Sprite spr_space;
 		//lanes
-		private int lane1 = 480-32;//y value
+		private int lane1 = 480-64;//y value
 		private int lane2 = 480; //y value
-		private int lane3 = 480+32;//y value
+		private int lane3 = 480+64;//y value
 		//keypushes
 		private Boolean Q = false;
 		private Boolean W = false;
