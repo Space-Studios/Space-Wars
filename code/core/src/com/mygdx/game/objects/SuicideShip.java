@@ -47,10 +47,12 @@ public class SuicideShip {
 	}
 	//update
 	public void update(float delta){
-		//if not colliding
-		if (this.hits(mask) == -1){
-			//move this object
-			this.setPlace(x+speed, y);
+		if (created == true){
+			//if not colliding
+			if (this.hits(mask) == -1){
+				//move this object
+				this.setPlace(x+speed, y);
+			}
 		}
 		else{
 			System.out.print("Suicidal collision between objects");
