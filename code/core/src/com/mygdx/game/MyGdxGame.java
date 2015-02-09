@@ -18,7 +18,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		private OrthographicCamera camera;
 		//spritebatch for drawing the sprites on
 		private SpriteBatch batch;
-		//----TEXTURES AND SPRITES DEFINED (ALL ARE MADE BY LEON LEIBMANN)----\\
+		//----TEXTURES AND SPRITES DEFINED----\\
 		//suicide drone: I called it boomship because it booms
 		private SuicideShip mboomship00 = new SuicideShip();
 		//shooter ship: i called it shootship because it shoots
@@ -35,10 +35,19 @@ public class MyGdxGame extends ApplicationAdapter {
 		private int lane1 = 480-32;//y value
 		private int lane2 = 480; //y value
 		private int lane3 = 480+32;//y value
-		//Make Ship Variable:
-		
-		
-		
+		//keypushes
+		private Boolean Q = false;
+		private Boolean W = false;
+		private Boolean E = false;
+		private Boolean num1 = false;
+		private Boolean num2 = false;
+		private Boolean num3 = false;
+		private Boolean numpadnum1 = false;
+		private Boolean numpadnum2 = false;
+		private Boolean numpadnum3 = false;
+		private Boolean numpadnu4 = false;
+		private Boolean numpadnum5 = false;
+		private Boolean numpadnum6 = false;
 		
 		
 		// EPIC TIP: 0,0 is the lower left hand corner

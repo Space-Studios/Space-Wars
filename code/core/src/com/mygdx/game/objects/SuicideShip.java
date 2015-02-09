@@ -14,6 +14,9 @@ public class SuicideShip {
 	private int action;
 	private int xVel;
 	private int life;
+	private float x;
+	private float y;
+	private final int speed = 5;
 	
 	//constructor
 	public SuicideShip() {
@@ -25,6 +28,8 @@ public class SuicideShip {
 		texture = new Texture(Gdx.files.internal("sprites/Basic Suicide Drone.png"));
 		sprite = new Sprite(texture,0,0,128,64);
 		this.setPlace(0, 0);
+		x = 0.0f;
+		y = 0.0f;
 	}
 	
 	//returns if front is colliding
@@ -42,13 +47,22 @@ public class SuicideShip {
 	}
 	//update
 	public void update(float delta){
-		
+		//if not colliding
+		if (this.hits(mask) == -1){
+			//move this object
+			this.setPlace(x+speed, y);
+		}
+		else{
+			System.out.print("Suicidal collision between objects");
+		}
 	}
 	//sets position of the object
-	public void setPlace(float x,float y){
-		mask.x = x;
-		mask.y = y;
-		sprite.setPosition(x, y);
+	public void setPlace(float xpo,float ypo){
+		mask.x = xpo;
+		mask.y = ypo;
+		sprite.setPosition(xpo, ypo);
+		x = xpo;
+		y = ypo;
 	}
 	
 	public void takeDamage(int amount){
