@@ -53,7 +53,7 @@ public class BlockerShip {
 				this.setPlace(x+speed, y);
 			}
 			else{
-				System.out.print("Suicidal collision between objects");
+
 			}
 		}
 
