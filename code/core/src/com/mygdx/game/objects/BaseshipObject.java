@@ -17,6 +17,7 @@ public class BaseshipObject {
 	protected int Speed;
 	protected Boolean Created;
 	protected int Damage;
+	protected Boolean Blue;
 	
 	//getters and setters for all variables
 	public Rectangle getMask() {
@@ -119,19 +120,33 @@ public class BaseshipObject {
 		if (Created == false){
 			return;
 		}
-		//--------Moving-----------\\
-		Boolean colliding = false;
+		//this piece of code checks if it is colliding with a ship. that ship is called the collider
+		Boolean colliding = false; //if it is colliding
+		BaseshipObject collider = null; //what it is colliding with
 		//this goes through all the ships and checks if they are colliding.
 		for(int len = otherShips.size(), i = 0; i < len; i++) {
+			//this sets the ship variable to the current one
 			BaseshipObject otherShip = otherShips.get(i);
-			if (this.hits(otherShip.Mask) == -1){
+			// this checks if it is colliding and the ship is of a different color
+			if (this.hits(otherShip.Mask) == -1 && otherShip.Blue!=this.Blue){
 				colliding = true;
+				collider = otherShip;
 				break;
 			}
-		}	
+		}
+		//--------Moving-----------\\
 		//if not colliding, move this object
 		if (colliding == false){
-			this.setPlace(X + Speed, Y);
+			if (Blue == true){
+				this.setPlace(X + Speed, Y);
+			}
+			else{
+				this.setPlace(X - Speed, Y);
+			}
+		}
+		//--------Melee Damaging------\\
+		if (collider!=null){
+			this.takeDamage(collider.Damage);
 		}
 	}
 	
@@ -145,7 +160,10 @@ public class BaseshipObject {
 	}
 	
 	public void takeDamage(int amount){
-		
+		Life-=amount;
+		if (Life<=0){
+			Created = false;
+		}
 	}
 	
 	public void draw(SpriteBatch batch){

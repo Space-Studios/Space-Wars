@@ -18,5 +18,6 @@ public class SuicideShip extends BaseshipObject {
 		Texture = new Texture(Gdx.files.internal("sprites/Basic Suicide Drone.png"));
 		Sprite = new Sprite(Texture,0,0,128,64);
 		this.setPlace(0, 0);
+		Blue=true; 
 	}
 }

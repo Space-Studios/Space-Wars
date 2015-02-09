@@ -18,5 +18,6 @@ public class BlockerShip extends BaseshipObject {
 		Texture = new Texture(Gdx.files.internal("sprites/Basic Blocker.png"));
 		Sprite = new Sprite(Texture,0,0,128,64);
 		this.setPlace(0, 0);
+		Blue=true; 
 	}
 }
