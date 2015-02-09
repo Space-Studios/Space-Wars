@@ -18,6 +18,7 @@ public class BaseshipObject {
 	protected Boolean Created;
 	protected int Damage;
 	
+	//getters and setters for all variables
 	public Rectangle getMask() {
 		return Mask;
 	}
@@ -114,21 +115,23 @@ public class BaseshipObject {
 	
 	//update
 	public void update(float delta, List<BaseshipObject> otherShips){
+		//if not created, instantly exit
 		if (Created == false){
 			return;
 		}
-		
+		//--------Moving-----------\\
+		Boolean colliding = false;
+		//this goes through all the ships and checks if they are colliding.
 		for(int len = otherShips.size(), i = 0; i < len; i++) {
 			BaseshipObject otherShip = otherShips.get(i);
-
-			//if not colliding
 			if (this.hits(otherShip.Mask) == -1){
-				//move this object
-				this.setPlace(X + Speed, Y);
+				colliding = true;
+				break;
 			}
-			else{
-	
-			}
+		}	
+		//if not colliding, move this object
+		if (colliding == false){
+			this.setPlace(X + Speed, Y);
 		}
 	}
 	
