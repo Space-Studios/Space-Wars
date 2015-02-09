@@ -8,12 +8,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class RedBase {
-	Rectangle mask;
-	Sprite sprite;
-	Texture texture;
-	int action;
-	int xVel;
-	int life = 20;
+	private Rectangle mask;
+	private Sprite sprite;
+	private Texture texture;
+	private int life = 20;
 	//constructor
 	public RedBase(){
 		
@@ -24,7 +22,7 @@ public class RedBase {
 		sprite = new Sprite(texture,0,0,128,128);
 		this.setPlace(0, 0);
 	}
-	//returns if front is colliding
+	//returns colliding
 	public int hits(Rectangle r){
 		if (mask.overlaps(r)){
 		return 1;

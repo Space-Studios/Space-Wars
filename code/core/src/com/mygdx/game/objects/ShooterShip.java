@@ -11,8 +11,6 @@ public class ShooterShip {
 	private Rectangle mask;
 	private Sprite sprite;
 	private Texture texture;
-	private int action;
-	private int xVel;
 	private int life;
 	private float x;
 	private float y;
@@ -32,7 +30,7 @@ public class ShooterShip {
 		y = 0.0f;
 	}
 	
-	//returns if front is colliding
+	//returns if colliding
 	public int hits(Rectangle r){
 		if (mask.overlaps(r)){
 			return 1;

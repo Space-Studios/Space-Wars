@@ -11,8 +11,6 @@ public class BlueBase {
 	private Rectangle mask;
 	private Sprite sprite;
 	private Texture texture;
-	private int action;
-	private int xVel;
 	private int life = 20;
 	
 	//constructor
