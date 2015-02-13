@@ -123,7 +123,10 @@ public class BaseshipObject {
 		//if not created, instantly exit
 		if (Created == false){
 			return;
+		
 		}
+		//Goal: 30 fps
+		delta /= 30;
 		//this piece of code checks if it is colliding with a ship. that ship is called the collider
 		Boolean colliding = false; //if it is colliding
 		BaseshipObject collider = null; //what it is colliding with
