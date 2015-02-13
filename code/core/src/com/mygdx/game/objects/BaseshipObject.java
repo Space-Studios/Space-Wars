@@ -20,7 +20,7 @@ public class BaseshipObject {
 	protected int Damage;
 	protected Boolean Blue;
 	protected int ShotTime = 60; //Shot cooldown
-	protected int Shot; // the cooldown counter. if it equals ShotTime, it shoots.
+	protected float Shot; // the cooldown counter. if it equals ShotTime, it shoots.
 	
 	//getters and setters for all variables
 	public ShipTypes getType() {
@@ -103,7 +103,7 @@ public class BaseshipObject {
 		Created = false;
 		X = 0.0f;
 		Y = 0.0f;
-		Shot = 0;
+		Shot = 0.0f;
 	}
 
 	public void Init() {};
@@ -142,10 +142,10 @@ public class BaseshipObject {
 		//if not colliding, move this object
 		if (colliding == false){
 			if (Blue == true){
-				this.setPlace(X + Speed, Y);
+				this.setPlace(X + (Speed*delta), Y);
 			}
 			else{
-				this.setPlace(X - Speed, Y);
+				this.setPlace(X - (Speed*delta), Y);
 			}
 		}
 		//--------Melee Damaging------\\
@@ -157,7 +157,7 @@ public class BaseshipObject {
 		}
 		
 		//-------Shooting------\\
-		Shot++;
+		Shot+= (1*delta);
 		if (Shot >= 60){
 			Shot=0;
 			//Code still to be added: making the bullet by the color of the ship.

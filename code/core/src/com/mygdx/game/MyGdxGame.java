@@ -170,7 +170,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static void updateShips(List<BaseshipObject> allShips){
 			for(int len = allShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allShips.get(i);
-				ship.update(0, allShips);
+				ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
 			}
 		}
 		private static void drawShips(List<BaseshipObject> allShips, SpriteBatch batch){
