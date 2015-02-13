@@ -20,6 +20,7 @@ import com.mygdx.game.objects.ShooterShip;
 import com.mygdx.game.objects.SuicideShip;
 
 public class MyGdxGame extends ApplicationAdapter {
+		
 		//camera633
 		private OrthographicCamera camera;
 		//spritebatch for drawing the sprites on

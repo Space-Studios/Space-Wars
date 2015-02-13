@@ -45,10 +45,10 @@ public class BlueBase {
 	}
 	
 	//sets position of the object
-	public void setPlace(float x,float y){
-		mask.x = x;
-		mask.y = y;
-		sprite.setPosition(x, y);
+	public void setPlace(float xPosition,float yPosition){
+		mask.x = xPosition;
+		mask.y = yPosition;
+		sprite.setPosition(xPosition, yPosition);
 	}
 	
 	public void takeDamage(int amount){
