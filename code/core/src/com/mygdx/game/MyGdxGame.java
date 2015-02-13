@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -34,26 +35,24 @@ public class MyGdxGame extends ApplicationAdapter {
 		private int lane2 = 480; //y value
 		private int lane3 = 480+64;//y value
 		//keypushes
-		private Boolean Q = false;
-		private Boolean W = false;
-		private Boolean E = false;
-		private Boolean num1 = false;
-		private Boolean num2 = false;
-		private Boolean num3 = false;
-		private Boolean numpadnum1 = false;
-		private Boolean numpadnum2 = false;
-		private Boolean numpadnum3 = false;
-		private Boolean numpadnu4 = false;
-		private Boolean numpadnum5 = false;
-		private Boolean numpadnum6 = false;
+		private static Boolean Q = false;
+		private static Boolean W = false;
+		private static Boolean E = false;
+		private static Boolean num1 = false;
+		private static Boolean num2 = false;
+		private static Boolean num3 = false;
+		private static Boolean numpadnum1 = false;
+		private static Boolean numpadnum2 = false;
+		private static Boolean numpadnum3 = false;
+		private static Boolean numpadnum4 = false;
+		private static Boolean numpadnum5 = false;
+		private static Boolean numpadnum6 = false;
+		private List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
 		
 		
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
-			//call the Init function for all the class variables
-			//suicide ships
-			List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
 			
 			// Create all ships in the game
 			for(int i = 0; i<10; i++) {
@@ -120,7 +119,104 @@ public class MyGdxGame extends ApplicationAdapter {
 			
 			//Controls
 		}
-		private static void updateShips(){
+		private static void updateShips(List<BaseshipObject> allShips){
+			for(int len = allShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allShips.get(i);
+				ship.update(0, allShips);
+			}
+		}
+		private static void updateKeys(){
+			//updates all keys 
+			if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+				 Q = true;
+			 }
+			 else{
+				 Q = false;
+			 }
 			
+			 if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+				 Q = true;
+			 }
+			 else{
+				 Q = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.W)){
+				 W = true;
+			 }
+			 else{
+				 W = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.E)){
+				 E = true;
+			 }
+			 else{
+				 E = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
+				 num1 = true;
+			 }
+			 else{
+				 num1 = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
+				 num2 = true;
+			 }
+			 else{
+				 num2 = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
+				 num3 = true;
+			 }
+			 else{
+				 num3 = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_1)){
+				 numpadnum1 = true;
+			 }
+			 
+			 else{
+				 numpadnum1 = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_2)){
+				 numpadnum2 = true;
+			 }
+			 else{
+				 numpadnum2 = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_3)){
+				 numpadnum3 = true;
+			 }
+			 else{
+				 numpadnum3 = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_4)){
+				 numpadnum4 = true;
+			 }
+			 else{
+				 numpadnum4 = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_5)){
+				 numpadnum5 = true;
+			 }
+			 else{
+				 numpadnum5 = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_6)){
+				 numpadnum6 = true;
+			 }
+			 else{
+				 numpadnum6 = false;
+			 }
 		}
 }
