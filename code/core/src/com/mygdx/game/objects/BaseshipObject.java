@@ -188,8 +188,14 @@ public class BaseshipObject {
 		Sprite.draw(batch);
 	}
 	
-	public void create(int yPosition) {
-		Created = true;
-		this.setPlace(736-128, yPosition);
+	public Boolean create(int yPosition) {
+		if (Created = false){
+			Created = true;
+			this.setPlace(736-128, yPosition);
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }

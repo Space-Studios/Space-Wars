@@ -15,6 +15,7 @@ import com.mygdx.game.objects.BaseshipObject;
 import com.mygdx.game.objects.BlockerShip;
 import com.mygdx.game.objects.BlueBase;
 import com.mygdx.game.objects.RedBase;
+import com.mygdx.game.objects.ShipTypes;
 import com.mygdx.game.objects.ShooterShip;
 import com.mygdx.game.objects.SuicideShip;
 
@@ -31,9 +32,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		private Texture tex_space;
 		private Sprite spr_space;
 		//lanes
-		private int lane1 = 480-64;//y value
-		private int lane2 = 480; //y value
-		private int lane3 = 480+64;//y value
+		private static int lane1 = 480-64;//y value
+		private static int lane2 = 480; //y value
+		private static int lane3 = 480+64;//y value
+		private static int blueSelected;
+		private static int redSelected;
 		//keypushes
 		private static Boolean Q = false;
 		private static Boolean W = false;
@@ -102,9 +105,8 @@ public class MyGdxGame extends ApplicationAdapter {
 			Gdx.gl.glClearColor(1, 1, 1, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			
-			//batch things
-			
-			//put sprites you want to draw in here, the ones drawn first are behind the others
+
+			///drawing. The ones drawn first are behind the others
 			batch.begin();
 			//reset the color, just in case
 			batch.setColor(0, 0, 0, 1);
@@ -113,16 +115,87 @@ public class MyGdxGame extends ApplicationAdapter {
 			//draw the bases
 			mRedbase.show(batch); 
 			mBluebase.show(batch);
+			//draw the ships
+			drawShips(allShips,batch);
+			//end the drawing
 			batch.end();
 			
 			//Updates
-			
+			updateShips(allShips);
 			//Controls
+			updateKeys();
+			//get right selected variable
+			getLane();
+			//create ships
+			//suicide ship
+			if (Q==true){
+				for(int len = allShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allShips.get(i);
+					if (ship.getType().equals(ShipTypes.SuicideShip)){
+						if (ship.create(blueSelected)==true){
+							break;
+						}
+					}
+				}
+			}
+			//shooter ship
+			if (W==true){
+				for(int len = allShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allShips.get(i);
+					if (ship.getType().equals(ShipTypes.ShooterShip)){
+						if (ship.create(blueSelected)==true){
+							break;
+						}
+					}
+				}
+			}
+			//blocker ship
+			if (E==true){
+				for(int len = allShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allShips.get(i);
+					if (ship.getType().equals(ShipTypes.BlockerShip)){
+						if (ship.create(blueSelected)==true){
+							break;
+						}
+					}
+				}
+			}
 		}
+		
+		
+		
+		
+		//-------FUNCTIONS-------\\
 		private static void updateShips(List<BaseshipObject> allShips){
 			for(int len = allShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allShips.get(i);
 				ship.update(0, allShips);
+			}
+		}
+		private static void drawShips(List<BaseshipObject> allShips, SpriteBatch batch){
+			for(int len = allShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allShips.get(i);
+				ship.draw(batch);
+			}
+		}
+		private static void getLane(){
+			if (num1){
+				blueSelected = lane1;
+			}
+			if (num2){
+				blueSelected = lane2;
+			}
+			if (num3){
+				blueSelected = lane3;
+			}
+			if (numpadnum4){
+				redSelected = lane1;
+			}
+			if (numpadnum5){
+				redSelected = lane2;
+			}
+			if (numpadnum6){
+				redSelected = lane3;
 			}
 		}
 		private static void updateKeys(){
