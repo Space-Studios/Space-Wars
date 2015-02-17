@@ -76,8 +76,11 @@ public class MyGdxGame extends ApplicationAdapter {
 				BaseshipObject ship = allShips.get(i);
 				ship.Init();
 			}
+			// init the bases
+			mRedbase.Init();
+			mBluebase.Init();
 			
-			
+			//set camera
 			camera=new OrthographicCamera();
 			camera.setToOrtho(false,640,480);
 			batch=new SpriteBatch();
@@ -85,9 +88,9 @@ public class MyGdxGame extends ApplicationAdapter {
 			//background for the game
 			tex_space = new Texture(Gdx.files.internal("sprites/SPACE!!!!!.png"));
 			spr_space = new Sprite(tex_space,0,0,1024,480);
+			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
-			//-----Location Work------\\
 			//blue stuff
 			mBluebase.setPlace(736, 178);
 			//red stuff

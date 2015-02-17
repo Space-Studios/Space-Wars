@@ -16,6 +16,7 @@ public class RedBase {
 	public RedBase(){
 		
 	}
+	
 	public void Init(){
 		mask = new Rectangle (0.0f,0.0f,128.0f,128.0f);
 		texture = new Texture(Gdx.files.internal("sprites/RedBase.png"));
