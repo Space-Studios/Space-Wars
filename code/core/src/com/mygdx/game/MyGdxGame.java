@@ -130,7 +130,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			updateKeys();
 			//get right selected variable
 			getLane();
-			//create ships
+			//----create ships----\\
 			//suicide ship
 			if (Q==true){
 				for(int len = allShips.size(), i = 0; i < len; i++) {
@@ -164,6 +164,7 @@ public class MyGdxGame extends ApplicationAdapter {
 					}
 				}
 			}
+			
 		}
 		
 		
