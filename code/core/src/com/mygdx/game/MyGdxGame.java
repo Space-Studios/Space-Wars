@@ -33,9 +33,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		private Texture tex_space;
 		private Sprite spr_space;
 		//lanes
-		private static int lane1 = 480-64;//y value
+		private static int lane1 = 414;//y value
 		private static int lane2 = 480; //y value
-		private static int lane3 = 480+64;//y value
+		private static int lane3 = 544;//y value
 		private static int blueSelected;
 		private static int redSelected;
 		//keypushes
@@ -51,6 +51,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static Boolean numpadnum4 = false;
 		private static Boolean numpadnum5 = false;
 		private static Boolean numpadnum6 = false;
+		//basic ship list
 		private List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
 		
 		
