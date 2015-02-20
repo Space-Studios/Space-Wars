@@ -33,9 +33,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		private Texture tex_space;
 		private Sprite spr_space;
 		//lanes
-		private static int lane1 = 414;//y value
+		private static int lane1 = 480-64;//y value
 		private static int lane2 = 480; //y value
-		private static int lane3 = 544;//y value
+		private static int lane3 = 480+64;//y value
 		private static int blueSelected;
 		private static int redSelected;
 		//keypushes
@@ -51,7 +51,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static Boolean numpadnum4 = false;
 		private static Boolean numpadnum5 = false;
 		private static Boolean numpadnum6 = false;
-		//basic ship list
+		//arraylist of ships
+		//TIP: dont look at the ships. They are for my understanding only (they include no/little comments)
 		private List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
 		
 		
@@ -60,14 +61,17 @@ public class MyGdxGame extends ApplicationAdapter {
 		public void create () {
 			
 			// Create all ships in the game
+			//ten suicide ships
 			for(int i = 0; i<10; i++) {
 				allShips.add(new SuicideShip());
 			}
-
+			
+			//five shooter ships
 			for(int i = 0; i<5; i++) {
 				allShips.add(new ShooterShip());
 			}
 			
+			//three blocker ships
 			for(int i = 0; i<3; i++) {
 				allShips.add(new BlockerShip());
 			}
@@ -134,9 +138,13 @@ public class MyGdxGame extends ApplicationAdapter {
 			//----create ships----\\
 			//suicide ship
 			if (Q==true){
+				//goes through the list of ships
 				for(int len = allShips.size(), i = 0; i < len; i++) {
+					//gets current ship
 					BaseshipObject ship = allShips.get(i);
+					//if it is a suicide ship
 					if (ship.getType().equals(ShipTypes.SuicideShip)){
+						//if its create function returns true, break
 						if (ship.create(blueSelected)==true){
 							break;
 						}
@@ -144,6 +152,7 @@ public class MyGdxGame extends ApplicationAdapter {
 				}
 			}
 			//shooter ship
+			//same as suicide ship
 			if (W==true){
 				for(int len = allShips.size(), i = 0; i < len; i++) {
 					BaseshipObject ship = allShips.get(i);
