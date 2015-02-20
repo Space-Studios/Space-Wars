@@ -45,12 +45,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static Boolean num1 = false;
 		private static Boolean num2 = false;
 		private static Boolean num3 = false;
-		private static Boolean numpadnum1 = false;
-		private static Boolean numpadnum2 = false;
-		private static Boolean numpadnum3 = false;
-		private static Boolean numpadnum4 = false;
-		private static Boolean numpadnum5 = false;
-		private static Boolean numpadnum6 = false;
+		private static Boolean num8 = false;
+		private static Boolean num9 = false;
+		private static Boolean num0 = false;
+		private static Boolean I = false;
+		private static Boolean O = false;
+		private static Boolean P = false;
 		//basic ship list
 		private List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
 		
@@ -194,13 +194,13 @@ public class MyGdxGame extends ApplicationAdapter {
 			if (num3){
 				blueSelected = lane3;
 			}
-			if (numpadnum4){
+			if (num8){
 				redSelected = lane1;
 			}
-			if (numpadnum5){
+			if (num9){
 				redSelected = lane2;
 			}
-			if (numpadnum6){
+			if (num0){
 				redSelected = lane3;
 			}
 		}
@@ -255,47 +255,47 @@ public class MyGdxGame extends ApplicationAdapter {
 				 num3 = false;
 			 }
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_1)){
-				 numpadnum1 = true;
+			 if(Gdx.input.isKeyPressed(Input.Keys.Num_8)){
+				 num8 = true;
 			 }
 			 
 			 else{
-				 numpadnum1 = false;
+				 num8 = false;
 			 }
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_2)){
-				 numpadnum2 = true;
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUM_9)){
+				 num9 = true;
 			 }
 			 else{
-				 numpadnum2 = false;
+				 num9 = false;
 			 }
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_3)){
-				 numpadnum3 = true;
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUM_0)){
+				 num0 = true;
 			 }
 			 else{
-				 numpadnum3 = false;
+				 num0 = false;
 			 }
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_4)){
-				 numpadnum4 = true;
+			 if(Gdx.input.isKeyPressed(Input.Keys.I)){
+				 I = true;
 			 }
 			 else{
-				 numpadnum4 = false;
+				 I = false;
 			 }
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_5)){
-				 numpadnum5 = true;
+			 if(Gdx.input.isKeyPressed(Input.Keys.O)){
+				 O = true;
 			 }
 			 else{
-				 numpadnum5 = false;
+				 O = false;
 			 }
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.NUMPAD_6)){
-				 numpadnum6 = true;
+			 if(Gdx.input.isKeyPressed(Input.Keys.P)){
+				 P = true;
 			 }
 			 else{
-				 numpadnum6 = false;
+				 P = false;
 			 }
 		}
 }
