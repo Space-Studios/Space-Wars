@@ -378,7 +378,7 @@ public class MyGdxGame extends ApplicationAdapter {
 								E=false;
 								break;
 							}
-							blueMoney-=51;
+							blueMoney-=15;
 						}
 					}
 				}
