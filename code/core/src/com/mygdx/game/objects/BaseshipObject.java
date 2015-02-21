@@ -145,10 +145,10 @@ public class BaseshipObject {
 		//if not colliding, move this object
 		if (colliding == false){
 			if (Blue == true){
-				this.setPlace(X + (Speed*delta), Y);
+				this.setPlace(X + (Speed), Y);
 			}
 			else{
-				this.setPlace(X - (Speed*delta), Y);
+				this.setPlace(X - (Speed), Y);
 			}
 		}
 		//--------Melee Damaging------\\
@@ -192,7 +192,7 @@ public class BaseshipObject {
 	}
 	
 	public Boolean create(int yPosition) {
-		if (Created = false){
+		if (Created == false){
 			Created = true;
 			this.setPlace(736-128, yPosition);
 			return true;

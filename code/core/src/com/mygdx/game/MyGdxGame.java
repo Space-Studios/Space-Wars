@@ -21,23 +21,28 @@ import com.mygdx.game.objects.SuicideShip;
 
 public class MyGdxGame extends ApplicationAdapter {
 		
-		//camera633
+		//camera
 		private OrthographicCamera camera;
+		
 		//spritebatch for drawing the sprites on
 		private SpriteBatch batch;
+		
 		//----TEXTURES AND SPRITES DEFINED----\\
 		//base
 		private RedBase mRedbase = new RedBase();
 		private BlueBase mBluebase = new BlueBase();
+		
 		//background(hope you like it!!!)
 		private Texture tex_space;
 		private Sprite spr_space;
+		
 		//lanes
-		private static int lane1 = 480-64;//y value
-		private static int lane2 = 480; //y value
-		private static int lane3 = 480+64;//y value
+		private static int lane1 = 178-64;//y value
+		private static int lane2 = 178; //y value
+		private static int lane3 = 178+64;//y value
 		private static int blueSelected;
 		private static int redSelected;
+		
 		//keypushes
 		private static Boolean Q = false;
 		private static Boolean W = false;
@@ -45,33 +50,17 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static Boolean num1 = false;
 		private static Boolean num2 = false;
 		private static Boolean num3 = false;
-<<<<<<< HEAD
+
 		private static Boolean num8 = false;
 		private static Boolean num9 = false;
 		private static Boolean num0 = false;
 		private static Boolean I = false;
 		private static Boolean O = false;
 		private static Boolean P = false;
+		
 		//basic ship list
-=======
-		private static Boolean numpadnum1 = false;
-		private static Boolean numpadnum2 = false;
-		private static Boolean numpadnum3 = false;
-		private static Boolean numpadnum4 = false;
-		private static Boolean numpadnum5 = false;
-		private static Boolean numpadnum6 = false;
-<<<<<<< HEAD
-<<<<<<< HEAD
-		//basic ship list
-=======
 		//arraylist of ships
 		//TIP: dont look at the ships. They are for my understanding only (they include no/little comments)
->>>>>>> origin/master
->>>>>>> origin/master
-=======
-		//arraylist of ships
-		//TIP: dont look at the ships. They are for my understanding only (they include no/little comments)
->>>>>>> parent of b3453b8... Revert "Added Comments and fixed addition+subtraction"
 		private List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
 		
 		
@@ -115,12 +104,12 @@ public class MyGdxGame extends ApplicationAdapter {
 			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
-			//blue stuff
-			mBluebase.setPlace(736, 178);
 			//red stuff
-			mRedbase.setPlace(128, 178);
-			
+			mRedbase.setPlace(736, 178);
+			//blue stuff
+			mBluebase.setPlace(128, 178);		
 		}
+		
 		@Override
 		public void dispose(){
 			//disposes all the game textures and objects
@@ -192,12 +181,8 @@ public class MyGdxGame extends ApplicationAdapter {
 						}
 					}
 				}
-			}
-			
-		}
-		
-		
-		
+			}		
+		} // render
 		
 		//-------FUNCTIONS-------\\
 		private static void updateShips(List<BaseshipObject> allShips){
@@ -206,12 +191,14 @@ public class MyGdxGame extends ApplicationAdapter {
 				ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
 			}
 		}
+		
 		private static void drawShips(List<BaseshipObject> allShips, SpriteBatch batch){
 			for(int len = allShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allShips.get(i);
 				ship.draw(batch);
 			}
 		}
+		
 		private static void getLane(){
 			if (num1){
 				blueSelected = lane1;
@@ -232,16 +219,10 @@ public class MyGdxGame extends ApplicationAdapter {
 				redSelected = lane3;
 			}
 		}
+		
 		private static void updateKeys(){
 			//updates all keys 
 			if(Gdx.input.isKeyPressed(Input.Keys.Q)){
-				 Q = true;
-			 }
-			 else{
-				 Q = false;
-			 }
-			
-			 if(Gdx.input.isKeyPressed(Input.Keys.Q)){
 				 Q = true;
 			 }
 			 else{
@@ -283,7 +264,7 @@ public class MyGdxGame extends ApplicationAdapter {
 				 num3 = false;
 			 }
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.Num_8)){
+			 if(Gdx.input.isKeyPressed(Input.Keys.NUM_8)){
 				 num8 = true;
 			 }
 			 

@@ -24,5 +24,6 @@ public class ShooterShip extends BaseshipObject {
 		Sprite = new Sprite(Texture,0,0,128,64);
 		this.setPlace(0, 0);
 		Blue=true; 
+		Speed=2;
 	}
 }
