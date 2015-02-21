@@ -151,6 +151,13 @@ public class BaseshipObject {
 				this.setPlace(X - (Speed), Y);
 			}
 		}
+		//if out of the play area
+		if (X<0){
+			Created=false;
+		}
+		if (X>1024){
+			Created=false;
+		}
 		//--------Melee Damaging------\\
 		if (collider!=null){
 			this.takeDamage(collider.Damage);

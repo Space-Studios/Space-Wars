@@ -61,32 +61,36 @@ public class MyGdxGame extends ApplicationAdapter {
 		//basic ship list
 		//arraylist of ships
 		//TIP: dont look at the ships. They are for my understanding only (they include no/little comments)
-		private List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
+		private List<BaseshipObject> allBShips = new ArrayList<BaseshipObject>();
+		//ship cooldown. cool/30 = cooldown in seconds
+		private static final int cooldown = 100;
+		private int currentTick;
 		
 		
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
-			
+			//sets currentTick to 0
+			currentTick=0;
 			// Create all ships in the game
 			//ten suicide ships
 			for(int i = 0; i<10; i++) {
-				allShips.add(new SuicideShip());
+				allBShips.add(new SuicideShip());
 			}
 			
 			//five shooter ships
 			for(int i = 0; i<5; i++) {
-				allShips.add(new ShooterShip());
+				allBShips.add(new ShooterShip());
 			}
 			
 			//three blocker ships
 			for(int i = 0; i<3; i++) {
-				allShips.add(new BlockerShip());
+				allBShips.add(new BlockerShip());
 			}
 			
 			// init the ships
-			for(int len = allShips.size(), i = 0; i < len; i++) {
-				BaseshipObject ship = allShips.get(i);
+			for(int len = allBShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allBShips.get(i);
 				ship.Init();
 			}
 			// init the bases
@@ -133,27 +137,37 @@ public class MyGdxGame extends ApplicationAdapter {
 			mRedbase.show(batch); 
 			mBluebase.show(batch);
 			//draw the ships
-			drawShips(allShips,batch);
+			drawShips(allBShips,batch);
 			//end the drawing
 			batch.end();
 			
 			//Updates
-			updateShips(allShips);
-			//Controls
+			updateShips(allBShips);
+			//update keys
 			updateKeys();
 			//get right selected variable
 			getLane();
+			
 			//----create ships----\\
+			//cooldown management
+			if (currentTick < cooldown){
+				currentTick++;
+				return;
+			}
+			currentTick = 0;	
+			
+			//actually make ships:
 			//suicide ship
 			if (Q==true){
 				//goes through the list of ships
-				for(int len = allShips.size(), i = 0; i < len; i++) {
+				for(int len = allBShips.size(), i = 0; i < len; i++) {
 					//gets current ship
-					BaseshipObject ship = allShips.get(i);
+					BaseshipObject ship = allBShips.get(i);
 					//if it is a suicide ship
 					if (ship.getType().equals(ShipTypes.SuicideShip)){
 						//if its create function returns true, break
 						if (ship.create(blueSelected)==true){
+							Q=false;
 							break;
 						}
 					}
@@ -162,10 +176,11 @@ public class MyGdxGame extends ApplicationAdapter {
 			//shooter ship
 			//same as suicide ship
 			if (W==true){
-				for(int len = allShips.size(), i = 0; i < len; i++) {
-					BaseshipObject ship = allShips.get(i);
+				for(int len = allBShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allBShips.get(i);
 					if (ship.getType().equals(ShipTypes.ShooterShip)){
 						if (ship.create(blueSelected)==true){
+							W=false;
 							break;
 						}
 					}
@@ -173,28 +188,29 @@ public class MyGdxGame extends ApplicationAdapter {
 			}
 			//blocker ship
 			if (E==true){
-				for(int len = allShips.size(), i = 0; i < len; i++) {
-					BaseshipObject ship = allShips.get(i);
+				for(int len = allBShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allBShips.get(i);
 					if (ship.getType().equals(ShipTypes.BlockerShip)){
 						if (ship.create(blueSelected)==true){
+							E=false;
 							break;
 						}
 					}
 				}
 			}		
-		} // render
+		} // end of render
 		
 		//-------FUNCTIONS-------\\
-		private static void updateShips(List<BaseshipObject> allShips){
-			for(int len = allShips.size(), i = 0; i < len; i++) {
-				BaseshipObject ship = allShips.get(i);
-				ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
+		private static void updateShips(List<BaseshipObject> allBShips){
+			for(int len = allBShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allBShips.get(i);
+				ship.update(Gdx.graphics.getRawDeltaTime(), allBShips);
 			}
 		}
 		
-		private static void drawShips(List<BaseshipObject> allShips, SpriteBatch batch){
-			for(int len = allShips.size(), i = 0; i < len; i++) {
-				BaseshipObject ship = allShips.get(i);
+		private static void drawShips(List<BaseshipObject> allBShips, SpriteBatch batch){
+			for(int len = allBShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allBShips.get(i);
 				ship.draw(batch);
 			}
 		}
@@ -221,7 +237,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 		
 		private static void updateKeys(){
-			//updates all keys 
+			//updates ship keys 
 			if(Gdx.input.isKeyPressed(Input.Keys.Q)){
 				 Q = true;
 			 }
@@ -243,6 +259,26 @@ public class MyGdxGame extends ApplicationAdapter {
 				 E = false;
 			 }
 			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.I)){
+				 I = true;
+			 }
+			 else{
+				 I = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.O)){
+				 O = true;
+			 }
+			 else{
+				 O = false;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.P)){
+				 P = true;
+			 }
+			 else{
+				 P = false;
+			 }
 			 if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
 				 num1 = true;
 			 }
@@ -286,25 +322,5 @@ public class MyGdxGame extends ApplicationAdapter {
 				 num0 = false;
 			 }
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.I)){
-				 I = true;
-			 }
-			 else{
-				 I = false;
-			 }
-			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.O)){
-				 O = true;
-			 }
-			 else{
-				 O = false;
-			 }
-			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.P)){
-				 P = true;
-			 }
-			 else{
-				 P = false;
-			 }
 		}
 }
