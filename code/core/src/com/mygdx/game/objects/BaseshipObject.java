@@ -167,7 +167,7 @@ public class BaseshipObject {
 		}
 		
 		//-------Shooting------\\
-		Shot+= (1*delta);
+		Shot+= (1);
 		if (Shot >= 60){
 			Shot=0;
 			//Code still to be added: making the bullet by the color of the ship.
@@ -201,7 +201,12 @@ public class BaseshipObject {
 	public Boolean create(int yPosition) {
 		if (Created == false){
 			Created = true;
-			this.setPlace(736-128, yPosition);
+			if (Blue) {
+				this.setPlace(128, yPosition+48);
+			}
+			else{
+				this.setPlace(736, yPosition+48);
+			}
 			return true;
 		}
 		else{

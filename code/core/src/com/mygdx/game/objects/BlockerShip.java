@@ -19,7 +19,7 @@ public class BlockerShip extends BaseshipObject {
 	public void Init() {
 		Life = 6;
 		Damage = 1;
-		Mask = new Rectangle (0.0f,0.0f,128.0f,64.0f);
+		Mask = new Rectangle (0.0f,0.0f,64.0f,32.0f);
 		Texture = new Texture(Gdx.files.internal("sprites/Basic Blocker.png"));
 		Sprite = new Sprite(Texture,0,0,128,64);
 		this.setPlace(0, 0);

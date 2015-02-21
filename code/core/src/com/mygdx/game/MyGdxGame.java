@@ -6,9 +6,11 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.objects.BaseshipObject;
@@ -37,9 +39,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		private Sprite spr_space;
 		
 		//lanes
-		private static int lane1 = 178-64;//y value
+		private static int lane1 = 178-32;//y value
 		private static int lane2 = 178; //y value
-		private static int lane3 = 178+64;//y value
+		private static int lane3 = 178+96;//y value
 		private static int blueSelected;
 		private static int redSelected;
 		
@@ -61,17 +63,43 @@ public class MyGdxGame extends ApplicationAdapter {
 		//basic ship list
 		//arraylist of ships
 		//TIP: dont look at the ships. They are for my understanding only (they include no/little comments)
-		private List<BaseshipObject> allBShips = new ArrayList<BaseshipObject>();
+		private static List<BaseshipObject> allBShips = new ArrayList<BaseshipObject>();
+		
 		//ship cooldown. cool/30 = cooldown in seconds
-		private static final int cooldown = 100;
-		private int currentTick;
+		private static final int cooldown = 30;
+		private static int currentTick;
+		
+		//resoucesCooldown. same time as the ship cooldown
+		private static final int cooldown2 = 60;
+		private static int currentTick2;
+		
+		//resouces variables
+		private static int blueMoney;
+		private static int redMoney;
+		
+		//font
+		private static BitmapFont font;
 		
 		
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
+			//--font stuff--\\
+			//make font
+			font = new BitmapFont();
+			//sets font color
+			font.setColor(Color.WHITE);
+			
+			//--Timer stuff--\\
 			//sets currentTick to 0
 			currentTick=0;
+			
+			//--Resources stuff--\\
+			//set resources to 20
+			blueMoney=20;
+			redMoney=20;
+			
+			//--Ship Stuff--\\
 			// Create all ships in the game
 			//ten suicide ships
 			for(int i = 0; i<10; i++) {
@@ -138,6 +166,9 @@ public class MyGdxGame extends ApplicationAdapter {
 			mBluebase.show(batch);
 			//draw the ships
 			drawShips(allBShips,batch);
+			//draw Money
+			font.draw(batch, "Money:$"+blueMoney, 128, 178-16);
+			font.draw(batch, "Money:$"+redMoney, 736, 178-16);
 			//end the drawing
 			batch.end();
 			
@@ -148,57 +179,12 @@ public class MyGdxGame extends ApplicationAdapter {
 			//get right selected variable
 			getLane();
 			
-			//----create ships----\\
-			//cooldown management
-			if (currentTick < cooldown){
-				currentTick++;
-				return;
-			}
-			currentTick = 0;	
+			//create ships
+			createShips();
 			
-			//actually make ships:
-			//suicide ship
-			if (Q==true){
-				//goes through the list of ships
-				for(int len = allBShips.size(), i = 0; i < len; i++) {
-					//gets current ship
-					BaseshipObject ship = allBShips.get(i);
-					//if it is a suicide ship
-					if (ship.getType().equals(ShipTypes.SuicideShip)){
-						//if its create function returns true, break
-						if (ship.create(blueSelected)==true){
-							Q=false;
-							break;
-						}
-					}
-				}
-			}
-			//shooter ship
-			//same as suicide ship
-			if (W==true){
-				for(int len = allBShips.size(), i = 0; i < len; i++) {
-					BaseshipObject ship = allBShips.get(i);
-					if (ship.getType().equals(ShipTypes.ShooterShip)){
-						if (ship.create(blueSelected)==true){
-							W=false;
-							break;
-						}
-					}
-				}
-			}
-			//blocker ship
-			if (E==true){
-				for(int len = allBShips.size(), i = 0; i < len; i++) {
-					BaseshipObject ship = allBShips.get(i);
-					if (ship.getType().equals(ShipTypes.BlockerShip)){
-						if (ship.create(blueSelected)==true){
-							E=false;
-							break;
-						}
-					}
-				}
-			}		
-		} // end of render
+			//update money
+			giveMoney();
+		} 
 		
 		//-------FUNCTIONS-------\\
 		private static void updateShips(List<BaseshipObject> allBShips){
@@ -322,5 +308,66 @@ public class MyGdxGame extends ApplicationAdapter {
 				 num0 = false;
 			 }
 			 
+		}
+		public static void createShips(){
+			//cooldown management
+			if (currentTick < cooldown){
+				currentTick++;
+				return;
+			}
+			currentTick = 0;	
+			
+			//actually make ships:
+			//suicide ship
+			if (Q==true){
+				//goes through the list of ships
+				for(int len = allBShips.size(), i = 0; i < len; i++) {
+					//gets current ship
+					BaseshipObject ship = allBShips.get(i);
+					//if it is a suicide ship
+					if (ship.getType().equals(ShipTypes.SuicideShip)){
+						//if its create function returns true, break
+						if (ship.create(blueSelected)==true){
+							Q=false;
+							break;
+						}
+					}
+				}
+			}
+			//shooter ship
+			//same as suicide ship
+			if (W==true){
+				for(int len = allBShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allBShips.get(i);
+					if (ship.getType().equals(ShipTypes.ShooterShip)){
+						if (ship.create(blueSelected)==true){
+							W=false;
+							break;
+						}
+					}
+				}
+			}
+			//blocker ship
+			if (E==true){
+				for(int len = allBShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allBShips.get(i);
+					if (ship.getType().equals(ShipTypes.BlockerShip)){
+						if (ship.create(blueSelected)==true){
+							E=false;
+							break;
+						}
+					}
+				}
+			}		
+		}
+		public static void giveMoney(){
+			if (currentTick2 < cooldown2){
+				currentTick2++;
+				return;
+			}
+			currentTick2 = 0;
+			
+			blueMoney+=5;
+			redMoney+=5;
 		}
 }
