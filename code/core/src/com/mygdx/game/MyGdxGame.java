@@ -336,10 +336,14 @@ public class MyGdxGame extends ApplicationAdapter {
 					BaseshipObject ship = allBShips.get(i);
 					//if it is a suicide ship
 					if (ship.getType().equals(ShipTypes.SuicideShip)){
-						//if its create function returns true, break
-						if (ship.create(blueSelected)==true){
-							Q=false;
-							break;
+						//if you have enough money for it
+						if (blueMoney>=5){	
+							//if its create function returns true, break
+							if (ship.create(blueSelected)==true){
+								Q=false;
+								break;
+							}
+							blueMoney-=5;
 						}
 					}
 				}
@@ -350,9 +354,14 @@ public class MyGdxGame extends ApplicationAdapter {
 				for(int len = allBShips.size(), i = 0; i < len; i++) {
 					BaseshipObject ship = allBShips.get(i);
 					if (ship.getType().equals(ShipTypes.ShooterShip)){
-						if (ship.create(blueSelected)==true){
-							W=false;
-							break;
+						//if you have enough money for it
+						if (blueMoney>=10){	
+							//if its create function returns true, break
+							if (ship.create(blueSelected)==true){
+								W=false;
+								break;
+							}
+							blueMoney-=10;
 						}
 					}
 				}
@@ -362,9 +371,14 @@ public class MyGdxGame extends ApplicationAdapter {
 				for(int len = allBShips.size(), i = 0; i < len; i++) {
 					BaseshipObject ship = allBShips.get(i);
 					if (ship.getType().equals(ShipTypes.BlockerShip)){
-						if (ship.create(blueSelected)==true){
-							E=false;
-							break;
+						//if you have enough money for it
+						if (blueMoney>=15){	
+							//if its create function returns true, break
+							if (ship.create(blueSelected)==true){
+								E=false;
+								break;
+							}
+							blueMoney-=51;
 						}
 					}
 				}
