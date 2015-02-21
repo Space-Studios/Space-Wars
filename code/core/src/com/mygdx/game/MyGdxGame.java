@@ -167,8 +167,18 @@ public class MyGdxGame extends ApplicationAdapter {
 			//draw the ships
 			drawShips(allBShips,batch);
 			//draw Money
-			font.draw(batch, "Money:$"+blueMoney, 128, 178-16);
-			font.draw(batch, "Money:$"+redMoney, 736, 178-16);
+			if (blueMoney==100) {
+				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED!!!", 128-32, 178-16);
+			}
+			else{
+				font.draw(batch, "Money:$"+blueMoney, 128, 178-16);
+			}
+			if (redMoney==100) {
+				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED!!!", 736-32, 178-16);
+			}
+			else{
+				font.draw(batch, "Money:$"+redMoney, 736, 178-16);
+			}
 			//end the drawing
 			batch.end();
 			
@@ -369,5 +379,13 @@ public class MyGdxGame extends ApplicationAdapter {
 			
 			blueMoney+=5;
 			redMoney+=5;
+			
+			//money cap
+			if (blueMoney>100) {
+				blueMoney=100;
+			}
+			if (redMoney>100) {
+				redMoney=100;
+			}
 		}
 }
