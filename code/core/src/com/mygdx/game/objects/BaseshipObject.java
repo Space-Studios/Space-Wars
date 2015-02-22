@@ -123,8 +123,8 @@ public class BaseshipObject {
 		//if not created, instantly exit
 		if (Created == false){
 			return;
-		
 		}
+		
 		//Goal: 30 fps
 		delta /= 30;
 		//this piece of code checks if it is colliding with a ship. that ship is called the collider
@@ -203,8 +203,7 @@ public class BaseshipObject {
 			Created = true;
 			if (Blue) {
 				this.setPlace(128, yPosition+48);
-			}
-			else{
+			} else {
 				this.setPlace(736, yPosition+48);
 			}
 			return true;

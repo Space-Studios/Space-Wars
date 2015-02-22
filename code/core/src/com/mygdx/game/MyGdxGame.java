@@ -230,6 +230,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static void updateShips(List<BaseshipObject> allBShips){
 			for(int len = allBShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allBShips.get(i);
+				ship.update(Gdx.graphics.getRawDeltaTime(), allRShips);
+			}
+			for(int len = allRShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allRShips.get(i);
 				ship.update(Gdx.graphics.getRawDeltaTime(), allBShips);
 			}
 		}
@@ -237,6 +241,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static void drawShips(List<BaseshipObject> allBShips, SpriteBatch batch){
 			for(int len = allBShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allBShips.get(i);
+				ship.draw(batch);
+			}
+			for(int len = allRShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allRShips.get(i);
 				ship.draw(batch);
 			}
 		}
