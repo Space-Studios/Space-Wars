@@ -6,13 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.objects.BaseshipObject;
 
-public class BlockerShip extends BaseshipObject {
+public class RedBlockerShip extends BaseshipObject {
 
 	public ShipTypes getType() {
 		return ShipTypes.BlockerShip; 
 	}
 	
-	public BlockerShip() {
+	public RedBlockerShip() {
 		super();
 	}
 	
@@ -23,7 +23,7 @@ public class BlockerShip extends BaseshipObject {
 		Texture = new Texture(Gdx.files.internal("sprites/Basic Blocker.png"));
 		Sprite = new Sprite(Texture,0,0,64,32);
 		this.setPlace(0, 0);
-		Blue=true; 
+		Blue=false; 
 		Speed=1;
 	}
 }

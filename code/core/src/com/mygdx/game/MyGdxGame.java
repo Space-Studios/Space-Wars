@@ -1,8 +1,8 @@
 package com.mygdx.game;
-
+//import list and arraylist
 import java.util.ArrayList;
 import java.util.List;
-
+//import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -13,13 +13,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+//import baseShip class
 import com.mygdx.game.objects.BaseshipObject;
-import com.mygdx.game.objects.BlockerShip;
+//import bases
 import com.mygdx.game.objects.BlueBase;
 import com.mygdx.game.objects.RedBase;
+//import enum shipTypes
 import com.mygdx.game.objects.ShipTypes;
+//import blue ships
+import com.mygdx.game.objects.BlockerShip;
 import com.mygdx.game.objects.ShooterShip;
 import com.mygdx.game.objects.SuicideShip;
+//import red ships
+import com.mygdx.game.objects.RedShooterShip;
+import com.mygdx.game.objects.RedSuicideShip;
+import com.mygdx.game.objects.RedBlockerShip;
 
 public class MyGdxGame extends ApplicationAdapter {
 		
@@ -63,7 +71,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		//basic ship list
 		//arraylist of ships
 		//TIP: dont look at the ships. They are for my understanding only (they include no/little comments)
+		//blue ship list
 		private static List<BaseshipObject> allBShips = new ArrayList<BaseshipObject>();
+		//red ship list
+		private static List<BaseshipObject> allRShips = new ArrayList<BaseshipObject>();
 		
 		//ship cooldown. cool/30 = cooldown in seconds
 		private static final int cooldown = 30;
@@ -101,6 +112,22 @@ public class MyGdxGame extends ApplicationAdapter {
 			
 			//--Ship Stuff--\\
 			// Create all ships in the game
+			//red first
+			//ten suicide ships
+			for(int i = 0; i<10; i++) {
+				allRShips.add(new RedSuicideShip());
+			}
+			
+			//five shooter ships
+			for(int i = 0; i<5; i++) {
+				allRShips.add(new RedShooterShip());
+			}
+			
+			//three blocker ships
+			for(int i = 0; i<3; i++) {
+				allRShips.add(new RedBlockerShip());
+			}
+			//then blue
 			//ten suicide ships
 			for(int i = 0; i<10; i++) {
 				allBShips.add(new SuicideShip());
@@ -115,10 +142,13 @@ public class MyGdxGame extends ApplicationAdapter {
 			for(int i = 0; i<3; i++) {
 				allBShips.add(new BlockerShip());
 			}
-			
 			// init the ships
 			for(int len = allBShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allBShips.get(i);
+				ship.Init();
+			}
+			for(int len = allRShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allRShips.get(i);
 				ship.Init();
 			}
 			// init the bases
@@ -127,7 +157,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			
 			//set camera
 			camera=new OrthographicCamera();
-			camera.setToOrtho(false,640,480);
+			camera.setToOrtho(false,1024,480);
 			batch=new SpriteBatch();
 	
 			//background for the game
@@ -328,6 +358,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			currentTick = 0;	
 			
 			//actually make ships:
+			//----BLUE----\\
 			//suicide ship
 			if (Q==true){
 				//goes through the list of ships
@@ -341,9 +372,10 @@ public class MyGdxGame extends ApplicationAdapter {
 							//if its create function returns true, break
 							if (ship.create(blueSelected)==true){
 								Q=false;
+								blueMoney-=5;
 								break;
 							}
-							blueMoney-=5;
+							
 						}
 					}
 				}
@@ -359,9 +391,10 @@ public class MyGdxGame extends ApplicationAdapter {
 							//if its create function returns true, break
 							if (ship.create(blueSelected)==true){
 								W=false;
+								blueMoney-=10;
 								break;
 							}
-							blueMoney-=10;
+							
 						}
 					}
 				}
@@ -376,14 +409,74 @@ public class MyGdxGame extends ApplicationAdapter {
 							//if its create function returns true, break
 							if (ship.create(blueSelected)==true){
 								E=false;
+								blueMoney-=15;
 								break;
 							}
-							blueMoney-=15;
+							
 						}
 					}
 				}
-			}		
-		}
+			}
+			//----RED----\\
+			//suicide ship
+			if (I==true){
+				//goes through the list of ships
+				for(int len = allRShips.size(), i = 0; i < len; i++) {
+					//gets current ship
+					BaseshipObject ship = allRShips.get(i);
+					//if it is a suicide ship
+					if (ship.getType().equals(ShipTypes.SuicideShip)){
+						//if you have enough money for it
+						if (redMoney>=5){	
+							//if its create function returns true, break
+							if (ship.create(redSelected)==true){
+								I=false;
+								redMoney-=5;
+								break;
+							}
+							
+						}
+					}
+				}
+			}
+			//shooter ship
+			//same as suicide ship
+			if (O==true){
+				for(int len = allRShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allRShips.get(i);
+					if (ship.getType().equals(ShipTypes.ShooterShip)){
+						//if you have enough money for it
+						if (redMoney>=10){	
+							//if its create function returns true, break
+							if (ship.create(redSelected)==true){
+								O=false;
+								redMoney-=10;
+								break;
+							}
+							
+						}
+					}
+				}
+			}
+			//blocker ship
+			if (P==true){
+				for(int len = allRShips.size(), i = 0; i < len; i++) {
+					BaseshipObject ship = allRShips.get(i);
+					if (ship.getType().equals(ShipTypes.BlockerShip)){
+						//if you have enough money for it
+						if (redMoney>=15){	
+							//if its create function returns true, break
+							if (ship.create(redSelected)==true){
+								P=false;
+								redMoney-=15;
+								break;
+							}
+							
+						}
+					}
+				}
+			}
+		}//end of shipCreate
 		public static void giveMoney(){
 			if (currentTick2 < cooldown2){
 				currentTick2++;
