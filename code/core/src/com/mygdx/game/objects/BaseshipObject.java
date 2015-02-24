@@ -1,5 +1,6 @@
 package com.mygdx.game.objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -19,8 +20,10 @@ public class BaseshipObject {
 	protected Boolean Created;
 	protected int Damage;
 	protected Boolean Blue;
-	protected int ShotTime = 60; //Shot cooldown
-	protected float Shot; // the cooldown counter. if it equals ShotTime, it shoots.
+	protected final int ShotTime = 60; //Shot cooldown
+	protected int Shot; // the cooldown counter. if it equals ShotTime, it shoots.
+	protected List<BaseBullet> allBullets = new ArrayList<BaseBullet>(); //bulletList
+	protected int Bullets;
 	
 	//getters and setters for all variables
 	public ShipTypes getType() {
@@ -103,7 +106,8 @@ public class BaseshipObject {
 		Created = false;
 		X = 0.0f;
 		Y = 0.0f;
-		Shot = 0.0f;
+		Shot = 0;
+		Bullets = 0;
 	}
 
 	public void Init() {};
@@ -125,6 +129,16 @@ public class BaseshipObject {
 			return;
 		}
 		
+		if (Mask == null){
+			Mask = new Rectangle (0.0f,0.0f,32.0f,16.0f);
+		}
+		
+		int bulletLen = allBullets.size();
+		BaseBullet bulletFront = null;
+		if(bulletLen >= 1) {
+			bulletFront = allBullets.get(bulletLen-1);
+		}
+		
 		//Goal: 30 fps
 		delta /= 30;
 		//this piece of code checks if it is colliding with a ship. that ship is called the collider
@@ -134,11 +148,22 @@ public class BaseshipObject {
 		for(int len = otherShips.size(), i = 0; i < len; i++) {
 			//this sets the ship variable to the current one
 			BaseshipObject otherShip = otherShips.get(i);
-			// this checks if it is colliding and the ship is of a different color
-			if (this.hits(otherShip.Mask) && otherShip.Blue != this.Blue){
-				colliding = true;
-				collider = otherShip;
-				break;
+			// this checks if it is colliding and the ship is of a different color and if it is created
+			if (otherShip.Blue != this.Blue && otherShip.Created == true){
+				if (this.hits(otherShip.Mask)){
+					colliding = true;
+					collider = otherShip;
+					this.takeDamage(collider.Damage);
+					if (this.getType() == ShipTypes.SuicideShip){
+						Created = false;
+					}
+					break;
+				}
+				if(bulletFront != null && otherShip.hits(bulletFront.Mask) ) {
+					otherShip.takeDamage(Damage);
+					bulletFront.Created = false;
+					break;
+				}
 			}
 		}
 		//--------Moving-----------\\
@@ -151,26 +176,25 @@ public class BaseshipObject {
 				this.setPlace(X - (Speed), Y);
 			}
 		}
+		
 		//if out of the play area
-		if (X<0){
+		if (X<-64){
 			Created=false;
 		}
 		if (X>1024){
 			Created=false;
 		}
-		//--------Melee Damaging------\\
-		if (collider!=null){
-			this.takeDamage(collider.Damage);
-			if (this.getType() == ShipTypes.SuicideShip){
-				Created = false;
-			}
-		}
 		
 		//-------Shooting------\\
-		Shot+= (1);
-		if (Shot >= 60){
-			Shot=0;
-			//Code still to be added: making the bullet by the color of the ship.
+		if (this.getType() == ShipTypes.ShooterShip){
+			Shot+= (1);
+			if (Shot >= ShotTime){
+				Shot=0;
+				Bullets++;
+				BaseBullet b = new BaseBullet();
+				b.create(X, Y, 2, Speed, Blue);
+				allBullets.add(b);
+			}
 		}
 	}
 	
@@ -196,15 +220,28 @@ public class BaseshipObject {
 		}
 		
 		Sprite.draw(batch);
+		int len = allBullets.size();
+		for(int i = 0; i < len; i++) {
+			BaseBullet b = allBullets.get(i);
+			b.update();
+			b.Sprite.draw(batch);
+		}
+		if(len >=1 && !allBullets.get(len-1).Created) {
+			allBullets.remove(len-1);
+		}
 	}
 	
-	public Boolean create(int yPosition) {
+	public Boolean create(float yPosition, float xPosition) {
 		if (Created == false){
 			Created = true;
 			if (Blue) {
 				this.setPlace(128, yPosition+48);
-			} else {
+			} 
+			if (!Blue){
 				this.setPlace(736, yPosition+48);
+			}
+			if (this.getType() == ShipTypes.Bullet){
+				this.setPlace(xPosition, yPosition);
 			}
 			return true;
 		}

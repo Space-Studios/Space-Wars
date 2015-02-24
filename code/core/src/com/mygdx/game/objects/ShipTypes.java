@@ -4,5 +4,6 @@ public enum ShipTypes {
 	BaseshipObject,
 	BlockerShip,
 	ShooterShip,
-	SuicideShip
+	SuicideShip,
+	Bullet
 }

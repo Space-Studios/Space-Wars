@@ -2,6 +2,8 @@ package com.mygdx.game;
 //import list and arraylist
 import java.util.ArrayList;
 import java.util.List;
+
+
 //import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -17,6 +19,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.objects.BaseshipObject;
 //import bases
 import com.mygdx.game.objects.BlueBase;
+import com.mygdx.game.objects.BulletBlue;
+import com.mygdx.game.objects.BulletRed;
 import com.mygdx.game.objects.RedBase;
 //import enum shipTypes
 import com.mygdx.game.objects.ShipTypes;
@@ -75,6 +79,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static List<BaseshipObject> allBShips = new ArrayList<BaseshipObject>();
 		//red ship list
 		private static List<BaseshipObject> allRShips = new ArrayList<BaseshipObject>();
+		//all ships
+		private static List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
 		
 		//ship cooldown. cool/30 = cooldown in seconds
 		private static final int cooldown = 30;
@@ -122,6 +128,10 @@ public class MyGdxGame extends ApplicationAdapter {
 			for(int i = 0; i<5; i++) {
 				allRShips.add(new RedShooterShip());
 			}
+			//ten red bullets
+			for(int i = 0; i<10; i++) {
+				allRShips.add(new BulletRed());
+			}
 			
 			//three blocker ships
 			for(int i = 0; i<3; i++) {
@@ -137,11 +147,18 @@ public class MyGdxGame extends ApplicationAdapter {
 			for(int i = 0; i<5; i++) {
 				allBShips.add(new ShooterShip());
 			}
+			//ten blue bullets
+			for(int i = 0; i<10; i++) {
+				allBShips.add(new BulletBlue());
+			}
 			
 			//three blocker ships
 			for(int i = 0; i<3; i++) {
 				allBShips.add(new BlockerShip());
 			}
+			//add stuff to the allships list
+			allShips.addAll(allRShips);
+			allShips.addAll(allBShips);
 			// init the ships
 			for(int len = allBShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allBShips.get(i);
@@ -213,7 +230,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			batch.end();
 			
 			//Updates
-			updateShips(allBShips);
+			updateShips(allShips);
 			//update keys
 			updateKeys();
 			//get right selected variable
@@ -227,24 +244,24 @@ public class MyGdxGame extends ApplicationAdapter {
 		} 
 		
 		//-------FUNCTIONS-------\\
-		private static void updateShips(List<BaseshipObject> allBShips){
+		private static void updateShips(List<BaseshipObject> allShips){
 			for(int len = allBShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allBShips.get(i);
-				ship.update(Gdx.graphics.getRawDeltaTime(), allRShips);
+				ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
 			}
 			for(int len = allRShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allRShips.get(i);
-				ship.update(Gdx.graphics.getRawDeltaTime(), allBShips);
+				ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
 			}
 		}
 		
-		private static void drawShips(List<BaseshipObject> allBShips, SpriteBatch batch){
-			for(int len = allBShips.size(), i = 0; i < len; i++) {
-				BaseshipObject ship = allBShips.get(i);
-				ship.draw(batch);
-			}
+		private static void drawShips(List<BaseshipObject> allShips, SpriteBatch batch){
 			for(int len = allRShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allRShips.get(i);
+				ship.draw(batch);
+			}
+			for(int len = allBShips.size(), i = 0; i < len; i++) {
+				BaseshipObject ship = allBShips.get(i);
 				ship.draw(batch);
 			}
 		}
@@ -378,7 +395,7 @@ public class MyGdxGame extends ApplicationAdapter {
 						//if you have enough money for it
 						if (blueMoney>=5){	
 							//if its create function returns true, break
-							if (ship.create(blueSelected)==true){
+							if (ship.create(blueSelected,0)==true){
 								Q=false;
 								blueMoney-=5;
 								break;
@@ -397,7 +414,7 @@ public class MyGdxGame extends ApplicationAdapter {
 						//if you have enough money for it
 						if (blueMoney>=10){	
 							//if its create function returns true, break
-							if (ship.create(blueSelected)==true){
+							if (ship.create(blueSelected,0)==true){
 								W=false;
 								blueMoney-=10;
 								break;
@@ -415,7 +432,7 @@ public class MyGdxGame extends ApplicationAdapter {
 						//if you have enough money for it
 						if (blueMoney>=15){	
 							//if its create function returns true, break
-							if (ship.create(blueSelected)==true){
+							if (ship.create(blueSelected,0)==true){
 								E=false;
 								blueMoney-=15;
 								break;
@@ -437,7 +454,7 @@ public class MyGdxGame extends ApplicationAdapter {
 						//if you have enough money for it
 						if (redMoney>=5){	
 							//if its create function returns true, break
-							if (ship.create(redSelected)==true){
+							if (ship.create(redSelected,0)==true){
 								I=false;
 								redMoney-=5;
 								break;
@@ -456,7 +473,7 @@ public class MyGdxGame extends ApplicationAdapter {
 						//if you have enough money for it
 						if (redMoney>=10){	
 							//if its create function returns true, break
-							if (ship.create(redSelected)==true){
+							if (ship.create(redSelected,0)==true){
 								O=false;
 								redMoney-=10;
 								break;
@@ -474,7 +491,7 @@ public class MyGdxGame extends ApplicationAdapter {
 						//if you have enough money for it
 						if (redMoney>=15){	
 							//if its create function returns true, break
-							if (ship.create(redSelected)==true){
+							if (ship.create(redSelected,0)==true){
 								P=false;
 								redMoney-=15;
 								break;
