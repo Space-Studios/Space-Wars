@@ -12,6 +12,7 @@ public class BaseBullet {
 	protected Texture Texture;
 	protected float X;
 	protected float Y;
+	protected float acc;
 	protected int Speed;
 	protected Boolean Blue;
 	protected Boolean Created;
@@ -25,6 +26,7 @@ public class BaseBullet {
 		if (Created){
 			return;
 		}
+		acc=0;
 		Blue = BBlue;
 		Created = true;
 		Speed = speed;
@@ -49,11 +51,12 @@ public class BaseBullet {
 			Mask = new Rectangle (0.0f,0.0f,32.0f,16.0f);
 		}
 		if (Blue) {
-			this.setPlace(X + (ShipSpeed + Speed), Y);
+			this.setPlace(X + (ShipSpeed + Speed + acc), Y);
 		}
 		else {
-			this.setPlace(X - (ShipSpeed + Speed), Y);
+			this.setPlace(X - (ShipSpeed + Speed + acc), Y);
 		}
+		acc+=0.2;
 		//if out of play
 		if (X<-64){
 			Created=false;

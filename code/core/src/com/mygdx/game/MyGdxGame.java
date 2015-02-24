@@ -53,7 +53,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		//lanes
 		private static int lane1 = 178-32;//y value
 		private static int lane2 = 178; //y value
-		private static int lane3 = 178+96;//y value
+		private static int lane3 = 178+32;//y value
 		private static int blueSelected;
 		private static int redSelected;
 		

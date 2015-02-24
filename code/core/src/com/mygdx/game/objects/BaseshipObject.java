@@ -153,14 +153,14 @@ public class BaseshipObject {
 				if (this.hits(otherShip.Mask)){
 					colliding = true;
 					collider = otherShip;
-					this.takeDamage(collider.Damage);
+					this.takeDamage(collider.Damage,collider);
 					if (this.getType() == ShipTypes.SuicideShip){
 						Created = false;
 					}
 					break;
 				}
 				if(bulletFront != null && otherShip.hits(bulletFront.Mask) ) {
-					otherShip.takeDamage(Damage);
+					otherShip.takeDamage(Damage,this);
 					bulletFront.Created = false;
 					break;
 				}
@@ -207,8 +207,12 @@ public class BaseshipObject {
 		Y = yPosition;
 	}
 	
-	public void takeDamage(int amount){
+	public void takeDamage(int amount, BaseshipObject otherShip){
 		Life-=amount;
+		otherShip.Life -= amount;
+		if (otherShip.Life<=0){
+			otherShip.Created = false;
+		}
 		if (Life<=0){
 			Created = false;
 		}
