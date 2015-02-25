@@ -24,6 +24,7 @@ public class BaseshipObject {
 	protected int Shot; // the cooldown counter. if it equals ShotTime, it shoots.
 	protected List<BaseBullet> allBullets = new ArrayList<BaseBullet>(); //bulletList
 	protected int Bullets;
+	protected BaseBullet bulletFront;
 	
 	//getters and setters for all variables
 	public ShipTypes getType() {
@@ -109,8 +110,10 @@ public class BaseshipObject {
 		Shot = 0;
 		Bullets = 0;
 	}
-
+	
 	public void Init() {};
+	
+	public void set() {}
 	
 	public Boolean hits(Rectangle r) {
 		Boolean rc = Mask.overlaps(r);
@@ -160,7 +163,7 @@ public class BaseshipObject {
 					break;
 				}
 				if(bulletFront != null && otherShip.hits(bulletFront.Mask) ) {
-					otherShip.takeDamage(Damage,this);
+					otherShip.takeBulletDamage(Damage);
 					bulletFront.Created = false;
 					break;
 				}
@@ -217,6 +220,12 @@ public class BaseshipObject {
 			Created = false;
 		}
 	}
+	public void takeBulletDamage(int amount){
+		Life-=amount;
+		if (Life<=0){
+			Created = false;
+		}
+	}
 	
 	public void draw(SpriteBatch batch){
 		if (Created == false){
@@ -247,6 +256,7 @@ public class BaseshipObject {
 			if (this.getType() == ShipTypes.Bullet){
 				this.setPlace(xPosition, yPosition);
 			}
+			this.set();
 			return true;
 		}
 		else{

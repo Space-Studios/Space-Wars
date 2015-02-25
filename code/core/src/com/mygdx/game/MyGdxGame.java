@@ -231,6 +231,8 @@ public class MyGdxGame extends ApplicationAdapter {
 			
 			//Updates
 			updateShips(allShips);
+			mRedbase.update(allShips);
+			mBluebase.update(allShips);
 			//update keys
 			updateKeys();
 			//get right selected variable

@@ -12,8 +12,8 @@ public class BaseBullet {
 	protected Texture Texture;
 	protected float X;
 	protected float Y;
-	protected float acc;
-	protected int Speed;
+	protected final float acc = 0.2f;
+	protected float Speed;
 	protected Boolean Blue;
 	protected Boolean Created;
 	protected int ShipSpeed;
@@ -26,10 +26,9 @@ public class BaseBullet {
 		if (Created){
 			return;
 		}
-		acc=0;
 		Blue = BBlue;
 		Created = true;
-		Speed = speed;
+		Speed = speed * 1.0f;
 		ShipSpeed = shipspeed;
 		Mask = new Rectangle (0.0f,0.0f,32.0f,16.0f);
 		if (Blue){
@@ -39,7 +38,7 @@ public class BaseBullet {
 			Texture = new Texture(Gdx.files.internal("sprites/RedBullet.png"));
 		}
 		Sprite = new Sprite(Texture,0,0,32,16);
-		this.setPlace(Xposition, Yposition);
+		this.setPlace(Xposition, Yposition+8);
 	}
 	
 	public void update(){
@@ -51,12 +50,12 @@ public class BaseBullet {
 			Mask = new Rectangle (0.0f,0.0f,32.0f,16.0f);
 		}
 		if (Blue) {
-			this.setPlace(X + (ShipSpeed + Speed + acc), Y);
+			this.setPlace(X + (ShipSpeed + Speed), Y);
 		}
 		else {
-			this.setPlace(X - (ShipSpeed + Speed + acc), Y);
+			this.setPlace(X - (ShipSpeed + Speed), Y);
 		}
-		acc+=0.2;
+		Speed+=acc;
 		//if out of play
 		if (X<-64){
 			Created=false;
