@@ -18,8 +18,8 @@ public class RedSuicideShip extends BaseshipObject {
 	}
 	
 	public void Init() {
-		Life = 2;
-		Damage = 3;
+		Life = Constants.sShipLife;
+		Damage = Constants.shShipDam;
 		Mask = new Rectangle (0.0f,0.0f,64.0f,32.0f);
 		Texture = new Texture(Gdx.files.internal("sprites/Red Basic Suicide Drone.png"));
 		Sprite = new Sprite(Texture,0,0,64,32);
@@ -28,6 +28,6 @@ public class RedSuicideShip extends BaseshipObject {
 		this.setPlace(0, 0);
 	}
 	public void set() {
-		Life = 2;
+		Life = Constants.sShipLife;
 	}
 }

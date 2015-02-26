@@ -15,7 +15,7 @@ public class RedBase {
 	private Rectangle mask;
 	private Sprite sprite;
 	private Texture texture;
-	private int Life = 100;
+	private int Life = Constants.baseLife;
 	private static BitmapFont font;
 	//constructor
 	public RedBase(){

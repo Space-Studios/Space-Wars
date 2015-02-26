@@ -17,8 +17,8 @@ public class RedShooterShip extends BaseshipObject {
 	}
 	
 	public void Init() {
-		Life = 3;
-		Damage = 1;
+		Life = Constants.shShipLife;
+		Damage = Constants.shShipDam;
 		Mask = new Rectangle (0.0f,0.0f,64.0f,32.0f);
 		Texture = new Texture(Gdx.files.internal("sprites/Red Basic Shooter Ship.png"));
 		Sprite = new Sprite(Texture,0,0,64,32);
@@ -27,6 +27,6 @@ public class RedShooterShip extends BaseshipObject {
 		this.setPlace(0, 0);
 	}
 	public void set() {
-		Life = 3;
+		Life = Constants.shShipLife;
 	}
 }

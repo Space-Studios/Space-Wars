@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 //import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -19,8 +20,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.objects.BaseshipObject;
 //import bases
 import com.mygdx.game.objects.BlueBase;
-import com.mygdx.game.objects.BulletBlue;
-import com.mygdx.game.objects.BulletRed;
+import com.mygdx.game.objects.Constants;
 import com.mygdx.game.objects.RedBase;
 //import enum shipTypes
 import com.mygdx.game.objects.ShipTypes;
@@ -83,12 +83,14 @@ public class MyGdxGame extends ApplicationAdapter {
 		private static List<BaseshipObject> allShips = new ArrayList<BaseshipObject>();
 		
 		//ship cooldown. cool/30 = cooldown in seconds
-		private static final int cooldown = 30;
+		private static int cooldown = Constants.shipCool;
 		private static int currentTick;
+		private static int cooldown2 = Constants.shipCool;
+		private static int currentTick2;
 		
 		//resoucesCooldown. same time as the ship cooldown
-		private static final int cooldown2 = 60;
-		private static int currentTick2;
+		private static final int rcooldown = Constants.moneyCool;
+		private static int rcurrentTick;
 		
 		//resouces variables
 		private static int blueMoney;
@@ -120,40 +122,32 @@ public class MyGdxGame extends ApplicationAdapter {
 			// Create all ships in the game
 			//red first
 			//ten suicide ships
-			for(int i = 0; i<10; i++) {
+			for(int i = 0; i<Constants.sShips; i++) {
 				allRShips.add(new RedSuicideShip());
 			}
 			
 			//five shooter ships
-			for(int i = 0; i<5; i++) {
+			for(int i = 0; i<Constants.shShips; i++) {
 				allRShips.add(new RedShooterShip());
-			}
-			//ten red bullets
-			for(int i = 0; i<10; i++) {
-				allRShips.add(new BulletRed());
 			}
 			
 			//three blocker ships
-			for(int i = 0; i<3; i++) {
+			for(int i = 0; i<Constants.bShips; i++) {
 				allRShips.add(new RedBlockerShip());
 			}
 			//then blue
 			//ten suicide ships
-			for(int i = 0; i<10; i++) {
+			for(int i = 0; i<Constants.sShips; i++) {
 				allBShips.add(new SuicideShip());
 			}
 			
 			//five shooter ships
-			for(int i = 0; i<5; i++) {
+			for(int i = 0; i<Constants.shShips; i++) {
 				allBShips.add(new ShooterShip());
-			}
-			//ten blue bullets
-			for(int i = 0; i<10; i++) {
-				allBShips.add(new BulletBlue());
 			}
 			
 			//three blocker ships
-			for(int i = 0; i<3; i++) {
+			for(int i = 0; i<Constants.bShips; i++) {
 				allBShips.add(new BlockerShip());
 			}
 			//add stuff to the allships list
@@ -400,6 +394,7 @@ public class MyGdxGame extends ApplicationAdapter {
 							if (ship.create(blueSelected,0)==true){
 								Q=false;
 								blueMoney-=5;
+								cooldown = Constants.shipCool;
 								break;
 							}
 							
@@ -419,6 +414,7 @@ public class MyGdxGame extends ApplicationAdapter {
 							if (ship.create(blueSelected,0)==true){
 								W=false;
 								blueMoney-=10;
+								cooldown = Constants.shipCool+10;
 								break;
 							}
 							
@@ -437,6 +433,7 @@ public class MyGdxGame extends ApplicationAdapter {
 							if (ship.create(blueSelected,0)==true){
 								E=false;
 								blueMoney-=15;
+								cooldown = Constants.shipCool * 2;
 								break;
 							}
 							
@@ -444,6 +441,15 @@ public class MyGdxGame extends ApplicationAdapter {
 					}
 				}
 			}
+			
+		}//end of shipCreate
+		public static void shipCreateR(){
+			//cooldown management
+			if (currentTick2 < cooldown2){
+				currentTick2++;
+				return;
+			}
+			currentTick = 0;
 			//----RED----\\
 			//suicide ship
 			if (I==true){
@@ -458,6 +464,7 @@ public class MyGdxGame extends ApplicationAdapter {
 							//if its create function returns true, break
 							if (ship.create(redSelected,0)==true){
 								I=false;
+								cooldown2=Constants.shipCool;
 								redMoney-=5;
 								break;
 							}
@@ -477,6 +484,7 @@ public class MyGdxGame extends ApplicationAdapter {
 							//if its create function returns true, break
 							if (ship.create(redSelected,0)==true){
 								O=false;
+								cooldown2=Constants.shipCool+10;
 								redMoney-=10;
 								break;
 							}
@@ -495,6 +503,7 @@ public class MyGdxGame extends ApplicationAdapter {
 							//if its create function returns true, break
 							if (ship.create(redSelected,0)==true){
 								P=false;
+								cooldown2 = Constants.shipCool * 2;
 								redMoney-=15;
 								break;
 							}
@@ -503,16 +512,16 @@ public class MyGdxGame extends ApplicationAdapter {
 					}
 				}
 			}
-		}//end of shipCreate
+		}
 		public static void giveMoney(){
-			if (currentTick2 < cooldown2){
-				currentTick2++;
+			if (rcurrentTick < rcooldown){
+				rcurrentTick++;
 				return;
 			}
-			currentTick2 = 0;
+			rcurrentTick = 0;
 			
-			blueMoney+=5;
-			redMoney+=5;
+			blueMoney+=Constants.income;
+			redMoney+=Constants.income;
 			
 			//money cap
 			if (blueMoney>100) {

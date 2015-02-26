@@ -17,8 +17,8 @@ public class BlockerShip extends BaseshipObject {
 	}
 	
 	public void Init() {
-		Life = 6;
-		Damage = 1;
+		Life = Constants.bShipLife;
+		Damage = Constants.bShipDam;
 		Mask = new Rectangle (0.0f,0.0f,64.0f,32.0f);
 		Texture = new Texture(Gdx.files.internal("sprites/Basic Blocker.png"));
 		Sprite = new Sprite(Texture,0,0,64,32);
@@ -27,6 +27,6 @@ public class BlockerShip extends BaseshipObject {
 		this.setPlace(1024, 480);
 	}
 	public void set() {
-		Life = 6;
+		Life = Constants.bShipLife;
 	}
 }
