@@ -15,7 +15,7 @@ public class BlueBase {
 	private Rectangle mask;
 	private Sprite sprite;
 	private Texture texture;
-	private int Life = Constants.baseLife;
+	public int Life = Constants.baseLife;
 	private static BitmapFont font;
 	
 	//constructor

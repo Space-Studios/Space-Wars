@@ -43,8 +43,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		
 		//----TEXTURES AND SPRITES DEFINED----\\
 		//base
-		private RedBase mRedbase = new RedBase();
-		private BlueBase mBluebase = new BlueBase();
+		private static RedBase mRedbase = new RedBase();
+		private static BlueBase mBluebase = new BlueBase();
 		
 		//background(hope you like it!!!)
 		private Texture tex_space;
@@ -112,6 +112,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			//--Timer stuff--\\
 			//sets currentTick to 0
 			currentTick=0;
+			currentTick2=0;
 			
 			//--Resources stuff--\\
 			//set resources to 20
@@ -234,6 +235,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			
 			//create ships
 			createShips();
+			shipCreateR();
 			
 			//update money
 			giveMoney();
@@ -244,11 +246,14 @@ public class MyGdxGame extends ApplicationAdapter {
 			for(int len = allBShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allBShips.get(i);
 				ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
+				ship.bulletTest(mRedbase, mBluebase);
 			}
 			for(int len = allRShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allRShips.get(i);
 				ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
+				ship.bulletTest(mRedbase, mBluebase);
 			}
+			
 		}
 		
 		private static void drawShips(List<BaseshipObject> allShips, SpriteBatch batch){
@@ -449,7 +454,7 @@ public class MyGdxGame extends ApplicationAdapter {
 				currentTick2++;
 				return;
 			}
-			currentTick = 0;
+			currentTick2 = 0;
 			//----RED----\\
 			//suicide ship
 			if (I==true){

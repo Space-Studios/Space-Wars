@@ -137,7 +137,7 @@ public class BaseshipObject {
 		}
 		
 		int bulletLen = allBullets.size();
-		BaseBullet bulletFront = null;
+		bulletFront = null;
 		if(bulletLen >= 1) {
 			bulletFront = allBullets.get(bulletLen-1);
 		}
@@ -226,6 +226,24 @@ public class BaseshipObject {
 			Created = false;
 		}
 	}
+	public void bulletTest(RedBase red, BlueBase blue){
+		//if not shooter ship or if bulletFront is null
+		if (this.getType()!=ShipTypes.ShooterShip || bulletFront == null){
+			return;
+		}
+		
+		//if bullet hits red base
+		if (red.hits(bulletFront.Mask)){
+			red.Life-=this.Damage;
+			bulletFront.Created = false;
+		}
+		
+		//if bullet hits blue base
+		if (blue.hits(bulletFront.Mask)){
+			blue.Life-=this.Damage;
+			bulletFront.Created = false;
+		}
+	}
 	
 	public void draw(SpriteBatch batch){
 		if (Created == false){
@@ -248,10 +266,10 @@ public class BaseshipObject {
 		if (Created == false){
 			Created = true;
 			if (Blue) {
-				this.setPlace(128, yPosition+48);
+				this.setPlace(128+70, yPosition+48);
 			} 
 			if (!Blue){
-				this.setPlace(736, yPosition+48);
+				this.setPlace(736-70, yPosition+48);
 			}
 			if (this.getType() == ShipTypes.Bullet){
 				this.setPlace(xPosition, yPosition);
