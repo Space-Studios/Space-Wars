@@ -12,7 +12,7 @@ public class BaseBullet {
 	protected Texture Texture;
 	protected float X;
 	protected float Y;
-	protected final float acc = 0.2f;
+	protected final float acc = 0.1f;
 	protected float Speed;
 	protected Boolean Blue;
 	protected Boolean Created;
@@ -60,9 +60,13 @@ public class BaseBullet {
 		if (X<-64){
 			Created=false;
 		}
-		if (X>1024){
+		if (X>1024*2){
 			Created=false;
 		}
+	}
+	public Boolean hits(Rectangle r) {
+		Boolean rc = Mask.overlaps(r);
+		return rc;
 	}
 	
 	public void setPlace(float xPosition,float yPosition){

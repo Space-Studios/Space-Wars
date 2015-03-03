@@ -20,7 +20,7 @@ public class BaseshipObject {
 	protected Boolean Created;
 	protected int Damage;
 	protected Boolean Blue;
-	protected final int ShotTime = 60; //Shot cooldown
+	protected final int ShotTime = Constants.shotCool; //Shot cooldown
 	protected int Shot; // the cooldown counter. if it equals ShotTime, it shoots.
 	protected List<BaseBullet> allBullets = new ArrayList<BaseBullet>(); //bulletList
 	protected int Bullets;
@@ -165,6 +165,7 @@ public class BaseshipObject {
 				if(bulletFront != null && otherShip.hits(bulletFront.Mask) ) {
 					otherShip.takeBulletDamage(Damage);
 					bulletFront.Created = false;
+					bulletFront.setPlace(0, 0);
 					break;
 				}
 			}
@@ -184,7 +185,7 @@ public class BaseshipObject {
 		if (X<-64){
 			Created=false;
 		}
-		if (X>1024){
+		if (X>1024*2){
 			Created=false;
 		}
 		
@@ -233,13 +234,13 @@ public class BaseshipObject {
 		}
 		
 		//if bullet hits red base
-		if (red.hits(bulletFront.Mask)){
+		if (bulletFront.hits(red.mask)){
 			red.Life-=this.Damage;
 			bulletFront.Created = false;
 		}
 		
 		//if bullet hits blue base
-		if (blue.hits(bulletFront.Mask)){
+		if (bulletFront.hits(blue.mask)){
 			blue.Life-=this.Damage;
 			bulletFront.Created = false;
 		}
@@ -255,7 +256,9 @@ public class BaseshipObject {
 		for(int i = 0; i < len; i++) {
 			BaseBullet b = allBullets.get(i);
 			b.update();
-			b.Sprite.draw(batch);
+			if (b.Created){
+				b.Sprite.draw(batch);
+			}
 		}
 		if(len >=1 && !allBullets.get(len-1).Created) {
 			allBullets.remove(len-1);
@@ -266,10 +269,10 @@ public class BaseshipObject {
 		if (Created == false){
 			Created = true;
 			if (Blue) {
-				this.setPlace(128+70, yPosition+48);
+				this.setPlace((128*2)+70, yPosition+48);
 			} 
 			if (!Blue){
-				this.setPlace(736-70, yPosition+48);
+				this.setPlace((736*2)-70, yPosition+48);
 			}
 			if (this.getType() == ShipTypes.Bullet){
 				this.setPlace(xPosition, yPosition);

@@ -51,9 +51,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		private Sprite spr_space;
 		
 		//lanes
-		private static int lane1 = 178-32;//y value
-		private static int lane2 = 178; //y value
-		private static int lane3 = 178+32;//y value
+		private static int lane1 = (178-32)*2;//y value
+		private static int lane2 = 178*2; //y value
+		private static int lane3 = (178+32)*2;//y value
 		private static int blueSelected;
 		private static int redSelected;
 		
@@ -174,14 +174,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	
 			//background for the game
 			tex_space = new Texture(Gdx.files.internal("sprites/SPACE!!!!!.png"));
-			spr_space = new Sprite(tex_space,0,0,1024,480);
+			spr_space = new Sprite(tex_space,0,0,1024*2,480*2);
 			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
 			//red stuff
-			mRedbase.setPlace(736, 178);
+			mRedbase.setPlace(736*2, 178*2);
 			//blue stuff
-			mBluebase.setPlace(128, 178);		
+			mBluebase.setPlace(128*2, 178*2);		
 		}
 		
 		@Override
@@ -210,16 +210,16 @@ public class MyGdxGame extends ApplicationAdapter {
 			drawShips(allBShips,batch);
 			//draw Money
 			if (blueMoney==100) {
-				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED!!!", 128-32, 178-16);
+				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (128*2)-32, ((178)*2)-56);
 			}
 			else{
-				font.draw(batch, "Money:$"+blueMoney, 128, 178-16);
+				font.draw(batch, "Money:$"+blueMoney, 128*2, ((178)*2)-56);
 			}
 			if (redMoney==100) {
-				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED!!!", 736-32, 178-16);
+				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", (736*2)-32, ((178)*2)-56);
 			}
 			else{
-				font.draw(batch, "Money:$"+redMoney, 736, 178-16);
+				font.draw(batch, "Money:$"+redMoney, 736*2, ((178)*2)-56);
 			}
 			//end the drawing
 			batch.end();

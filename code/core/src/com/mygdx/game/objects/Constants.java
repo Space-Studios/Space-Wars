@@ -3,8 +3,8 @@ package com.mygdx.game.objects;
 public class Constants {
 	//----------define constants----------\\
 	//room stuff
-	public static final int room_width = 1024;
-	public static final int room_height = 480;
+	public static final int room_width = 1024*2;
+	public static final int room_height = 480*2;
 	public static final String title = "Space Wars";
 	//minor gameplay stuff
 	public static final int shipCool = 30; //if s ship, this value, if sh ship, this value + 10, if b ship, this value *2
@@ -25,5 +25,7 @@ public class Constants {
 	public static final int bShipDam = 1;
 	//base stuff
 	public static final int baseLife = 50;
+	//shooter ship shooting cooldown
+	public static final int shotCool = 120;
 	
 }

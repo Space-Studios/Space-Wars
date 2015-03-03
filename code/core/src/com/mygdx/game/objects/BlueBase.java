@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class BlueBase {
-	private Rectangle mask;
+	public Rectangle mask;
 	private Sprite sprite;
 	private Texture texture;
 	public int Life = Constants.baseLife;
@@ -29,6 +29,7 @@ public class BlueBase {
 		texture = new Texture(Gdx.files.internal("sprites/BlueBase.png"));
 		sprite = new Sprite(texture,0,0,128,128);
 		this.setPlace(0, 0);
+		sprite.scale(0.5f);
 	}
 	
 	//returns if front is colliding
@@ -81,7 +82,7 @@ public class BlueBase {
 	}
 	
 	public void show(SpriteBatch batch){
-		font.draw(batch, "Life: "+Life, 128, (178+160));
+		font.draw(batch, "Life: "+Life, 128*2, ((178)*2)+200);
 		sprite.draw(batch);
 	}
 	
