@@ -80,7 +80,7 @@ public class RedBase {
 		return false;
 	}
 	public void show(SpriteBatch batch){
-		font.draw(batch, "Life: "+Life, 736*2, ((178)*2)+200);
+		font.draw(batch, "Life: "+Life, 736*2, ((178)*2)+320);
 		sprite.draw(batch);
 	}
 	

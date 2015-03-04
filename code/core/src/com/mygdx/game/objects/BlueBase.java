@@ -82,7 +82,7 @@ public class BlueBase {
 	}
 	
 	public void show(SpriteBatch batch){
-		font.draw(batch, "Life: "+Life, 128*2, ((178)*2)+200);
+		font.draw(batch, "Life: "+Life, 128*2, ((178)*2)+320);
 		sprite.draw(batch);
 	}
 	

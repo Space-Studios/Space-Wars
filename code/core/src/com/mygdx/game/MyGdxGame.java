@@ -41,7 +41,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		//spritebatch for drawing the sprites on
 		private SpriteBatch batch;
 		
-		//----TEXTURES AND SPRITES DEFINED----\\
 		//base
 		private static RedBase mRedbase = new RedBase();
 		private static BlueBase mBluebase = new BlueBase();
@@ -51,9 +50,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		private Sprite spr_space;
 		
 		//lanes
-		private static int lane1 = (178-32)*2;//y value
-		private static int lane2 = 178*2; //y value
-		private static int lane3 = (178+32)*2;//y value
+		private static int lane1 = ((178-32)*2)+120;//y value
+		private static int lane2 = (178*2)+120; //y value
+		private static int lane3 = ((178+32)*2)+120;//y value
 		private static int blueSelected;
 		private static int redSelected;
 		
@@ -174,14 +173,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	
 			//background for the game
 			tex_space = new Texture(Gdx.files.internal("sprites/SPACE!!!!!.png"));
-			spr_space = new Sprite(tex_space,0,0,1024*2,480*2);
+			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
 			//red stuff
-			mRedbase.setPlace(736*2, 178*2);
+			mRedbase.setPlace(736*2, (178*2)+120);
 			//blue stuff
-			mBluebase.setPlace(128*2, 178*2);		
+			mBluebase.setPlace(128*2, (178*2)+120);		
 		}
 		
 		@Override
@@ -193,14 +192,12 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		@Override
 		public void render () {
-			Gdx.gl.glClearColor(1, 1, 1, 1);
+			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			
 
 			///drawing. The ones drawn first are behind the others
 			batch.begin();
-			//reset the color, just in case
-			batch.setColor(0, 0, 0, 1);
 			//draw the background
 			spr_space.draw(batch);
 			//draw the bases
@@ -210,16 +207,16 @@ public class MyGdxGame extends ApplicationAdapter {
 			drawShips(allBShips,batch);
 			//draw Money
 			if (blueMoney==100) {
-				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (128*2)-32, ((178)*2)-56);
+				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (128*2)-32, ((178)*2)+64);
 			}
 			else{
-				font.draw(batch, "Money:$"+blueMoney, 128*2, ((178)*2)-56);
+				font.draw(batch, "Money:$"+blueMoney, 128*2, ((178)*2)+64);
 			}
 			if (redMoney==100) {
-				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", (736*2)-32, ((178)*2)-56);
+				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", (736*2)-32, ((178)*2)+64);
 			}
 			else{
-				font.draw(batch, "Money:$"+redMoney, 736*2, ((178)*2)-56);
+				font.draw(batch, "Money:$"+redMoney, 736*2, ((178)*2)+64);
 			}
 			//end the drawing
 			batch.end();
@@ -230,6 +227,13 @@ public class MyGdxGame extends ApplicationAdapter {
 			mBluebase.update(allShips);
 			//update keys
 			updateKeys();
+			
+			//if escape if pushed, exit
+			if (end()){
+				dispose();
+				System.exit(0);
+			}
+			
 			//get right selected variable
 			getLane();
 			
@@ -372,8 +376,14 @@ public class MyGdxGame extends ApplicationAdapter {
 			 }
 			 else{
 				 num0 = false;
+			 }	 
+		}
+		
+		public static Boolean end(){
+			 if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+				return true; 
 			 }
-			 
+			return false;
 		}
 		public static void createShips(){
 			//cooldown management
