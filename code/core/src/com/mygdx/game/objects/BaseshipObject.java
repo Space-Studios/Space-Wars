@@ -23,6 +23,7 @@ public class BaseshipObject {
 	protected final int ShotTime = Constants.shotCool; //Shot cooldown
 	protected int Shot; // the cooldown counter. if it equals ShotTime, it shoots.
 	protected List<BaseBullet> allBullets = new ArrayList<BaseBullet>(); //bulletList
+	protected List<Boom> boom = new ArrayList<Boom>();
 	protected int Bullets;
 	protected BaseBullet bulletFront;
 	
@@ -31,78 +32,6 @@ public class BaseshipObject {
 		return ShipTypes.BaseshipObject; 
 	}
 	
-	public Rectangle getMask() {
-		return Mask;
-	}
-
-	public void setMask(Rectangle mask) {
-		Mask = mask;
-	}
-
-	public Sprite getSprite() {
-		return Sprite;
-	}
-
-	public void setSprite(Sprite sprite) {
-		Sprite = sprite;
-	}
-
-	public Texture getTexture() {
-		return Texture;
-	}
-
-	public void setTexture(Texture texture) {
-		Texture = texture;
-	}
-
-	public int getLife() {
-		return Life;
-	}
-
-	public void setLife(int life) {
-		Life = life;
-	}
-
-	public float getX() {
-		return X;
-	}
-
-	public void setX(float x) {
-		X = x;
-	}
-
-	public float getY() {
-		return Y;
-	}
-
-	public void setY(float y) {
-		Y = y;
-	}
-
-	public int getSpeed() {
-		return Speed;
-	}
-
-	public void setSpeed(int speed) {
-		Speed = speed;
-	}
-
-	public Boolean getCreated() {
-		return Created;
-	}
-
-	public void setCreated(Boolean created) {
-		Created = created;
-	}
-
-	public int getDamage() {
-		return Damage;
-	}
-
-	public void setDamage(int damage) {
-		Damage = damage;
-	}
-
 	public BaseshipObject() {
 		Created = false;
 		X = 0.0f;
@@ -165,6 +94,12 @@ public class BaseshipObject {
 				if(bulletFront != null && otherShip.hits(bulletFront.Mask) ) {
 					otherShip.takeBulletDamage(Damage);
 					bulletFront.Created = false;
+					boom.add(new Boom(bulletFront.X,bulletFront.Y,Constants.boomSize));
+					if (!boom.isEmpty()){
+						for (int d=0;d<boom.size();d++){
+							boom.get(d).Init();
+						}
+					}
 					bulletFront.setPlace(0, 0);
 					break;
 				}
@@ -215,15 +150,35 @@ public class BaseshipObject {
 		Life-=amount;
 		otherShip.Life -= amount;
 		if (otherShip.Life<=0){
+			otherShip.boom.add(new Boom(otherShip.X,otherShip.Y,Constants.boomSize));
+			if (!otherShip.boom.isEmpty()){
+				for (int i=0;i<otherShip.boom.size();i++){
+					otherShip.boom.get(i).Init();
+				}
+			}
 			otherShip.Created = false;
+			otherShip.setPlace(0, 0);
 		}
 		if (Life<=0){
+			boom.add(new Boom(X,Y,Constants.boomSize));
+			if (!boom.isEmpty()){
+				for (int i=0;i<boom.size();i++){
+					boom.get(i).Init();
+				}
+			}
 			Created = false;
+			this.setPlace(0, 0);
 		}
 	}
 	public void takeBulletDamage(int amount){
 		Life-=amount;
 		if (Life<=0){
+			boom.add(new Boom(X,Y,Constants.boomSize));
+			if (!boom.isEmpty()){
+				for (int i=0;i<boom.size();i++){
+					boom.get(i).Init();
+				}
+			}
 			Created = false;
 		}
 	}
@@ -237,16 +192,40 @@ public class BaseshipObject {
 		if (bulletFront.hits(red.mask)){
 			red.Life-=this.Damage;
 			bulletFront.Created = false;
+			boom.add(new Boom(bulletFront.X,bulletFront.Y,Constants.boomSize));
+			if (!boom.isEmpty()){
+				for (int d=0;d<boom.size();d++){
+					boom.get(d).Init();
+				}
+			}
 		}
 		
 		//if bullet hits blue base
 		if (bulletFront.hits(blue.mask)){
 			blue.Life-=this.Damage;
 			bulletFront.Created = false;
+			boom.add(new Boom(bulletFront.X,bulletFront.Y,Constants.boomSize));
+			if (!boom.isEmpty()){
+				for (int d=0;d<boom.size();d++){
+					boom.get(d).Init();
+				}
+			}
 		}
 	}
 	
 	public void draw(SpriteBatch batch){
+		//update DA BOOOMZ
+		if (!boom.isEmpty()){
+			for (int i=0;i<boom.size();i++){
+				boom.get(i).update();
+				boom.get(i).show(batch);
+				boom.get(i);
+				if (Boom.Show == false){
+					boom.remove(i);
+				}
+			}
+		}
+		
 		if (Created == false){
 			return;
 		}

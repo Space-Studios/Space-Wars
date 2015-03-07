@@ -15,8 +15,11 @@ public class RedBase {
 	public Rectangle mask;
 	private Sprite sprite;
 	private Texture texture;
+	private float X;
+	private float Y;
 	public int Life = Constants.baseLife;
 	private static BitmapFont font;
+	private static Boom boom;
 	//constructor
 	public RedBase(){
 	}
@@ -30,7 +33,7 @@ public class RedBase {
 		texture = new Texture(Gdx.files.internal("sprites/RedBase.png"));
 		sprite = new Sprite(texture,0,0,128,128);
 		this.setPlace(0, 0);
-		sprite.scale(0.5f);
+		sprite.scale(0.8f);
 	}
 	//returns colliding
 	//returns if front is colliding
@@ -55,6 +58,12 @@ public class RedBase {
 			if (this.hits(otherShip.Mask) && otherShip.Blue == true && otherShip.Created){
 				otherShip.Created = false;
 				this.takeDamage(otherShip.Damage);
+				otherShip.boom.add(new Boom(otherShip.X,otherShip.Y,Constants.boomSize));
+				if (!otherShip.boom.isEmpty()){
+					for (int i1=0;i1<otherShip.boom.size();i1++){
+						otherShip.boom.get(i1).Init();
+					}
+				}
 			}
 			if (otherShip.bulletFront != null){
 			
@@ -64,12 +73,21 @@ public class RedBase {
 				}
 			}
 		}
+		if (Life<=0 && boom==null){
+			boom=new Boom(X+280,Y-250,Constants.boomSize+10);
+			boom.Init();
+		}
+		if (boom!=null){
+			boom.update();
+		}
 	}
 	//sets position of the object
 	public void setPlace(float xPosition,float yPosition){
 		mask.x = xPosition;
 		mask.y = yPosition;
 		sprite.setPosition(xPosition, yPosition);
+		X=xPosition;
+		Y=yPosition;
 	}
 	//returns true if dead
 	public Boolean takeDamage(int amount){
@@ -80,6 +98,12 @@ public class RedBase {
 		return false;
 	}
 	public void show(SpriteBatch batch){
+		if (boom!=null){
+			boom.show(batch);
+		}
+		if (Life<=0){
+			return;
+		}
 		font.draw(batch, "Life: "+Life, 736*2, ((178)*2)+320);
 		sprite.draw(batch);
 	}

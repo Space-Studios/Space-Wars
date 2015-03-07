@@ -5,10 +5,12 @@ import java.util.List;
 
 
 
+
 //import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -33,7 +35,7 @@ import com.mygdx.game.objects.RedShooterShip;
 import com.mygdx.game.objects.RedSuicideShip;
 import com.mygdx.game.objects.RedBlockerShip;
 
-public class MyGdxGame extends ApplicationAdapter {
+public class MyGdxGame extends ApplicationAdapter{
 		
 		//camera
 		private OrthographicCamera camera;
@@ -261,11 +263,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 		
 		private static void drawShips(List<BaseshipObject> allShips, SpriteBatch batch){
-			for(int len = allRShips.size(), i = 0; i < len; i++) {
+			for(int i = allRShips.size()-1; i != 0; i--) {
 				BaseshipObject ship = allRShips.get(i);
 				ship.draw(batch);
 			}
-			for(int len = allBShips.size(), i = 0; i < len; i++) {
+			for(int i = allBShips.size()-1; i != 0; i--) {
 				BaseshipObject ship = allBShips.get(i);
 				ship.draw(batch);
 			}
