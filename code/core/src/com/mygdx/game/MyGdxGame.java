@@ -10,7 +10,6 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -51,6 +50,16 @@ public class MyGdxGame extends ApplicationAdapter{
 		private Texture tex_space;
 		private Sprite spr_space;
 		
+		
+		//menu + lose screen
+		private Texture tex_redLose;
+		private Sprite spr_redLose;
+		private Texture tex_blueLose;
+		private Sprite spr_blueLose;
+		private Texture tex_menu;
+		private Sprite spr_menu;
+		
+		
 		//lanes
 		private static int lane1 = ((178-32)*2)+120;//y value
 		private static int lane2 = (178*2)+120; //y value
@@ -89,6 +98,10 @@ public class MyGdxGame extends ApplicationAdapter{
 		private static int cooldown2 = Constants.shipCool;
 		private static int currentTick2;
 		
+		//timer stuff for the lose screens
+		private static int waitTime;
+		private static final int waitMax = Constants.waitBeforeEnd;
+		
 		//resoucesCooldown. same time as the ship cooldown
 		private static final int rcooldown = Constants.moneyCool;
 		private static int rcurrentTick;
@@ -114,6 +127,11 @@ public class MyGdxGame extends ApplicationAdapter{
 			//sets currentTick to 0
 			currentTick=0;
 			currentTick2=0;
+			waitTime=0;
+			
+			//--debug stuff--\\
+			blueSelected=lane2;
+			redSelected=lane2;
 			
 			//--Resources stuff--\\
 			//set resources to 20
@@ -177,6 +195,16 @@ public class MyGdxGame extends ApplicationAdapter{
 			tex_space = new Texture(Gdx.files.internal("sprites/SPACE!!!!!.png"));
 			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
+			//red lose and blue lose screens
+			tex_redLose = new Texture(Gdx.files.internal("sprites/Menu.png"));
+			spr_redLose = new Sprite(tex_redLose,0,0,1024*2,1080);
+			tex_blueLose = new Texture(Gdx.files.internal("sprites/Menu.png"));
+			spr_blueLose = new Sprite(tex_blueLose,0,0,1024*2,1080);
+			
+			//menu
+			tex_menu = new Texture(Gdx.files.internal("sprites/Menu.png"));
+			spr_menu = new Sprite(tex_menu,0,0,1024*2,1080);
+			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
 			//red stuff
@@ -194,12 +222,50 @@ public class MyGdxGame extends ApplicationAdapter{
 
 		@Override
 		public void render () {
+			
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			
 
 			///drawing. The ones drawn first are behind the others
 			batch.begin();
+			//if escape if pushed, exit
+			if (end()){
+				dispose();
+				System.exit(0);
+			}
+			//if any group lost, wait for 20/30 of a second and then draw the appropriate lose screen and freeze the game until escape is pressed
+			if (mBluebase.isDead() || mRedbase.isDead() && waitTime < waitMax){
+				waitTime++;
+				//update ships
+				updateShips(allShips);
+				//draw the background
+				spr_space.draw(batch);
+				//draw the bases
+				mRedbase.show(batch); 
+				mBluebase.show(batch);
+				//update the bases
+				mRedbase.update(allShips); 
+				mBluebase.update(allShips);
+				//draw the ships
+				drawShips(allBShips,batch);
+				batch.end();
+				return;
+			}
+			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax){
+				if (mBluebase.isDead()){
+					spr_blueLose.setPosition(0, 0);
+					spr_blueLose.draw(batch);
+					batch.end();
+					return;
+				}
+				if (mRedbase.isDead()){
+					spr_redLose.setPosition(0, 0);
+					spr_redLose.draw(batch);
+					batch.end();
+					return;
+				}
+			}
 			//draw the background
 			spr_space.draw(batch);
 			//draw the bases
@@ -230,11 +296,7 @@ public class MyGdxGame extends ApplicationAdapter{
 			//update keys
 			updateKeys();
 			
-			//if escape if pushed, exit
-			if (end()){
-				dispose();
-				System.exit(0);
-			}
+
 			
 			//get right selected variable
 			getLane();

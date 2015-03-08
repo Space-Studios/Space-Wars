@@ -19,7 +19,7 @@ public class Boom {
 	private static int X;
 	private static int Y;
 	private static float Size;
-	public static Boolean Show;
+	public Boolean Show;
 	
 	//constructor
 	public Boom(float Xpo,float Ypo,float howBig){

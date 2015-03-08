@@ -102,11 +102,20 @@ public class BlueBase {
 		return false;
 	}
 	
+	public Boolean isDead(){
+		if (Life<=0){
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public void show(SpriteBatch batch){
 		if (boom!=null){
 			boom.show(batch);
 		}
 		if (Life<=0){
+			this.setPlace(99999, 99999);
 			return;
 		}
 		font.draw(batch, "Life: "+Life, 128*2, ((178)*2)+320);

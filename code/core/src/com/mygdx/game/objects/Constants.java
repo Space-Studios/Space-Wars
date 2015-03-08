@@ -32,5 +32,7 @@ public class Constants {
 	public static final int baseLife = 50;
 	//shooter ship shooting cooldown
 	public static final int shotCool = 120;
+	//how long to wait before showing the lose screen
+	public static final int waitBeforeEnd = 300;
 	
 }

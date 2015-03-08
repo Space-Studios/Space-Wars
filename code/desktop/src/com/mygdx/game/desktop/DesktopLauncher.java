@@ -20,14 +20,6 @@ public class DesktopLauncher {
 		config.fullscreen=Constants.fullscreen;
 		//This line creates the window after all the variables have been set
 		new LwjglApplication(new MyGdxGame(), config);
-		/*try {
-			java.applet.AudioClip clip =
-			java.applet.Applet.newAudioClip(
-			new java.net.URL(“”));
-			clip.play();
-			} catch (java.net.MalformedURLException murle) {
-			System.out.println(murle);
-			}*/
 		
 	}
 }

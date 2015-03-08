@@ -220,7 +220,7 @@ public class BaseshipObject {
 				boom.get(i).update();
 				boom.get(i).show(batch);
 				boom.get(i);
-				if (Boom.Show == false){
+				if (boom.get(i).Show == false){
 					boom.remove(i);
 				}
 			}
