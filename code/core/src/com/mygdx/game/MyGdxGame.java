@@ -6,6 +6,7 @@ import java.util.List;
 
 
 
+
 //import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -59,7 +60,10 @@ public class MyGdxGame extends ApplicationAdapter{
 		private Texture tex_menu;
 		private Sprite spr_menu;
 		
-		
+		//title screen
+		private Texture tex_title;
+		private Sprite spr_title;
+		private static Boolean inTitleSequence = true;
 		//lanes
 		private static int lane1 = ((178-32)*2)+120;//y value
 		private static int lane2 = (178*2)+120; //y value
@@ -205,6 +209,10 @@ public class MyGdxGame extends ApplicationAdapter{
 			tex_menu = new Texture(Gdx.files.internal("sprites/Menu.png"));
 			spr_menu = new Sprite(tex_menu,0,0,1024*2,1080);
 			
+			//title
+			tex_title = new Texture(Gdx.files.internal("sprites/Title Screen Image 2.0.png"));
+			spr_title = new Sprite(tex_title,0,0,1920,1080);
+			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
 			//red stuff
@@ -233,6 +241,12 @@ public class MyGdxGame extends ApplicationAdapter{
 			if (end()){
 				dispose();
 				System.exit(0);
+			}
+			//if the user hasn't pressed enter, render the title screen
+			if (!endTitle() && inTitleSequence) {
+				spr_title.draw(batch);
+				batch.end();
+				return;
 			}
 			//if any group lost, wait for 20/30 of a second and then draw the appropriate lose screen and freeze the game until escape is pressed
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime < waitMax){
@@ -447,6 +461,15 @@ public class MyGdxGame extends ApplicationAdapter{
 			 if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 				return true; 
 			 }
+			return false;
+		}
+		//If the user presses enter, it changes the status of inTitleSequence to false
+		//This will cause the game to begin rendering
+		public static Boolean endTitle(){
+			if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+				inTitleSequence = false;
+				return true;
+			}
 			return false;
 		}
 		public static void createShips(){
