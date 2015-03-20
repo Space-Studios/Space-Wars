@@ -210,7 +210,7 @@ public class MyGdxGame extends ApplicationAdapter{
 			spr_menu = new Sprite(tex_menu,0,0,1024*2,1080);
 			
 			//title
-			tex_title = new Texture(Gdx.files.internal("sprites/Title Screen Image 2.0.png"));
+			tex_title = new Texture(Gdx.files.internal("sprites/Title Screen Image .png"));
 			spr_title = new Sprite(tex_title,0,0,1920,1080);
 			
 			//sets position for stationary things
