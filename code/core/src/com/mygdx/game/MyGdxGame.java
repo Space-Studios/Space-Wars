@@ -34,6 +34,8 @@ import com.mygdx.game.objects.SuicideShip;
 import com.mygdx.game.objects.RedShooterShip;
 import com.mygdx.game.objects.RedSuicideShip;
 import com.mygdx.game.objects.RedBlockerShip;
+//import Music
+import com.mygdx.game.objects.MusicPlayer;
 
 public class MyGdxGame extends ApplicationAdapter{
 		
@@ -117,10 +119,17 @@ public class MyGdxGame extends ApplicationAdapter{
 		//font
 		private static BitmapFont font;
 		
+		//music
+		private static MusicPlayer music;
+		
+		
 		
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
+			//music\\
+			music=new MusicPlayer();
+			music.init();
 			//--font stuff--\\
 			//make font
 			font = new BitmapFont();
