@@ -209,10 +209,10 @@ public class MyGdxGame extends ApplicationAdapter{
 			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
 			//red lose and blue lose screens
-			tex_redLose = new Texture(Gdx.files.internal("sprites/Menu.png"));
-			spr_redLose = new Sprite(tex_redLose,0,0,1024*2,1080);
-			tex_blueLose = new Texture(Gdx.files.internal("sprites/Menu.png"));
-			spr_blueLose = new Sprite(tex_blueLose,0,0,1024*2,1080);
+			tex_redLose = new Texture(Gdx.files.internal("sprites/Player 2 Red Lose Screen.png"));
+			spr_redLose = new Sprite(tex_redLose,0,0,1920,1080);
+			tex_blueLose = new Texture(Gdx.files.internal("sprites/Player 1 Blue Lose Screen.png"));
+			spr_blueLose = new Sprite(tex_blueLose,0,0,1920,1080);
 			
 			//menu
 			tex_menu = new Texture(Gdx.files.internal("sprites/Menu.png"));
