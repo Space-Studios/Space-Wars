@@ -2,7 +2,7 @@ package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.SpaceWarsCore;
 import com.mygdx.game.objects.Constants;
 
 public class DesktopLauncher {
@@ -19,7 +19,7 @@ public class DesktopLauncher {
 		//this line sets fullscreen
 		config.fullscreen=Constants.fullscreen;
 		//This line creates the window after all the variables have been set
-		new LwjglApplication(new MyGdxGame(), config);
+		new LwjglApplication(new SpaceWarsCore(), config);
 		
 	}
 }

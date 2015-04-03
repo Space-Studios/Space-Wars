@@ -37,7 +37,7 @@ import com.mygdx.game.objects.RedBlockerShip;
 //import Music
 import com.mygdx.game.objects.MusicPlayer;
 
-public class MyGdxGame extends ApplicationAdapter{
+public class SpaceWarsCore extends ApplicationAdapter{
 		
 		//camera
 		private OrthographicCamera camera;
