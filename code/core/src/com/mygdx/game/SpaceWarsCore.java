@@ -55,10 +55,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		
 		
 		//menu + lose screen
-		private Texture tex_redLose;
-		private Sprite spr_redLose;
-		private Texture tex_blueLose;
-		private Sprite spr_blueLose;
+		private Texture tex_BlueWins;
+		private Sprite spr_BlueWins;
+		private Texture tex_RedWins;
+		private Sprite spr_RedWins;
 		private Texture tex_menu;
 		private Sprite spr_menu;
 		
@@ -209,10 +209,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
 			//red lose and blue lose screens
-			tex_redLose = new Texture(Gdx.files.internal("sprites/Player 2 Red Lose Screen.png"));
-			spr_redLose = new Sprite(tex_redLose,0,0,1920,1080);
-			tex_blueLose = new Texture(Gdx.files.internal("sprites/Player 1 Blue Lose Screen.png"));
-			spr_blueLose = new Sprite(tex_blueLose,0,0,1920,1080);
+			tex_BlueWins = new Texture(Gdx.files.internal("sprites/Player 1 Blue Wins Screen.png"));
+			spr_BlueWins = new Sprite(tex_BlueWins,0,0,1920,1080);
+			tex_RedWins = new Texture(Gdx.files.internal("sprites/Player 2 Red Wins Screen.png"));
+			spr_RedWins = new Sprite(tex_RedWins,0,0,1920,1080);
 			
 			//menu
 			tex_menu = new Texture(Gdx.files.internal("sprites/Menu.png"));
@@ -277,14 +277,14 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			}
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax){
 				if (mBluebase.isDead()){
-					spr_blueLose.setPosition(0, 0);
-					spr_blueLose.draw(batch);
+					spr_RedWins.setPosition(0, 0);
+					spr_RedWins.draw(batch);
 					batch.end();
 					return;
 				}
 				if (mRedbase.isDead()){
-					spr_redLose.setPosition(0, 0);
-					spr_redLose.draw(batch);
+					spr_BlueWins.setPosition(0, 0);
+					spr_BlueWins.draw(batch);
 					batch.end();
 					return;
 				}
