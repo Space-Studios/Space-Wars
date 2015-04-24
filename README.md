@@ -11,5 +11,4 @@ The stratiest (stratagy misspelled) game of all time.
 
 # You can import on a school laptop, it is a pain to do though Nour did do it (miraculously) 
 
-# Importing or building on school laptops or networks will not work (THIS IS NOT TRUE, NOUR DID IT)
 
