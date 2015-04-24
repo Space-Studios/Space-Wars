@@ -36,6 +36,8 @@ import com.mygdx.game.objects.RedSuicideShip;
 import com.mygdx.game.objects.RedBlockerShip;
 //import Music
 import com.mygdx.game.objects.MusicPlayer;
+//import Statistics
+import com.mygdx.game.objects.Statistics;
 
 public class SpaceWarsCore extends ApplicationAdapter{
 		
@@ -54,13 +56,13 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private Sprite spr_space;
 		
 		
-		//menu + lose screen
+		//menu + Win screen
 		private Texture tex_BlueWins;
 		private Sprite spr_BlueWins;
 		private Texture tex_RedWins;
 		private Sprite spr_RedWins;
-		private Texture tex_menu;
-		private Sprite spr_menu;
+		//private Texture tex_menu;
+		//private Sprite spr_menu;
 		
 		//title screen
 		private Texture tex_title;
@@ -215,8 +217,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			spr_RedWins = new Sprite(tex_RedWins,0,0,1920,1080);
 			
 			//menu
-			tex_menu = new Texture(Gdx.files.internal("sprites/Menu.png"));
-			spr_menu = new Sprite(tex_menu,0,0,1024*2,1080);
+			//tex_menu = new Texture(Gdx.files.internal("sprites/Menu.png"));
+			//spr_menu = new Sprite(tex_menu,0,0,1024*2,1080);
 			
 			//title
 			tex_title = new Texture(Gdx.files.internal("sprites/Title Screen Image .png"));
@@ -504,6 +506,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							//if its create function returns true, break
 							if (ship.create(blueSelected,0)==true){
 								Q=false;
+								Statistics.blueSuicideShipCreation +=1;
 								blueMoney-=5;
 								cooldown = Constants.shipCool;
 								break;
@@ -524,6 +527,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							//if its create function returns true, break
 							if (ship.create(blueSelected,0)==true){
 								W=false;
+								Statistics.blueShooterShipCreation += 1;
 								blueMoney-=10;
 								cooldown = Constants.shipCool+10;
 								break;
@@ -543,6 +547,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							//if its create function returns true, break
 							if (ship.create(blueSelected,0)==true){
 								E=false;
+								Statistics.blueBlockerShipCreation += 1;
 								blueMoney-=15;
 								cooldown = Constants.shipCool * 2;
 								break;
@@ -575,6 +580,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							//if its create function returns true, break
 							if (ship.create(redSelected,0)==true){
 								I=false;
+								Statistics.redSuicideShipCreation += 1;
 								cooldown2=Constants.shipCool;
 								redMoney-=5;
 								break;
@@ -595,6 +601,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							//if its create function returns true, break
 							if (ship.create(redSelected,0)==true){
 								O=false;
+								Statistics.redShooterShipCreation += 1;
 								cooldown2=Constants.shipCool+10;
 								redMoney-=10;
 								break;
@@ -614,6 +621,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							//if its create function returns true, break
 							if (ship.create(redSelected,0)==true){
 								P=false;
+								Statistics.redBlockerShipCreation += 1;
 								cooldown2 = Constants.shipCool * 2;
 								redMoney-=15;
 								break;
@@ -633,7 +641,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			blueMoney+=Constants.income;
 			redMoney+=Constants.income;
-			
+			Statistics.totalInGameMoneyEarned += Constants.income;
 			//money cap
 			if (blueMoney>100) {
 				blueMoney=100;
