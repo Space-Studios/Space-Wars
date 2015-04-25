@@ -7,7 +7,7 @@ public class Constants {
 	public static final int room_width = 1920;
 	public static final int room_height = 1080;
 	public static final String title = "Space Wars";
-	public static final boolean fullscreen = true;
+	public static final boolean fullscreen = false;
 	//animation stuff
 	public static final int animationSpeed = 3; //this divided by 30 is the frames per second
 	public static final float boomSize = 1;

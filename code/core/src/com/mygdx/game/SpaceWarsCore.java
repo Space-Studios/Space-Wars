@@ -129,6 +129,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
+			//FULLSCREEN LINE, this enables fullscreen for your computer
+			Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 			//music\\
 			music=new MusicPlayer();
 			music.init();
