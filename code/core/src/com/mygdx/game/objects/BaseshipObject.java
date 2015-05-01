@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.objects.Statistics;
 
 public class BaseshipObject {
 	
@@ -154,6 +155,12 @@ public class BaseshipObject {
 			if (!otherShip.boom.isEmpty()){
 				for (int i=0;i<otherShip.boom.size();i++){
 					otherShip.boom.get(i).Init();
+				}
+			if (this.Blue) {
+				Statistics.redKills += 1;
+				}
+			if (otherShip.Blue) {
+				Statistics.blueKills += 1;
 				}
 			}
 			otherShip.Created = false;

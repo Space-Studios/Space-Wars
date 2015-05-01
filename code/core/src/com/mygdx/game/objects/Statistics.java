@@ -13,4 +13,7 @@ public class Statistics {
 	
 	//total money earned in game
 	public static int totalInGameMoneyEarned = 0;
+	
+	public static int redKills = 0;
+	public static int blueKills = 0;
 }

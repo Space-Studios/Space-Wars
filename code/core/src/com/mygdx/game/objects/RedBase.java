@@ -30,7 +30,7 @@ public class RedBase {
 		font.setColor(Color.WHITE);
 		//make mask, texture and sprite
 		mask = new Rectangle (0.0f,0.0f,128.0f,128.0f);
-		texture = new Texture(Gdx.files.internal("sprites/RedBase.png"));
+		texture = new Texture(Gdx.files.internal("sprites/Ships & Bases/Red Sprites/Other/RedBase.png"));
 		sprite = new Sprite(texture,0,0,128,128);
 		this.setPlace(0, 0);
 		sprite.scale(0.8f);

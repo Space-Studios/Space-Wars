@@ -61,8 +61,14 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private Sprite spr_BlueWins;
 		private Texture tex_RedWins;
 		private Sprite spr_RedWins;
+		private static Boolean inWinScreenSequence = true;
 		//private Texture tex_menu;
 		//private Sprite spr_menu;
+		
+		//Statistics Screen
+		private Texture tex_Statistics;
+		private Sprite spr_Statistics;
+		private static Boolean inStatisticsSequence = false;
 		
 		//title screen
 		private Texture tex_title;
@@ -213,9 +219,9 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
 			//red lose and blue lose screens
-			tex_BlueWins = new Texture(Gdx.files.internal("sprites/Player 1 Blue Wins Screen.png"));
+			tex_BlueWins = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Win Screen/Player 1 Blue Wins Screen.png"));
 			spr_BlueWins = new Sprite(tex_BlueWins,0,0,1920,1080);
-			tex_RedWins = new Texture(Gdx.files.internal("sprites/Player 2 Red Wins Screen.png"));
+			tex_RedWins = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Win Screen/Player 2 Red Wins Screen.png"));
 			spr_RedWins = new Sprite(tex_RedWins,0,0,1920,1080);
 			
 			//menu
@@ -223,8 +229,12 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//spr_menu = new Sprite(tex_menu,0,0,1024*2,1080);
 			
 			//title
-			tex_title = new Texture(Gdx.files.internal("sprites/Title Screen Image .png"));
+			tex_title = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/Title Screen Image .png"));
 			spr_title = new Sprite(tex_title,0,0,1920,1080);
+			
+			//statistics
+			tex_Statistics = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Statistics Screen/Statistics Screen.png"));
+			spr_Statistics = new Sprite(tex_Statistics,0,0,1920,1080);
 			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
@@ -279,8 +289,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
-			//if either base is dead and you have waited long enough, show appropriate lose screen for 5 secs, then show credits
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax){
+
+							if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
+
 				if (mBluebase.isDead()){
 					spr_RedWins.setPosition(0, 0);
 					spr_RedWins.draw(batch);
@@ -293,6 +305,21 @@ public class SpaceWarsCore extends ApplicationAdapter{
 					batch.end();
 					return;
 				}
+			}
+			if (beginStatistics()) {
+				spr_Statistics.setPosition(0,0);
+				spr_Statistics.draw(batch);
+				font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, 820, 565);
+				font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, 333, 440);
+				font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, 333, 510);
+				font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, 333, 625);
+				font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, 333, 720);
+				font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, 1267, 423);
+				font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, 1267, 515);
+				font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, 1267, 615);
+				font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, 1267, 720);
+				batch.end();
+				return;
 			}
 			//draw the background
 			spr_space.draw(batch);
@@ -483,6 +510,18 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 				inTitleSequence = false;
 				return true;
+			}
+			return false;
+		}
+		//If the user presses enter while on the win screen, 
+		//it will bring the statistics screen
+		public static Boolean beginStatistics(){
+			if(mBluebase.isDead() || mRedbase.isDead()) {
+				if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+					inWinScreenSequence = false;
+					return true;
+				}
+				
 			}
 			return false;
 		}

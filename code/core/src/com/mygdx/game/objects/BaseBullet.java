@@ -32,10 +32,10 @@ public class BaseBullet {
 		ShipSpeed = shipspeed;
 		Mask = new Rectangle (0.0f,0.0f,32.0f,16.0f);
 		if (Blue){
-			Texture = new Texture(Gdx.files.internal("sprites/BlueBullet.png"));
+			Texture = new Texture(Gdx.files.internal("sprites/Ships & Bases/Blue Sprites/Other/BlueBullet.png"));
 		}
 		else {
-			Texture = new Texture(Gdx.files.internal("sprites/RedBullet.png"));
+			Texture = new Texture(Gdx.files.internal("sprites/Ships & Bases/Red Sprites/Other/RedBullet.png"));
 		}
 		Sprite = new Sprite(Texture,0,0,32,16);
 		this.setPlace(Xposition, Yposition+8);
