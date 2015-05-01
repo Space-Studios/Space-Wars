@@ -279,6 +279,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
+			//if either base is dead and you have waited long enough, show appropriate lose screen for 5 secs, then show credits
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax){
 				if (mBluebase.isDead()){
 					spr_RedWins.setPosition(0, 0);
