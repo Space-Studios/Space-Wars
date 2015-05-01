@@ -21,7 +21,7 @@ public class SuicideShip extends BaseshipObject {
 		Life = Constants.sShipLife;
 		Damage = Constants.sShipDam;
 		Mask = new Rectangle (0.0f,0.0f,64.0f,32.0f);
-		Texture = new Texture(Gdx.files.internal("sprites/Basic Suicide Drone.png"));
+		Texture = new Texture(Gdx.files.internal("sprites/Ships & Bases/Blue Sprites/Ships/Basic Suicide Drone.png"));
 		Sprite = new Sprite(Texture,0,0,64,32);
 		Blue=true; 
 		Speed=4;
