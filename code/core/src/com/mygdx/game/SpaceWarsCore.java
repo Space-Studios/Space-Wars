@@ -362,6 +362,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//update money
 			giveMoney();
+			}
 		} 
 		
 		//-------FUNCTIONS-------\\
