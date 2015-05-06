@@ -114,7 +114,7 @@ public class RedBase {
 			this.setPlace(0, 0);
 			return;
 		}
-		font.draw(batch, "Life: "+Life, 736*2, ((178)*2)+320);
+		font.draw(batch, "Life: "+Life, (Gdx.graphics.getDesktopDisplayMode().width/4)*3, (Gdx.graphics.getDesktopDisplayMode().height/2)+80);
 		sprite.draw(batch);
 	}
 	

@@ -118,7 +118,7 @@ public class BlueBase {
 			this.setPlace(99999, 99999);
 			return;
 		}
-		font.draw(batch, "Life: "+Life, 128*2, ((178)*2)+320);
+		font.draw(batch, "Life: "+Life, (Gdx.graphics.getDesktopDisplayMode().width/4), ((Gdx.graphics.getDesktopDisplayMode().height/2)+80));
 		sprite.draw(batch);
 
 	}

@@ -137,6 +137,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		public void create () {
 			//FULLSCREEN LINE, this enables fullscreen for your computer
 			Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
+			//setting the lanes, it only works here and not higher
+			lane1 = Gdx.graphics.getDesktopDisplayMode().height/2+64; 
+			lane2 =Gdx.graphics.getDesktopDisplayMode().height/2;
+			lane3 = Gdx.graphics.getDesktopDisplayMode().height/2-64;
 			//music\\
 			music=new MusicPlayer();
 			music.init();
@@ -239,9 +243,9 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
 			//red stuff
-			mRedbase.setPlace(736*2, (178*2)+120);
+			mRedbase.setPlace((Gdx.graphics.getDesktopDisplayMode().width/4)*3, (Gdx.graphics.getDesktopDisplayMode().height/2)-48);
 			//blue stuff
-			mBluebase.setPlace(128*2, (178*2)+120);		
+			mBluebase.setPlace(Gdx.graphics.getDesktopDisplayMode().width/4, (Gdx.graphics.getDesktopDisplayMode().height/2)-48);		
 		}
 		
 		@Override
@@ -262,6 +266,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			batch.begin();
 			//if escape if pushed, exit
 			if (end()){
+				batch.end();
 				dispose();
 				System.exit(0);
 			}
@@ -293,18 +298,20 @@ public class SpaceWarsCore extends ApplicationAdapter{
 
 							if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
 
-				if (mBluebase.isDead()){
-					spr_RedWins.setPosition(0, 0);
-					spr_RedWins.draw(batch);
-					batch.end();
-					return;
+								if (mBluebase.isDead()){
+						spr_RedWins.setPosition(0, 0);
+						spr_RedWins.draw(batch);
+						batch.end();
+						return;
+					}
+					if (mRedbase.isDead()){
+						spr_BlueWins.setPosition(0, 0);
+						spr_BlueWins.draw(batch);
+						batch.end();
+						return;
+					}
 				}
-				if (mRedbase.isDead()){
-					spr_BlueWins.setPosition(0, 0);
-					spr_BlueWins.draw(batch);
-					batch.end();
-					return;
-				}
+				batch.end();
 			}
 			if (beginStatistics()) {
 				spr_Statistics.setPosition(0,0);
@@ -330,16 +337,16 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			drawShips(allBShips,batch);
 			//draw Money
 			if (blueMoney==100) {
-				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (128*2)-32, ((178)*2)+64);
+				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Gdx.graphics.getDesktopDisplayMode().width/4)-32, ((178)*2)+64);
 			}
 			else{
-				font.draw(batch, "Money:$"+blueMoney, 128*2, ((178)*2)+64);
+				font.draw(batch, "Money:$"+blueMoney, (Gdx.graphics.getDesktopDisplayMode().width/4), ((178)*2)+64);
 			}
 			if (redMoney==100) {
-				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", (736*2)-32, ((178)*2)+64);
+				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Gdx.graphics.getDesktopDisplayMode().width/4)*3)-32, ((178)*2)+64);
 			}
 			else{
-				font.draw(batch, "Money:$"+redMoney, 736*2, ((178)*2)+64);
+				font.draw(batch, "Money:$"+redMoney, (Gdx.graphics.getDesktopDisplayMode().width/4)*3, ((178)*2)+64);
 			}
 			//end the drawing
 			batch.end();
@@ -351,7 +358,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//update keys
 			updateKeys();
 			
-
+			
 			
 			//get right selected variable
 			getLane();
@@ -362,7 +369,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//update money
 			giveMoney();
-			}
+			
 		} 
 		
 		//-------FUNCTIONS-------\\

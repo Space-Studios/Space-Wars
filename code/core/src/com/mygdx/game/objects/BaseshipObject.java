@@ -3,6 +3,7 @@ package com.mygdx.game.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -255,10 +256,10 @@ public class BaseshipObject {
 		if (Created == false){
 			Created = true;
 			if (Blue) {
-				this.setPlace((128*2)+70, yPosition+48);
+				this.setPlace((Gdx.graphics.getDesktopDisplayMode().width/4)+70, yPosition);
 			} 
 			if (!Blue){
-				this.setPlace((736*2)-70, yPosition+48);
+				this.setPlace(((Gdx.graphics.getDesktopDisplayMode().width/4)*3)+70, yPosition);
 			}
 			if (this.getType() == ShipTypes.Bullet){
 				this.setPlace(xPosition, yPosition);
