@@ -20,6 +20,7 @@ public class RedBase {
 	public int Life = Constants.baseLife;
 	private static BitmapFont font;
 	private static Boom boom;
+	private SoundPlayer sounds = new SoundPlayer();
 	//constructor
 	public RedBase(){
 	}
@@ -34,6 +35,7 @@ public class RedBase {
 		sprite = new Sprite(texture,0,0,128,128);
 		this.setPlace(0, 0);
 		sprite.scale(0.8f);
+		sounds.init();
 	}
 	//returns colliding
 	//returns if front is colliding
@@ -69,10 +71,11 @@ public class RedBase {
 			
 				if (this.hits(otherShip.bulletFront.Mask) && otherShip.Blue == true && otherShip.bulletFront.Created){
 					otherShip.bulletFront.Created = false;
-					this.takeDamage(1);
+					takeDamage(otherShip.Damage);
 				}
 			}
 		}
+		
 		if (Life<=0 && boom==null){
 			boom=new Boom(X+280,Y-250,Constants.boomSize+10);
 			boom.Init();
@@ -91,6 +94,7 @@ public class RedBase {
 	}
 	//returns true if dead
 	public Boolean takeDamage(int amount){
+		this.sounds.playBoom();
 		Life-=amount;
 		if (Life<=0){
 			return true;
@@ -114,7 +118,7 @@ public class RedBase {
 			this.setPlace(0, 0);
 			return;
 		}
-		font.draw(batch, "Life: "+Life, (Gdx.graphics.getDesktopDisplayMode().width/4)*3, (Gdx.graphics.getDesktopDisplayMode().height/2)+80);
+		font.draw(batch, "Life: "+Life, X, Y+128+64);
 		sprite.draw(batch);
 	}
 	

@@ -28,6 +28,7 @@ public class BaseshipObject {
 	protected List<Boom> boom = new ArrayList<Boom>();
 	protected int Bullets;
 	protected BaseBullet bulletFront;
+	protected SoundPlayer sounds = new SoundPlayer();
 	
 	//getters and setters for all variables
 	public ShipTypes getType() {
@@ -130,6 +131,8 @@ public class BaseshipObject {
 		if (this.getType() == ShipTypes.ShooterShip){
 			Shot+= (1);
 			if (Shot >= ShotTime){
+				this.sounds.init();
+				this.sounds.playShoot();
 				Shot=0;
 				Bullets++;
 				BaseBullet b = new BaseBullet();
@@ -174,6 +177,8 @@ public class BaseshipObject {
 					boom.get(i).Init();
 				}
 			}
+			this.sounds.init();
+			this.sounds.playBoom();
 			Created = false;
 			this.setPlace(0, 0);
 		}
@@ -187,6 +192,8 @@ public class BaseshipObject {
 					boom.get(i).Init();
 				}
 			}
+			this.sounds.init();
+			this.sounds.playBoom();
 			Created = false;
 		}
 	}
@@ -254,6 +261,7 @@ public class BaseshipObject {
 	
 	public Boolean create(float yPosition, float xPosition) {
 		if (Created == false){
+			sounds.init();
 			Created = true;
 			if (Blue) {
 				this.setPlace((Gdx.graphics.getDesktopDisplayMode().width/4)+70, yPosition);
@@ -264,6 +272,10 @@ public class BaseshipObject {
 			if (this.getType() == ShipTypes.Bullet){
 				this.setPlace(xPosition, yPosition);
 			}
+			else{
+				this.sounds.playShipLaunch();
+			}
+			
 			this.set();
 			return true;
 		}

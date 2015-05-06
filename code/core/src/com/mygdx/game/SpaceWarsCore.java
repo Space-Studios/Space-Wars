@@ -248,7 +248,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//resizes all of the screens to your screen size\\
 			//yup, it is just the same command over and over again!!!
-			spr_space.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
 			spr_title.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
 			spr_RedWins.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
 			spr_BlueWins.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
@@ -351,16 +350,16 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			drawShips(allBShips,batch);
 			//draw Money
 			if (blueMoney==100) {
-				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Gdx.graphics.getDesktopDisplayMode().width/4)-32, ((178)*2)+64);
+				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Gdx.graphics.getDesktopDisplayMode().width/4)-32, (Gdx.graphics.getDesktopDisplayMode().height/2)-128);
 			}
 			else{
-				font.draw(batch, "Money:$"+blueMoney, (Gdx.graphics.getDesktopDisplayMode().width/4), ((178)*2)+64);
+				font.draw(batch, "Money:$"+blueMoney, (Gdx.graphics.getDesktopDisplayMode().width/4), (Gdx.graphics.getDesktopDisplayMode().height/2)-128);
 			}
 			if (redMoney==100) {
-				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Gdx.graphics.getDesktopDisplayMode().width/4)*3)-32, ((178)*2)+64);
+				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Gdx.graphics.getDesktopDisplayMode().width/4)*3)-32, (Gdx.graphics.getDesktopDisplayMode().height/2)-128);
 			}
 			else{
-				font.draw(batch, "Money:$"+redMoney, (Gdx.graphics.getDesktopDisplayMode().width/4)*3, ((178)*2)+64);
+				font.draw(batch, "Money:$"+redMoney, (Gdx.graphics.getDesktopDisplayMode().width/4)*3, (Gdx.graphics.getDesktopDisplayMode().height/2)-128);
 			}
 			//end the drawing
 			batch.end();

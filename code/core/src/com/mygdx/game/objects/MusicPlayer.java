@@ -7,9 +7,11 @@ public class MusicPlayer {
 	private static Sound music;
 	//84.37
 	public void init(){
+		long musicID = 0L;
 		music = Gdx.audio.newSound(Gdx.files.internal("sounds/Music.wav"));
-		music.play();
-		music.setLooping(0, true);
+		musicID = music.play();
+		music.setLooping(musicID, true);
+		music.setVolume(musicID, 0.2f);
 	}
 	public static void update(){
 
