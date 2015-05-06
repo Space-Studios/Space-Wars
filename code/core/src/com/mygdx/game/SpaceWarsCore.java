@@ -135,22 +135,27 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
-			//FULLSCREEN LINE, this enables fullscreen for your computer
+			//FULLSCREEN LINE, this enables fullscreen for your computer\\
 			Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 			//setting the lanes, it only works here and not higher
 			lane1 = Gdx.graphics.getDesktopDisplayMode().height/2+64; 
 			lane2 =Gdx.graphics.getDesktopDisplayMode().height/2;
 			lane3 = Gdx.graphics.getDesktopDisplayMode().height/2-64;
+			
 			//music\\
 			music=new MusicPlayer();
 			music.init();
+			
 			//--font stuff--\\
+			
 			//make font
 			font = new BitmapFont();
+			
 			//sets font color
 			font.setColor(Color.WHITE);
 			
 			//--Timer stuff--\\
+			
 			//sets currentTick to 0
 			currentTick=0;
 			currentTick2=0;
@@ -161,11 +166,13 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			redSelected=lane2;
 			
 			//--Resources stuff--\\
+			
 			//set resources to 20
 			blueMoney=20;
 			redMoney=20;
 			
 			//--Ship Stuff--\\
+			
 			// Create all ships in the game
 			//red first
 			//ten suicide ships
@@ -222,15 +229,14 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			tex_space = new Texture(Gdx.files.internal("sprites/SPACE!!!!!.png"));
 			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
+			
+			
 			//red lose and blue lose screens
 			tex_BlueWins = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Win Screen/Player 1 Blue Wins Screen.png"));
 			spr_BlueWins = new Sprite(tex_BlueWins,0,0,1920,1080);
 			tex_RedWins = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Win Screen/Player 2 Red Wins Screen.png"));
 			spr_RedWins = new Sprite(tex_RedWins,0,0,1920,1080);
 			
-			//menu
-			//tex_menu = new Texture(Gdx.files.internal("sprites/Menu.png"));
-			//spr_menu = new Sprite(tex_menu,0,0,1024*2,1080);
 			
 			//title
 			tex_title = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/Title Screen Image .png"));
@@ -239,6 +245,14 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//statistics
 			tex_Statistics = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Statistics Screen/Statistics Screen.png"));
 			spr_Statistics = new Sprite(tex_Statistics,0,0,1920,1080);
+			
+			//resizes all of the screens to your screen size\\
+			//yup, it is just the same command over and over again!!!
+			spr_space.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
+			spr_title.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
+			spr_RedWins.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
+			spr_BlueWins.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
+			spr_Statistics.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
 			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
