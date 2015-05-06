@@ -20,9 +20,11 @@ public class RedBase {
 	public int Life = Constants.baseLife;
 	private static BitmapFont font;
 	private static Boom boom;
-	private SoundPlayer sounds = new SoundPlayer();
+	private SoundPlayer sounds;
+	
 	//constructor
 	public RedBase(){
+		sounds = new SoundPlayer();
 	}
 	
 	public void Init(){

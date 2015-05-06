@@ -28,7 +28,7 @@ public class BaseshipObject {
 	protected List<Boom> boom = new ArrayList<Boom>();
 	protected int Bullets;
 	protected BaseBullet bulletFront;
-	protected SoundPlayer sounds = new SoundPlayer();
+	protected SoundPlayer sounds;
 	
 	//getters and setters for all variables
 	public ShipTypes getType() {
@@ -41,6 +41,8 @@ public class BaseshipObject {
 		Y = 0.0f;
 		Shot = 0;
 		Bullets = 0;
+		sounds = new SoundPlayer();
+		this.sounds.init();
 	}
 	
 	public void Init() {};
@@ -131,7 +133,6 @@ public class BaseshipObject {
 		if (this.getType() == ShipTypes.ShooterShip){
 			Shot+= (1);
 			if (Shot >= ShotTime){
-				this.sounds.init();
 				this.sounds.playShoot();
 				Shot=0;
 				Bullets++;
@@ -177,7 +178,6 @@ public class BaseshipObject {
 					boom.get(i).Init();
 				}
 			}
-			this.sounds.init();
 			this.sounds.playBoom();
 			Created = false;
 			this.setPlace(0, 0);
@@ -192,7 +192,6 @@ public class BaseshipObject {
 					boom.get(i).Init();
 				}
 			}
-			this.sounds.init();
 			this.sounds.playBoom();
 			Created = false;
 		}
@@ -205,6 +204,7 @@ public class BaseshipObject {
 		
 		//if bullet hits red base
 		if (bulletFront.hits(red.mask)){
+			this.sounds.playBoom();
 			red.Life-=this.Damage;
 			bulletFront.Created = false;
 			boom.add(new Boom(bulletFront.X,bulletFront.Y,Constants.boomSize));
@@ -217,6 +217,7 @@ public class BaseshipObject {
 		
 		//if bullet hits blue base
 		if (bulletFront.hits(blue.mask)){
+			this.sounds.playBoom();
 			blue.Life-=this.Damage;
 			bulletFront.Created = false;
 			boom.add(new Boom(bulletFront.X,bulletFront.Y,Constants.boomSize));
@@ -263,6 +264,7 @@ public class BaseshipObject {
 		if (Created == false){
 			sounds.init();
 			Created = true;
+			Shot = 0;
 			if (Blue) {
 				this.setPlace((Gdx.graphics.getDesktopDisplayMode().width/4)+70, yPosition);
 			} 

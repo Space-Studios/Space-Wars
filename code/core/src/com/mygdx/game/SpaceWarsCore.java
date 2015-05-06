@@ -311,7 +311,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 
 							if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
 
-								if (mBluebase.isDead()){
+					if (mBluebase.isDead()){
 						spr_RedWins.setPosition(0, 0);
 						spr_RedWins.draw(batch);
 						batch.end();
