@@ -289,9 +289,23 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
-			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax){
-
-							if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
+			if (beginStatistics() || inStatisticsSequence) {
+				spr_Statistics.setPosition(0,0);
+				spr_Statistics.draw(batch);
+				font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, 860, 1080-565);
+				font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, 325, 1080-425);
+				font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, 325, 1080-510);
+				font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, 325, 1080-602);
+				font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, 325, 1080-700);
+				font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, 1267, 1080-413);
+				font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, 1267, 1080-510);
+				font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, 1267, 1080-602);
+				font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, 1267, 1080-710);
+				batch.end();
+				return;
+			}
+			
+			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && !endWinScreen()){
 
 				if (mBluebase.isDead()){
 					spr_RedWins.setPosition(0, 0);
@@ -306,27 +320,13 @@ public class SpaceWarsCore extends ApplicationAdapter{
 					return;
 				}
 			}
-			if (beginStatistics()) {
-				spr_Statistics.setPosition(0,0);
-				spr_Statistics.draw(batch);
-				font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, 820, 565);
-				font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, 333, 440);
-				font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, 333, 510);
-				font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, 333, 625);
-				font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, 333, 720);
-				font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, 1267, 423);
-				font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, 1267, 515);
-				font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, 1267, 615);
-				font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, 1267, 720);
-				batch.end();
-				return;
-			}
+			
 			//draw the background
 			spr_space.draw(batch);
 			//draw the bases
 			mRedbase.show(batch); 
 			mBluebase.show(batch);
-			//draw the ships
+			//draw the shipsi
 			drawShips(allBShips,batch);
 			//draw Money
 			if (blueMoney==100) {
@@ -363,7 +363,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//update money
 			giveMoney();
 			}
-		} 
+		 
 		
 		//-------FUNCTIONS-------\\
 		private static void updateShips(List<BaseshipObject> allShips){
@@ -514,12 +514,20 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			}
 			return false;
 		}
+		public static Boolean endWinScreen(){
+			if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+				inWinScreenSequence = false;
+				return true;
+			}
+			return false;
+		}
 		//If the user presses enter while on the win screen, 
 		//it will bring the statistics screen
 		public static Boolean beginStatistics(){
 			if(mBluebase.isDead() || mRedbase.isDead()) {
 				if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 					inWinScreenSequence = false;
+					inStatisticsSequence = true;
 					return true;
 				}
 				
