@@ -40,5 +40,7 @@ public class Constants {
 	public static final int shotCool = 120;
 	//how long to wait before showing the lose screen
 	public static final int waitBeforeEnd = 300;
+	//how long you sit and stare at the lose screen before the credits pop up and you can stare at something else
+	public static final int waitBeforeCredits = 300;
 	
 }
