@@ -1,11 +1,17 @@
 package com.mygdx.game.objects;
 
+import com.badlogic.gdx.Gdx;
+
 
 public class Constants {
 	//----------define constants----------\\
 	//room stuff
 	public static final int room_width = 1920;
 	public static final int room_height = 1080;
+	
+	public static final int display_width = Gdx.graphics.getDesktopDisplayMode().width;
+	public static final int display_height = Gdx.graphics.getDesktopDisplayMode().height;
+	
 	public static final String title = "Space Wars";
 	public static final boolean fullscreen = false;
 	//animation stuff

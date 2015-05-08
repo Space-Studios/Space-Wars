@@ -266,10 +266,10 @@ public class BaseshipObject {
 			Created = true;
 			Shot = 0;
 			if (Blue) {
-				this.setPlace((Gdx.graphics.getDesktopDisplayMode().width/4)+70, yPosition);
+				this.setPlace((Constants.display_width/4)+70, yPosition);
 			} 
 			if (!Blue){
-				this.setPlace(((Gdx.graphics.getDesktopDisplayMode().width/4)*3)+70, yPosition);
+				this.setPlace(((Constants.display_width/4)*3)+70, yPosition);
 			}
 			if (this.getType() == ShipTypes.Bullet){
 				this.setPlace(xPosition, yPosition);

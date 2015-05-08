@@ -136,11 +136,11 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		@Override
 		public void create () {
 			//FULLSCREEN LINE, this enables fullscreen for your computer\\
-			Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
+			Gdx.graphics.setDisplayMode(Constants.display_width, Constants.display_height, true);
 			//setting the lanes, it only works here and not higher
-			lane1 = Gdx.graphics.getDesktopDisplayMode().height/2+64; 
-			lane2 =Gdx.graphics.getDesktopDisplayMode().height/2;
-			lane3 = Gdx.graphics.getDesktopDisplayMode().height/2-64;
+			lane1 = Constants.display_height/2+64; 
+			lane2 =Constants.display_height/2;
+			lane3 = Constants.display_height/2-64;
 			
 			//music\\
 			music=new MusicPlayer();
@@ -248,17 +248,17 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//resizes all of the screens to your screen size\\
 			//yup, it is just the same command over and over again!!!
-			spr_title.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
-			spr_RedWins.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
-			spr_BlueWins.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
-			spr_Statistics.setSize(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
+			spr_title.setSize(Constants.display_width, Constants.display_height);
+			spr_RedWins.setSize(Constants.display_width, Constants.display_height);
+			spr_BlueWins.setSize(Constants.display_width, Constants.display_height);
+			spr_Statistics.setSize(Constants.display_width, Constants.display_height);
 			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
 			//red stuff
-			mRedbase.setPlace((Gdx.graphics.getDesktopDisplayMode().width/4)*3, (Gdx.graphics.getDesktopDisplayMode().height/2)-48);
+			mRedbase.setPlace((Constants.display_width/4)*3, (Constants.display_height/2)-48);
 			//blue stuff
-			mBluebase.setPlace(Gdx.graphics.getDesktopDisplayMode().width/4, (Gdx.graphics.getDesktopDisplayMode().height/2)-48);		
+			mBluebase.setPlace(Constants.display_width/4, (Constants.display_height/2)-48);		
 		}
 		
 		@Override
@@ -310,15 +310,15 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			if (beginStatistics() || inStatisticsSequence) {
 				spr_Statistics.setPosition(0,0);
 				spr_Statistics.draw(batch);
-				font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, 860, 1080-565);
-				font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, 325, 1080-425);
-				font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, 325, 1080-510);
-				font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, 325, 1080-602);
-				font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, 325, 1080-700);
-				font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, 1267, 1080-413);
-				font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, 1267, 1080-510);
-				font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, 1267, 1080-602);
-				font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, 1267, 1080-710);
+				font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, (Constants.room_width * 860)/1920, (Constants.room_height * (1080-565))/1080);
+				font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-425))/1080);
+				font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-510))/1080);
+				font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-602))/1080);
+				font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-700))/1080);
+				font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-413))/1080);
+				font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-510))/1080);
+				font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-602))/1080);
+				font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-710))/1080);
 				batch.end();
 				return;
 			}
@@ -338,7 +338,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						return;
 					}
 				}
-			batch.end();
 			
 			
 			//draw the background
@@ -350,16 +349,16 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			drawShips(allBShips,batch);
 			//draw Money
 			if (blueMoney==100) {
-				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Gdx.graphics.getDesktopDisplayMode().width/4)-32, (Gdx.graphics.getDesktopDisplayMode().height/2)-128);
+				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Constants.display_width/4)-32, (Constants.display_height/2)-128);
 			}
 			else{
-				font.draw(batch, "Money:$"+blueMoney, (Gdx.graphics.getDesktopDisplayMode().width/4), (Gdx.graphics.getDesktopDisplayMode().height/2)-128);
+				font.draw(batch, "Money:$"+blueMoney, (Constants.display_width/4), (Constants.display_height/2)-128);
 			}
 			if (redMoney==100) {
-				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Gdx.graphics.getDesktopDisplayMode().width/4)*3)-32, (Gdx.graphics.getDesktopDisplayMode().height/2)-128);
+				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Constants.display_width/4)*3)-32, (Constants.display_height/2)-128);
 			}
 			else{
-				font.draw(batch, "Money:$"+redMoney, (Gdx.graphics.getDesktopDisplayMode().width/4)*3, (Gdx.graphics.getDesktopDisplayMode().height/2)-128);
+				font.draw(batch, "Money:$"+redMoney, (Constants.display_width/4)*3, (Constants.display_height/2)-128);
 			}
 			//end the drawing
 			batch.end();
@@ -368,10 +367,9 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			updateShips(allShips);
 			mRedbase.update(allShips);
 			mBluebase.update(allShips);
+			
 			//update keys
 			updateKeys();
-			
-			
 			
 			//get right selected variable
 			getLane();
