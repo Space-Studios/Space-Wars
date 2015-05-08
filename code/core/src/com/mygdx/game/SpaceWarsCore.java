@@ -121,6 +121,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private static final int creditsWaitMax = Constants.waitBeforeCredits;
 		private static Boolean creditsMoving;
 		private static int creditsYPosition;
+		private static int statisticsWait;
+		private static final int statisticsWaitMax = Constants.waitBeforeStatistics;
 		
 		//resoucesCooldown. same time as the ship cooldown
 		private static final int rcooldown = Constants.moneyCool;
@@ -331,34 +333,39 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				return;
 			}
 			//lose screen drawing
-			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && creditsWait < creditsWaitMax){
-				creditsWait ++;
+			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax){
+				inWinScreenSequence = true;
+				statisticsWait++;
+			}
+			if (statisticsWait >= statisticsWaitMax) {
+				inWinScreenSequence = false;
 				inStatisticsSequence = true;
+				creditsWait++;
 			}
 					
-					//this checks if the timer for the credits is ready
-					if (creditsWait >= creditsWaitMax){
-						//this sets it to the correct position, and then draws the credits
-						spr_Credits.setPosition(0, creditsYPosition);
-						spr_Credits.draw(batch);
-						//if moving has started, always move the credits down until they are over, and then the game stops
-						if (creditsMoving){
-							if (creditsYPosition < 0){
-								creditsYPosition ++;
-							}
-							else {
-								//if credits are done, make player wait until they push escape
-								creditsMoving = false;
-							}
-						}
-						// if the credits have not yet been set to their initial position, the credits will start moving next step
-						else {
-							creditsMoving = true;
-						}
-						//classic end
-						batch.end();
-						return;
+			//this checks if the timer for the credits is ready
+			if (creditsWait >= creditsWaitMax){
+				//this sets it to the correct position, and then draws the credits
+				spr_Credits.setPosition(0, creditsYPosition);
+				spr_Credits.draw(batch);
+				//if moving has started, always move the credits down until they are over, and then the game stops
+				if (creditsMoving){
+				if (creditsYPosition < 0){
+						creditsYPosition ++;
 					}
+					else {
+						//if credits are done, make player wait until they push escape
+						creditsMoving = false;
+					}
+				}
+			// if the credits have not yet been set to their initial position, the credits will start moving next step
+			else {
+				creditsMoving = true;
+				}
+			//classic end
+			batch.end();
+			return;
+		}
 					if (beginStatistics() || inStatisticsSequence) {
 						spr_StatisticsBLU.setPosition(0,0);
 						spr_StatisticsRED.setPosition(0,0);
@@ -381,6 +388,21 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						inWinScreenSequence = false;
 						batch.end();
 						return;
+					}
+					if (inWinScreenSequence) {
+						if (mRedbase.isDead()) {
+							spr_BlueWins.setPosition(0, 0);
+							spr_BlueWins.draw(batch);
+							batch.end();
+							return;
+						}
+						if(mBluebase.isDead()){
+							spr_RedWins.setPosition(0, 0);
+							spr_RedWins.draw(batch);
+							batch.end();
+							return;
+						}
+						batch.end();
 					}
 			
 

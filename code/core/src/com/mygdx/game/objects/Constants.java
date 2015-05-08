@@ -39,8 +39,10 @@ public class Constants {
 	//shooter ship shooting cooldown
 	public static final int shotCool = 120;
 	//how long to wait before showing the lose screen
-	public static final int waitBeforeEnd = 300;
+	public static final int waitBeforeEnd = 200;
 	//how long you sit and stare at the lose screen before the credits pop up and you can stare at something else
-	public static final int waitBeforeCredits = 300;
+	public static final int waitBeforeCredits = 500;
+	//Win screen splash screen wait time
+	public static final int waitBeforeStatistics = 200;
 	
 }
