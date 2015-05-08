@@ -338,8 +338,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						return;
 					}
 				}
-				batch.end();
-			}
+			batch.end();
+			
 			
 			//draw the background
 			spr_space.draw(batch);
