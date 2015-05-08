@@ -316,7 +316,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
-<<<<<<< HEAD
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && creditsWait < creditsWaitMax){
 					creditsWait ++;
 					if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
@@ -333,7 +332,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							batch.end();
 							return;
 						}
-=======
+						
 			if (beginStatistics() || inStatisticsSequence) {
 				spr_Statistics.setPosition(0,0);
 				spr_Statistics.draw(batch);
@@ -357,7 +356,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						spr_RedWins.draw(batch);
 						batch.end();
 						return;
->>>>>>> origin/master
+
 					}
 			}
 			//this checks if the timer for the credits is ready
@@ -375,7 +374,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						creditsMoving = false;
 					}
 				}
-<<<<<<< HEAD
+
 				// if the credits have not yet been set to their initial position, the credits will start moving next step
 				else {
 					creditsMoving = true;
@@ -399,11 +398,11 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
-=======
+
 			batch.end();
 			
 			
->>>>>>> origin/master
+
 			//draw the background
 			spr_space.draw(batch);
 			//draw the bases
@@ -446,6 +445,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//update money
 			giveMoney();
 			}
+		}
+	}
 		 
 
 		
