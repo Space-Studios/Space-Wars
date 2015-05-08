@@ -336,52 +336,52 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				inStatisticsSequence = true;
 			}
 					
-				//this checks if the timer for the credits is ready
-				if (creditsWait >= creditsWaitMax){
-					//this sets it to the correct position, and then draws the credits
-					spr_Credits.setPosition(0, creditsYPosition);
-					spr_Credits.draw(batch);
-					//if moving has started, always move the credits down until they are over, and then the game stops
-					if (creditsMoving){
-						if (creditsYPosition < 0){
-							creditsYPosition ++;
-						}
-						else {
-							//if credits are done, make player wait until they push escape
-							creditsMoving = false;
-						}
+			//this checks if the timer for the credits is ready
+			if (creditsWait >= creditsWaitMax){
+				//this sets it to the correct position, and then draws the credits
+				spr_Credits.setPosition(0, creditsYPosition);
+				spr_Credits.draw(batch);
+				//if moving has started, always move the credits down until they are over, and then the game stops
+				if (creditsMoving){
+					if (creditsYPosition < 0){
+						creditsYPosition ++;
 					}
-					// if the credits have not yet been set to their initial position, the credits will start moving next step
 					else {
-						creditsMoving = true;
+						//if credits are done, make player wait until they push escape
+						creditsMoving = false;
 					}
-					//classic end
+				}
+				// if the credits have not yet been set to their initial position, the credits will start moving next step
+				else {
+					creditsMoving = true;
+				}
+				//classic end
+				batch.end();
+				return;
+				}
+				if (inStatisticsSequence) {
+					spr_StatisticsBLU.setPosition(0,0);
+					spr_StatisticsRED.setPosition(0,0);
+					if (mBluebase.isDead()) {
+						spr_StatisticsRED.draw(batch);
+					}
+					if (mRedbase.isDead()){
+						spr_StatisticsBLU.draw(batch);
+					}
+					font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, (Constants.room_width * 860)/1920, (Constants.room_height * (1080-565))/1080);
+					font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-425))/1080);
+					font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-510))/1080);
+					font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-602))/1080);
+					font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-700))/1080);
+					font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-413))/1080);
+					font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-510))/1080);
+					font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-602))/1080);
+					font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-710))/1080);						
+					inStatisticsSequence = true;
+					inWinScreenSequence = false;
 					batch.end();
 					return;
 				}
-					if (inStatisticsSequence) {
-						spr_StatisticsBLU.setPosition(0,0);
-						spr_StatisticsRED.setPosition(0,0);
-						if (mBluebase.isDead()) {
-							spr_StatisticsRED.draw(batch);
-						}
-						else if (mRedbase.isDead()){
-							spr_StatisticsBLU.draw(batch);
-						}
-						font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, (Constants.room_width * 860)/1920, (Constants.room_height * (1080-565))/1080);
-						font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-425))/1080);
-						font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-510))/1080);
-						font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-602))/1080);
-						font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-700))/1080);
-						font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-413))/1080);
-						font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-510))/1080);
-						font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-602))/1080);
-						font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-710))/1080);						
-						inStatisticsSequence = true;
-						inWinScreenSequence = false;
-						batch.end();
-						return;
-					}
 			
 
 			//draw the background
