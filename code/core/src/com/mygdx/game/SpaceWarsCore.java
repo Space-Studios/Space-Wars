@@ -316,6 +316,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
+<<<<<<< HEAD
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && creditsWait < creditsWaitMax){
 					creditsWait ++;
 					if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
@@ -332,6 +333,31 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							batch.end();
 							return;
 						}
+=======
+			if (beginStatistics() || inStatisticsSequence) {
+				spr_Statistics.setPosition(0,0);
+				spr_Statistics.draw(batch);
+				font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, 860, 1080-565);
+				font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, 325, 1080-425);
+				font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, 325, 1080-510);
+				font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, 325, 1080-602);
+				font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, 325, 1080-700);
+				font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, 1267, 1080-413);
+				font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, 1267, 1080-510);
+				font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, 1267, 1080-602);
+				font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, 1267, 1080-710);
+				batch.end();
+				return;
+			}
+			
+			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && !endWinScreen()){
+
+					if (mBluebase.isDead()){
+						spr_RedWins.setPosition(0, 0);
+						spr_RedWins.draw(batch);
+						batch.end();
+						return;
+>>>>>>> origin/master
 					}
 			}
 			//this checks if the timer for the credits is ready
@@ -349,6 +375,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						creditsMoving = false;
 					}
 				}
+<<<<<<< HEAD
 				// if the credits have not yet been set to their initial position, the credits will start moving next step
 				else {
 					creditsMoving = true;
@@ -372,6 +399,11 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
+=======
+			batch.end();
+			
+			
+>>>>>>> origin/master
 			//draw the background
 			spr_space.draw(batch);
 			//draw the bases
@@ -413,8 +445,9 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//update money
 			giveMoney();
-			
-		} 
+			}
+		 
+
 		
 		//-------FUNCTIONS-------\\
 		private static void updateShips(List<BaseshipObject> allShips){
@@ -565,12 +598,20 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			}
 			return false;
 		}
+		public static Boolean endWinScreen(){
+			if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+				inWinScreenSequence = false;
+				return true;
+			}
+			return false;
+		}
 		//If the user presses enter while on the win screen, 
 		//it will bring the statistics screen
 		public static Boolean beginStatistics(){
 			if(mBluebase.isDead() || mRedbase.isDead()) {
 				if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 					inWinScreenSequence = false;
+					inStatisticsSequence = true;
 					return true;
 				}
 				
