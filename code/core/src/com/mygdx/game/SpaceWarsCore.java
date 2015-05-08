@@ -61,13 +61,15 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private Sprite spr_BlueWins;
 		private Texture tex_RedWins;
 		private Sprite spr_RedWins;
-		private static Boolean inWinScreenSequence = true;
+		private static Boolean inWinScreenSequence = false;
 		private Texture tex_Credits;
 		private Sprite spr_Credits;
 		
 		//Statistics Screen
-		private Texture tex_Statistics;
-		private Sprite spr_Statistics;
+		private Texture tex_StatisticsBLU;
+		private Sprite spr_StatisticsBLU;
+		private Texture tex_StatisticsRED;
+		private Sprite spr_StatisticsRED;
 		private static Boolean inStatisticsSequence = false;
 		
 		//title screen
@@ -238,7 +240,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			spr_Credits = new Sprite(tex_Credits,0,0,1920,3420);
 			creditsWait = 0;
 			creditsMoving = false;
-			creditsYPosition = -2160; //0,1080,3240,4320
+			creditsYPosition = -2160;
 			
 			//red lose and blue lose screens
 			tex_BlueWins = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Win Screen/Player 1 Blue Wins Screen.png"));
@@ -252,15 +254,24 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			spr_title = new Sprite(tex_title,0,0,1920,1080);
 			
 			//statistics
-			tex_Statistics = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Statistics Screen/Statistics Screen.png"));
-			spr_Statistics = new Sprite(tex_Statistics,0,0,1920,1080);
+			tex_StatisticsBLU = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Statistics Screen/Statistics Screen BLUEWON.png"));
+			spr_StatisticsBLU = new Sprite(tex_StatisticsBLU,0,0,1920,1080);
+			tex_StatisticsRED = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Statistics Screen/Statistics Screen REDWON.png"));
+			spr_StatisticsRED = new Sprite(tex_StatisticsRED,0,0,1920,1080);
 			
 			//resizes all of the screens to your screen size\\
 			//yup, it is just the same command over and over again!!!
 			spr_title.setSize(Constants.display_width, Constants.display_height);
 			spr_RedWins.setSize(Constants.display_width, Constants.display_height);
 			spr_BlueWins.setSize(Constants.display_width, Constants.display_height);
-			spr_Statistics.setSize(Constants.display_width, Constants.display_height);
+			spr_StatisticsBLU.setSize(Constants.display_width, Constants.display_height);
+			spr_StatisticsRED.setSize(Constants.display_width, Constants.display_height);
+
+			//except for those credits...
+			spr_Credits.setSize(Constants.display_width, Constants.display_height*4);
+			
+			//now the credits have to be put in the correct position
+			creditsYPosition = Constants.display_height*(-3);
 			
 			//sets position for stationary things
 			spr_space.setPosition(0, 0);
@@ -286,6 +297,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 
 			///drawing. The ones drawn first are behind the others
 			batch.begin();
+			
+			
 			//if escape if pushed, exit
 			if (end()){
 				batch.end();
@@ -298,7 +311,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
-			//if any group lost, wait for 20/30 of a second and then draw the appropriate lose screen and freeze the game until escape is pressed
+			//---if any group lost, wait for 20/30 of a second and then draw the appropriate lose screen and freeze the game until escape is pressed---\\
+			//waiting
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime < waitMax){
 				waitTime++;
 				//update ships
@@ -316,6 +330,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
+			//lose screen drawing
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && creditsWait < creditsWaitMax){
 					creditsWait ++;
 					if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
@@ -356,38 +371,31 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						batch.end();
 						return;
 					}
-			if (beginStatistics() || inStatisticsSequence) {
-				spr_Statistics.setPosition(0,0);
-				spr_Statistics.draw(batch);
-				font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, (Constants.room_width * 860)/1920, (Constants.room_height * (1080-565))/1080);
-				font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-425))/1080);
-				font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-510))/1080);
-				font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-602))/1080);
-				font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-700))/1080);
-				font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-413))/1080);
-				font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-510))/1080);
-				font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-602))/1080);
-				font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-710))/1080);
-				batch.end();
-				return;
-			}
-			
-			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && !endWinScreen()){
-
-					if (mBluebase.isDead()){
-						spr_RedWins.setPosition(0, 0);
-						spr_RedWins.draw(batch);
+					if (beginStatistics() || inStatisticsSequence) {
+						spr_StatisticsBLU.setPosition(0,0);
+						spr_StatisticsRED.setPosition(0,0);
+						if (mBluebase.isDead()) {
+							spr_StatisticsRED.draw(batch);
+						}
+						else if (mRedbase.isDead()){
+							spr_StatisticsBLU.draw(batch);
+						}
+						font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, (Constants.room_width * 860)/1920, (Constants.room_height * (1080-565))/1080);
+						font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-425))/1080);
+						font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-510))/1080);
+						font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-602))/1080);
+						font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-700))/1080);
+						font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-413))/1080);
+						font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-510))/1080);
+						font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-602))/1080);
+						font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-710))/1080);						
+						inStatisticsSequence = true;
+						inWinScreenSequence = false;
 						batch.end();
 						return;
 					}
-					if (mRedbase.isDead()){
-						spr_BlueWins.setPosition(0, 0);
-						spr_BlueWins.draw(batch);
-						batch.end();
-						return;
-						}
-				batch.end();
 			}
+
 			//draw the background
 			spr_space.draw(batch);
 			//draw the bases
@@ -395,6 +403,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			mBluebase.show(batch);
 			//draw the ships
 			drawShips(allBShips,batch);
+			
 			//draw Money
 			if (blueMoney==100) {
 				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Constants.display_width/4)-32, (Constants.display_height/2)-128);
@@ -408,6 +417,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			else{
 				font.draw(batch, "Money:$"+redMoney, (Constants.display_width/4)*3, (Constants.display_height/2)-128);
 			}
+			
+			
 			//end the drawing
 			batch.end();
 			
@@ -429,7 +440,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//update money
 			giveMoney();
 			}
-		}
 		 
 
 		
