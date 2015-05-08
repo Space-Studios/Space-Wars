@@ -121,6 +121,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private static final int creditsWaitMax = Constants.waitBeforeCredits;
 		private static Boolean creditsMoving;
 		private static int creditsYPosition;
+		private static int statisticsWait;
+		private static final int statisticsWaitMax = Constants.waitBeforeStatistics;
 		
 		//resoucesCooldown. same time as the ship cooldown
 		private static final int rcooldown = Constants.moneyCool;
@@ -331,9 +333,16 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				return;
 			}
 			//lose screen drawing
-			if ((mBluebase.isDead() || mRedbase.isDead()) && waitTime >= waitMax && creditsWait < creditsWaitMax){
-				creditsWait ++;
+
+			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax){
+				inWinScreenSequence = true;
+				statisticsWait++;
+			}
+			if (statisticsWait >= statisticsWaitMax) {
+				inWinScreenSequence = false;
+
 				inStatisticsSequence = true;
+				creditsWait++;
 			}
 					
 			//this checks if the timer for the credits is ready
@@ -343,7 +352,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				spr_Credits.draw(batch);
 				//if moving has started, always move the credits down until they are over, and then the game stops
 				if (creditsMoving){
-					if (creditsYPosition < 0){
+
+				if (creditsYPosition < 0){
 						creditsYPosition ++;
 					}
 					else {
@@ -351,37 +361,52 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						creditsMoving = false;
 					}
 				}
-				// if the credits have not yet been set to their initial position, the credits will start moving next step
-				else {
-					creditsMoving = true;
+			// if the credits have not yet been set to their initial position, the credits will start moving next step
+			else {
+				creditsMoving = true;
 				}
-				//classic end
-				batch.end();
-				return;
-				}
-				if (inStatisticsSequence) {
-					spr_StatisticsBLU.setPosition(0,0);
-					spr_StatisticsRED.setPosition(0,0);
-					if (mBluebase.isDead()) {
-						spr_StatisticsRED.draw(batch);
+			//classic end
+			batch.end();
+			return;
+		}
+					if (beginStatistics() || inStatisticsSequence) {
+						spr_StatisticsBLU.setPosition(0,0);
+						spr_StatisticsRED.setPosition(0,0);
+						if (mBluebase.isDead()) {
+							spr_StatisticsRED.draw(batch);
+						}
+						else if (mRedbase.isDead()){
+							spr_StatisticsBLU.draw(batch);
+						}
+						font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, (Constants.room_width * 860)/1920, (Constants.room_height * (1080-565))/1080);
+						font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-425))/1080);
+						font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-510))/1080);
+						font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-602))/1080);
+						font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-700))/1080);
+						font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-413))/1080);
+						font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-510))/1080);
+						font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-602))/1080);
+						font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-710))/1080);						
+						inStatisticsSequence = true;
+						inWinScreenSequence = false;
+						batch.end();
+						return;
 					}
-					if (mRedbase.isDead()){
-						spr_StatisticsBLU.draw(batch);
+					if (inWinScreenSequence) {
+						if (mRedbase.isDead()) {
+							spr_BlueWins.setPosition(0, 0);
+							spr_BlueWins.draw(batch);
+							batch.end();
+							return;
+						}
+						if(mBluebase.isDead()){
+							spr_RedWins.setPosition(0, 0);
+							spr_RedWins.draw(batch);
+							batch.end();
+							return;
+						}
+						batch.end();
 					}
-					font.draw(batch, "Total Money Earned:$"+Statistics.totalInGameMoneyEarned, (Constants.room_width * 860)/1920, (Constants.room_height * (1080-565))/1080);
-					font.draw(batch, "Suicide Ships Created: "+Statistics.blueSuicideShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-425))/1080);
-					font.draw(batch, "Shooter Ships Created: "+Statistics.blueShooterShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-510))/1080);
-					font.draw(batch, "Blocker Ships Created: "+Statistics.blueBlockerShipCreation, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-602))/1080);
-					font.draw(batch, "Red Ships Destroyed: "+Statistics.blueKills, (Constants.room_width * 325)/1920, (Constants.room_height * (1080-700))/1080);
-					font.draw(batch, "Suicide Ship Creation: "+Statistics.redSuicideShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-413))/1080);
-					font.draw(batch, "Shooter Ship Creation: "+Statistics.redShooterShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-510))/1080);
-					font.draw(batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-602))/1080);
-					font.draw(batch, "Blue Ships Destroyed: "+Statistics.redKills, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-710))/1080);						
-					inStatisticsSequence = true;
-					inWinScreenSequence = false;
-					batch.end();
-					return;
-				}
 			
 
 			//draw the background
