@@ -332,22 +332,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			}
 			//lose screen drawing
 			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && creditsWait < creditsWaitMax){
-					creditsWait ++;
-					if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
-						
-						if (mBluebase.isDead()){
-							spr_RedWins.setPosition(0, 0);
-							spr_RedWins.draw(batch);
-							batch.end();
-							return;
-						}
-						if (mRedbase.isDead()){
-							spr_BlueWins.setPosition(0, 0);
-							spr_BlueWins.draw(batch);
-							batch.end();
-							return;
-						}
-				}
+				creditsWait ++;
+				inStatisticsSequence = true;
+			}
+					
 					//this checks if the timer for the credits is ready
 					if (creditsWait >= creditsWaitMax){
 						//this sets it to the correct position, and then draws the credits
@@ -394,7 +382,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						batch.end();
 						return;
 					}
-			}
+			
 
 			//draw the background
 			spr_space.draw(batch);
