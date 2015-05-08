@@ -51,19 +51,19 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private static RedBase mRedbase = new RedBase();
 		private static BlueBase mBluebase = new BlueBase();
 		
-		//background(hope you like it!!!)
+		//background
 		private Texture tex_space;
 		private Sprite spr_space;
 		
 		
-		//menu + Win screen
+		//menu + Win screen +credits
 		private Texture tex_BlueWins;
 		private Sprite spr_BlueWins;
 		private Texture tex_RedWins;
 		private Sprite spr_RedWins;
 		private static Boolean inWinScreenSequence = true;
-		//private Texture tex_menu;
-		//private Sprite spr_menu;
+		private Texture tex_Credits;
+		private Sprite spr_Credits;
 		
 		//Statistics Screen
 		private Texture tex_Statistics;
@@ -98,7 +98,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		
 		//basic ship list
 		//arraylist of ships
-		//TIP: dont look at the ships. They are for my understanding only (they include no/little comments)
+		//TIP: dont look at the ships. They are complicated.
 		//blue ship list
 		private static List<BaseshipObject> allBShips = new ArrayList<BaseshipObject>();
 		//red ship list
@@ -112,9 +112,13 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private static int cooldown2 = Constants.shipCool;
 		private static int currentTick2;
 		
-		//timer stuff for the lose screens
+		//timer stuff for the lose screens/credits
 		private static int waitTime;
 		private static final int waitMax = Constants.waitBeforeEnd;
+		private static int creditsWait;
+		private static final int creditsWaitMax = Constants.waitBeforeCredits;
+		private static Boolean creditsMoving;
+		private static int creditsYPosition;
 		
 		//resoucesCooldown. same time as the ship cooldown
 		private static final int rcooldown = Constants.moneyCool;
@@ -229,7 +233,12 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			tex_space = new Texture(Gdx.files.internal("sprites/SPACE!!!!!.png"));
 			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
-			
+			//sets credits
+			tex_Credits = new Texture(Gdx.files.internal("sprites/Credits.png"));
+			spr_Credits = new Sprite(tex_Credits,0,0,1920,3420);
+			creditsWait = 0;
+			creditsMoving = false;
+			creditsYPosition = -2160; //0,1080,3240,4320
 			
 			//red lose and blue lose screens
 			tex_BlueWins = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Win Screen/Player 1 Blue Wins Screen.png"));
@@ -307,24 +316,46 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				batch.end();
 				return;
 			}
-			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax){
-
-							if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
-
-					if (mBluebase.isDead()){
-						spr_RedWins.setPosition(0, 0);
-						spr_RedWins.draw(batch);
-						batch.end();
-						return;
+			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && creditsWait < creditsWaitMax){
+					creditsWait ++;
+					if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && inWinScreenSequence){
+						
+						if (mBluebase.isDead()){
+							spr_RedWins.setPosition(0, 0);
+							spr_RedWins.draw(batch);
+							batch.end();
+							return;
+						}
+						if (mRedbase.isDead()){
+							spr_BlueWins.setPosition(0, 0);
+							spr_BlueWins.draw(batch);
+							batch.end();
+							return;
+						}
 					}
-					if (mRedbase.isDead()){
-						spr_BlueWins.setPosition(0, 0);
-						spr_BlueWins.draw(batch);
-						batch.end();
-						return;
+			}
+			//this checks if the timer for the credits is ready
+			if (creditsWait >= creditsWaitMax){
+				//this sets it to the correct position, and then draws the credits
+				spr_Credits.setPosition(0, creditsYPosition);
+				spr_Credits.draw(batch);
+				//if moving has started, always move the credits down until they are over, and then the game stops
+				if (creditsMoving){
+					if (creditsYPosition < 0){
+						creditsYPosition ++;
+					}
+					else {
+						//if credits are done, make player wait until they push escape
+						creditsMoving = false;
 					}
 				}
+				// if the credits have not yet been set to their initial position, the credits will start moving next step
+				else {
+					creditsMoving = true;
+				}
+				//classic end
 				batch.end();
+				return;
 			}
 			if (beginStatistics()) {
 				spr_Statistics.setPosition(0,0);
