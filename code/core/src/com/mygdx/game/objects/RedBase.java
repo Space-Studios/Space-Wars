@@ -108,7 +108,6 @@ public class RedBase {
 		if (Life<=0){
 			return true;
 		}
-		
 		return false;
 	}
 	
