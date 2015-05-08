@@ -20,6 +20,7 @@ public class BlueBase {
 	private float Y;
 	private static BitmapFont font;
 	private static Boom boom;
+	private SoundPlayer sounds = new SoundPlayer();
 	
 	//constructor
 	public BlueBase() {
@@ -35,6 +36,7 @@ public class BlueBase {
 		sprite.scale(0.8f);
 		X=0;
 		Y=0;
+		sounds.init();
 	}
 	
 	//returns if front is colliding
@@ -70,7 +72,7 @@ public class BlueBase {
 				
 				if (this.hits(otherShip.bulletFront.Mask) && otherShip.Blue == false && otherShip.bulletFront.Created){
 					otherShip.bulletFront.Created = false;
-					this.takeDamage(1);
+					takeDamage(otherShip.Damage);
 				}
 			}
 		}
@@ -95,6 +97,7 @@ public class BlueBase {
 	
 	//returns true if dead
 	public Boolean takeDamage(int amount){
+		this.sounds.playBoom();
 		Life-=amount;
 		if (Life<=0){
 			return true;
@@ -118,7 +121,7 @@ public class BlueBase {
 			this.setPlace(99999, 99999);
 			return;
 		}
-		font.draw(batch, "Life: "+Life, 128*2, ((178)*2)+320);
+		font.draw(batch, "Life: "+Life, X, Y+128+64);
 		sprite.draw(batch);
 
 	}

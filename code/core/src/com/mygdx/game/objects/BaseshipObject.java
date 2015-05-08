@@ -3,6 +3,7 @@ package com.mygdx.game.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,6 +28,7 @@ public class BaseshipObject {
 	protected List<Boom> boom = new ArrayList<Boom>();
 	protected int Bullets;
 	protected BaseBullet bulletFront;
+	protected SoundPlayer sounds;
 	
 	//getters and setters for all variables
 	public ShipTypes getType() {
@@ -39,6 +41,8 @@ public class BaseshipObject {
 		Y = 0.0f;
 		Shot = 0;
 		Bullets = 0;
+		sounds = new SoundPlayer();
+		this.sounds.init();
 	}
 	
 	public void Init() {};
@@ -129,6 +133,7 @@ public class BaseshipObject {
 		if (this.getType() == ShipTypes.ShooterShip){
 			Shot+= (1);
 			if (Shot >= ShotTime){
+				this.sounds.playShoot();
 				Shot=0;
 				Bullets++;
 				BaseBullet b = new BaseBullet();
@@ -173,6 +178,7 @@ public class BaseshipObject {
 					boom.get(i).Init();
 				}
 			}
+			this.sounds.playBoom();
 			Created = false;
 			this.setPlace(0, 0);
 		}
@@ -186,6 +192,7 @@ public class BaseshipObject {
 					boom.get(i).Init();
 				}
 			}
+			this.sounds.playBoom();
 			Created = false;
 		}
 	}
@@ -197,6 +204,7 @@ public class BaseshipObject {
 		
 		//if bullet hits red base
 		if (bulletFront.hits(red.mask)){
+			this.sounds.playBoom();
 			red.Life-=this.Damage;
 			bulletFront.Created = false;
 			boom.add(new Boom(bulletFront.X,bulletFront.Y,Constants.boomSize));
@@ -209,6 +217,7 @@ public class BaseshipObject {
 		
 		//if bullet hits blue base
 		if (bulletFront.hits(blue.mask)){
+			this.sounds.playBoom();
 			blue.Life-=this.Damage;
 			bulletFront.Created = false;
 			boom.add(new Boom(bulletFront.X,bulletFront.Y,Constants.boomSize));
@@ -253,16 +262,22 @@ public class BaseshipObject {
 	
 	public Boolean create(float yPosition, float xPosition) {
 		if (Created == false){
+			sounds.init();
 			Created = true;
+			Shot = 0;
 			if (Blue) {
-				this.setPlace((128*2)+70, yPosition+48);
+				this.setPlace((Gdx.graphics.getDesktopDisplayMode().width/4)+70, yPosition);
 			} 
 			if (!Blue){
-				this.setPlace((736*2)-70, yPosition+48);
+				this.setPlace(((Gdx.graphics.getDesktopDisplayMode().width/4)*3)+70, yPosition);
 			}
 			if (this.getType() == ShipTypes.Bullet){
 				this.setPlace(xPosition, yPosition);
 			}
+			else{
+				this.sounds.playShipLaunch();
+			}
+			
 			this.set();
 			return true;
 		}
