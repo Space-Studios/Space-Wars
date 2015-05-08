@@ -331,35 +331,35 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				return;
 			}
 			//lose screen drawing
-			if (mBluebase.isDead() || mRedbase.isDead() && waitTime >= waitMax && creditsWait < creditsWaitMax){
+			if ((mBluebase.isDead() || mRedbase.isDead()) && waitTime >= waitMax && creditsWait < creditsWaitMax){
 				creditsWait ++;
 				inStatisticsSequence = true;
 			}
 					
-					//this checks if the timer for the credits is ready
-					if (creditsWait >= creditsWaitMax){
-						//this sets it to the correct position, and then draws the credits
-						spr_Credits.setPosition(0, creditsYPosition);
-						spr_Credits.draw(batch);
-						//if moving has started, always move the credits down until they are over, and then the game stops
-						if (creditsMoving){
-							if (creditsYPosition < 0){
-								creditsYPosition ++;
-							}
-							else {
-								//if credits are done, make player wait until they push escape
-								creditsMoving = false;
-							}
+				//this checks if the timer for the credits is ready
+				if (creditsWait >= creditsWaitMax){
+					//this sets it to the correct position, and then draws the credits
+					spr_Credits.setPosition(0, creditsYPosition);
+					spr_Credits.draw(batch);
+					//if moving has started, always move the credits down until they are over, and then the game stops
+					if (creditsMoving){
+						if (creditsYPosition < 0){
+							creditsYPosition ++;
 						}
-						// if the credits have not yet been set to their initial position, the credits will start moving next step
 						else {
-							creditsMoving = true;
+							//if credits are done, make player wait until they push escape
+							creditsMoving = false;
 						}
-						//classic end
-						batch.end();
-						return;
 					}
-					if (beginStatistics() || inStatisticsSequence) {
+					// if the credits have not yet been set to their initial position, the credits will start moving next step
+					else {
+						creditsMoving = true;
+					}
+					//classic end
+					batch.end();
+					return;
+				}
+					if (inStatisticsSequence) {
 						spr_StatisticsBLU.setPosition(0,0);
 						spr_StatisticsRED.setPosition(0,0);
 						if (mBluebase.isDead()) {
