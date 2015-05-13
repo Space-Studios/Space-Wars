@@ -36,9 +36,9 @@ public class Constants {
 	//ship lives
 	public static final int sShipLife = 1;
 	public static final int shShipLife = 3;
-	public static final int bShipLife = 6;
+	public static final int bShipLife = 8;
 	//ship damage
-	public static final int sShipDam = 5;
+	public static final int sShipDam = 4;
 	public static final int shShipDam = 2; //this includes bullet damage
 	public static final int bShipDam = 2;
 	//base stuff
