@@ -76,6 +76,9 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private Texture tex_title;
 		private Sprite spr_title;
 		private static Boolean inTitleSequence = true;
+			// Start Button Duel
+			private Texture tex_duel;
+			private Sprite spr_duel;
 		//lanes
 		private static int lane1 = ((178-32)*2)+120;//y value
 		private static int lane2 = (178*2)+120; //y value
@@ -255,6 +258,11 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			tex_title = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/Title Screen Image .png"));
 			spr_title = new Sprite(tex_title,0,0,1920,1080);
 			
+			//Start Button Dual
+			tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartA.png"));
+			spr_duel = new Sprite(tex_duel);
+			spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
+			
 			//statistics
 			tex_StatisticsBLU = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Statistics Screen/Statistics Screen BLUEWON.png"));
 			spr_StatisticsBLU = new Sprite(tex_StatisticsBLU,0,0,1920,1080);
@@ -310,6 +318,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//if the user hasn't pressed enter, render the title screen
 			if (!endTitle() && inTitleSequence) {
 				spr_title.draw(batch);
+				spr_duel.draw(batch);
+				
 				batch.end();
 				return;
 			}
@@ -597,8 +607,26 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		}
 		//If the user presses enter, it changes the status of inTitleSequence to false
 		//This will cause the game to begin rendering
+		public static Boolean highlightedButton(){
+			if (Gdx.input.getX() > Gdx.graphics.getDesktopDisplayMode().width/5 
+					&& Gdx.input.getX() < (Gdx.graphics.getDesktopDisplayMode().width/5)+256)
+			{
+				if (Gdx.graphics.getDesktopDisplayMode().height - Gdx.input.getY() 
+						> Gdx.graphics.getDesktopDisplayMode().height/4 
+						&& 
+						Gdx.graphics.getDesktopDisplayMode().height - Gdx.input.getY() 
+						< (Gdx.graphics.getDesktopDisplayMode().height/4)+128)
+				{
+					return true;
+				}
+				return false;
+			}
+			
+			return false;
+		}
 		public static Boolean endTitle(){
-			if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+			if(/*Gdx.input.isKeyPressed(Input.Keys.ENTER)*/ highlightedButton() 
+					&& Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 				inTitleSequence = false;
 				return true;
 			}
