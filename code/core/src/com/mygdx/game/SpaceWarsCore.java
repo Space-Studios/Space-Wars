@@ -76,9 +76,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private Texture tex_title;
 		private Sprite spr_title;
 		private static Boolean inTitleSequence = true;
+
 			// Start Button Duel
-			private Texture tex_duel;
-			private Sprite spr_duel;
+			private static Texture tex_duel;
+			private static Sprite spr_duel;
 		//lanes
 		private static int lane1 = ((178-32)*2)+120;//y value
 		private static int lane2 = (178*2)+120; //y value
@@ -607,6 +608,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		}
 		//If the user presses enter, it changes the status of inTitleSequence to false
 		//This will cause the game to begin rendering
+		
+		// This is the button function that tracks whether the buttons are being highlighted or not.
+		//It will return a boolean (highlightedButton()) which will be used to exit the start screen
+		//Apologies for all the math if someone wants to change them to variables go for it but this in its entirety does track correctly
 		public static Boolean highlightedButton(){
 			if (Gdx.input.getX() > Gdx.graphics.getDesktopDisplayMode().width/5 
 					&& Gdx.input.getX() < (Gdx.graphics.getDesktopDisplayMode().width/5)+256)
@@ -617,13 +622,24 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						Gdx.graphics.getDesktopDisplayMode().height - Gdx.input.getY() 
 						< (Gdx.graphics.getDesktopDisplayMode().height/4)+128)
 				{
+					tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartB.png"));
+					spr_duel = new Sprite(tex_duel);
+					spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
 					return true;
 				}
+				tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartA.png"));
+				spr_duel = new Sprite(tex_duel);
+				spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
 				return false;
 			}
-			
+			tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartA.png"));
+			spr_duel = new Sprite(tex_duel);
+			spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
 			return false;
 		}
+
+		
+		
 		public static Boolean endTitle(){
 			if(/*Gdx.input.isKeyPressed(Input.Keys.ENTER)*/ highlightedButton() 
 					&& Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
