@@ -611,7 +611,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		
 		// This is the button function that tracks whether the buttons are being highlighted or not.
 		//It will return a boolean (highlightedButton()) which will be used to exit the start screen
-		//Apologies for all the math if someone wants to change them to variables go for it but this in its entirety does track correctly
+		//Apologies for all the math if someone wants to change them to variables go for it but this in its entirety does track correctly -- TFlexSoom
 		public static Boolean highlightedButton(){
 			if (Gdx.input.getX() > Gdx.graphics.getDesktopDisplayMode().width/5 
 					&& Gdx.input.getX() < (Gdx.graphics.getDesktopDisplayMode().width/5)+256)
