@@ -626,28 +626,28 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		//It will return a boolean (highlightedButton()) which will be used to exit the start screen
 		//Apologies for all the math if someone wants to change them to variables go for it but this in its entirety does track correctly -- TFlexSoom
 		public static Boolean highlightedButton(){
-			if (Gdx.input.getX() > Gdx.graphics.getDesktopDisplayMode().width/5 
-					&& Gdx.input.getX() < (Gdx.graphics.getDesktopDisplayMode().width/5)+256)
+			if (Gdx.input.getX() > (Constants.display_width/2)-128 
+					&& Gdx.input.getX() < (Constants.display_width/2)+128)
 			{
-				if (Gdx.graphics.getDesktopDisplayMode().height - Gdx.input.getY() 
-						> Gdx.graphics.getDesktopDisplayMode().height/4 
+				if (Constants.display_height - Gdx.input.getY() 
+						> (Constants.display_height/5)-64 
 						&& 
-						Gdx.graphics.getDesktopDisplayMode().height - Gdx.input.getY() 
-						< (Gdx.graphics.getDesktopDisplayMode().height/4)+128)
+						Constants.display_height - Gdx.input.getY() 
+						< (Constants.display_height/5)+64)
 				{
 					tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartB.png"));
 					spr_duel = new Sprite(tex_duel);
-					spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
+					spr_duel.setPosition(Constants.display_width/2 -128,Constants.display_height/5 - 64);
 					return true;
 				}
 				tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartA.png"));
 				spr_duel = new Sprite(tex_duel);
-				spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
+				spr_duel.setPosition(Constants.display_width/2-128,Constants.display_height/5-64);
 				return false;
 			}
 			tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartA.png"));
 			spr_duel = new Sprite(tex_duel);
-			spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
+			spr_duel.setPosition(Constants.display_width/2 - 128,Constants.display_height/5 - 64);
 			return false;
 		}
 

@@ -16,14 +16,18 @@ public class Constants {
 	
 	public static final int display_width = Gdx.graphics.getDesktopDisplayMode().width;
 	public static final int display_height = Gdx.graphics.getDesktopDisplayMode().height;
-
+	
+	//public static final int display_width = 1920;
+	//public static final int display_height = 1080;
+	
+	
 	//animation stuff
 	public static final int animationSpeed = 3; //this divided by 30 is the frames per second
 	public static final float boomSize = 1.5f;
 	//minor gameplay stuff
 	public static final int shipCool = 30; //if s ship, this value, if sh ship, this value + 10, if b ship, this value *2
 	public static final int moneyCool = 15;
-	public static final int income = 2;
+	public static final int income = 1;
 	//gameplay stuff
 	public static final int sShips = 10;
 	public static final int shShips = 5;
@@ -38,7 +42,7 @@ public class Constants {
 	public static final int shShipDam = 2; //this includes bullet damage
 	public static final int bShipDam = 2;
 	//base stuff
-	public static final int baseLife = 100;
+	public static final int baseLife = 50;
 	//shooter ship shooting cooldown
 	public static final int shotCool = 150;
 	//how long to wait before showing the lose screen
