@@ -7,6 +7,7 @@ import java.util.List;
 
 
 
+
 //import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -29,6 +30,7 @@ import com.mygdx.game.objects.ShipTypes;
 //import blue ships
 import com.mygdx.game.objects.BlockerShip;
 import com.mygdx.game.objects.ShooterShip;
+import com.mygdx.game.objects.SoundPlayer;
 import com.mygdx.game.objects.SuicideShip;
 //import red ships
 import com.mygdx.game.objects.RedShooterShip;
@@ -141,8 +143,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		
 		//music
 		private static MusicPlayer music;
+		private static Boolean playWinSound = true;
 		
-		
+		//sounds
+		protected SoundPlayer sounds;
 		
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
@@ -154,9 +158,14 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			lane2 =Constants.display_height/2;
 			lane3 = Constants.display_height/2-64;
 			
+				
 			//music\\
 			music=new MusicPlayer();
 			music.init();
+			
+			//sounds\\
+			sounds= new SoundPlayer();
+			sounds.init();
 			
 			//--font stuff--\\
 			
@@ -347,6 +356,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 
 			if ((mBluebase.isDead() || mRedbase.isDead()) && waitTime >= waitMax){
 				inWinScreenSequence = true;
+				if (playWinSound){
+					sounds.playWin();
+					playWinSound = false;
+				}
 				statisticsWait++;
 			}
 			if (statisticsWait >= statisticsWaitMax) {

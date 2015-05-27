@@ -6,14 +6,17 @@ import com.badlogic.gdx.Gdx;
 public class Constants {
 	//----------define constants----------\\
 	//room stuff
-	public static final int room_width = 1920;
-	public static final int room_height = 1080;
+	public static String versionNumber = "v1.0.1";
+	
+	public static final String title = "Space Wars" + " " + versionNumber;
+	public static final boolean fullscreen = false; //this must stay false
+	
+	public static int room_width = 1920;
+	public static int room_height = 1080;
 	
 	public static final int display_width = Gdx.graphics.getDesktopDisplayMode().width;
 	public static final int display_height = Gdx.graphics.getDesktopDisplayMode().height;
-	
-	public static final String title = "Space Wars";
-	public static final boolean fullscreen = false; //this must stay false
+
 	//animation stuff
 	public static final int animationSpeed = 3; //this divided by 30 is the frames per second
 	public static final float boomSize = 1.5f;
@@ -44,5 +47,6 @@ public class Constants {
 	public static final int waitBeforeCredits = 500;
 	//Win screen splash screen wait time
 	public static final int waitBeforeStatistics = 200;
+	//Version Number
 	
 }
