@@ -151,6 +151,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
+			//allows you to use constants
+			Constants.setSize(Gdx.graphics.getDesktopDisplayMode().width,Gdx.graphics.getDesktopDisplayMode().height);
 			//FULLSCREEN LINE, this enables fullscreen for your computer\\
 			Gdx.graphics.setDisplayMode(Constants.display_width, Constants.display_height, true);
 			//setting the lanes, it only works here and not higher

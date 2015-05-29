@@ -14,8 +14,8 @@ public class Constants {
 	public static int room_width = 1920;
 	public static int room_height = 1080;
 	
-	public static final int display_width = Gdx.graphics.getDesktopDisplayMode().width;
-	public static final int display_height = Gdx.graphics.getDesktopDisplayMode().height;
+	public static int display_width;
+	public static int display_height;
 	
 	//public static final int display_width = 1920;
 	//public static final int display_height = 1080;
@@ -52,5 +52,11 @@ public class Constants {
 	//Win screen splash screen wait time
 	public static final int waitBeforeStatistics = 200;
 	//Version Number
+	
+	//sets display_width
+	public static void setSize(int width, int height){
+		display_width = width;
+		display_height = height;
+	}
 	
 }
