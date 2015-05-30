@@ -94,7 +94,7 @@ public class RedBase {
 		X=xPosition;
 		Y=yPosition;
 	}
-	//returns true if dead
+	//returns true if de+ad
 	public Boolean takeDamage(int amount){
 		this.sounds.playBoom();
 		Life-=amount;

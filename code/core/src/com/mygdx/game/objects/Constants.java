@@ -33,6 +33,8 @@ public class Constants {
 	public static final int shShips = 5;
 	public static final int bShips = 3;
 	//major gameplay stuff
+	//maximum money
+	public static final int maxmoney = 999999998;
 	//ship lives
 	public static final int sShipLife = 1;
 	public static final int shShipLife = 3;
