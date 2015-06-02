@@ -14,11 +14,8 @@ public class Constants {
 	public static int room_width = 1920;
 	public static int room_height = 1080;
 	
-	//public static final int display_width = Gdx.graphics.getDesktopDisplayMode().width;
-	//public static final int display_height = Gdx.graphics.getDesktopDisplayMode().height;
-	
-	public static final int display_width = 1920;
-	public static final int display_height = 1080;
+	public static int display_width;
+	public static int display_height;
 	
 	
 	//animation stuff
@@ -33,12 +30,14 @@ public class Constants {
 	public static final int shShips = 5;
 	public static final int bShips = 3;
 	//major gameplay stuff
+	//maximum money
+	public static final int maxmoney = 999999998;
 	//ship lives
 	public static final int sShipLife = 1;
 	public static final int shShipLife = 3;
-	public static final int bShipLife = 6;
+	public static final int bShipLife = 8;
 	//ship damage
-	public static final int sShipDam = 5;
+	public static final int sShipDam = 4;
 	public static final int shShipDam = 2; //this includes bullet damage
 	public static final int bShipDam = 2;
 	//base stuff
@@ -51,6 +50,11 @@ public class Constants {
 	public static final int waitBeforeCredits = 500;
 	//Win screen splash screen wait time
 	public static final int waitBeforeStatistics = 200;
-	//Version Number
+	
+	//sets display_width
+	public static void setSize(int width, int height){
+		display_width = width;
+		display_height = height;
+	}
 	
 }

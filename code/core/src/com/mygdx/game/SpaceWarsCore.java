@@ -151,6 +151,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
+			//allows you to use constants
+			Constants.setSize(Gdx.graphics.getDesktopDisplayMode().width,Gdx.graphics.getDesktopDisplayMode().height);
 			//FULLSCREEN LINE, this enables fullscreen for your computer\\
 			Gdx.graphics.setDisplayMode(Constants.display_width, Constants.display_height, true);
 			//setting the lanes, it only works here and not higher
@@ -441,13 +443,13 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			drawShips(allBShips,batch);
 			
 			//draw Money
-			if (blueMoney==100) {
+			if (blueMoney==Constants.maxmoney) {
 				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Constants.display_width/4)-32, (Constants.display_height/2)-128);
 			}
 			else{
 				font.draw(batch, "Money:$"+blueMoney, (Constants.display_width/4), (Constants.display_height/2)-128);
 			}
-			if (redMoney==100) {
+			if (redMoney==Constants.maxmoney) {
 				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Constants.display_width/4)*3)-32, (Constants.display_height/2)-128);
 			}
 			else{
@@ -841,11 +843,11 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			redMoney+=Constants.income;
 			Statistics.totalInGameMoneyEarned += Constants.income;
 			//money cap
-			if (blueMoney>100) {
-				blueMoney=100;
+			if (blueMoney>Constants.maxmoney) {
+				blueMoney=Constants.maxmoney;
 			}
-			if (redMoney>100) {
-				redMoney=100;
+			if (redMoney>Constants.maxmoney) {
+				redMoney=Constants.maxmoney;
 			}
 		}
 }
