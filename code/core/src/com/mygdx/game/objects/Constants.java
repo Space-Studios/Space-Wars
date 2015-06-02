@@ -14,11 +14,11 @@ public class Constants {
 	public static int room_width = 1920;
 	public static int room_height = 1080;
 	
-	public static final int display_width = Gdx.graphics.getDesktopDisplayMode().width;
-	public static final int display_height = Gdx.graphics.getDesktopDisplayMode().height;
+	//public static final int display_width = Gdx.graphics.getDesktopDisplayMode().width;
+	//public static final int display_height = Gdx.graphics.getDesktopDisplayMode().height;
 	
-	//public static final int display_width = 1920;
-	//public static final int display_height = 1080;
+	public static final int display_width = 1920;
+	public static final int display_height = 1080;
 	
 	
 	//animation stuff
