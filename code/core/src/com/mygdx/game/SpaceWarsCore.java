@@ -443,13 +443,13 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			drawShips(allBShips,batch);
 			
 			//draw Money
-			if (blueMoney==100) {
+			if (blueMoney==Constants.maxmoney) {
 				font.draw(batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Constants.display_width/4)-32, (Constants.display_height/2)-128);
 			}
 			else{
 				font.draw(batch, "Money:$"+blueMoney, (Constants.display_width/4), (Constants.display_height/2)-128);
 			}
-			if (redMoney==100) {
+			if (redMoney==Constants.maxmoney) {
 				font.draw(batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Constants.display_width/4)*3)-32, (Constants.display_height/2)-128);
 			}
 			else{
@@ -843,11 +843,11 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			redMoney+=Constants.income;
 			Statistics.totalInGameMoneyEarned += Constants.income;
 			//money cap
-			if (blueMoney>100) {
-				blueMoney=100;
+			if (blueMoney>Constants.maxmoney) {
+				blueMoney=Constants.maxmoney;
 			}
-			if (redMoney>100) {
-				redMoney=100;
+			if (redMoney>Constants.maxmoney) {
+				redMoney=Constants.maxmoney;
 			}
 		}
 }
