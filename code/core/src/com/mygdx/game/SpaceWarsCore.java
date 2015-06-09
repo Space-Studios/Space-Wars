@@ -57,6 +57,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private Texture tex_space;
 		private Sprite spr_space;
 		
+		//AITest
+		private static Boolean inSoloMode = false;
+		private static Boolean inDuelMode = false;
+		
 		
 		//menu + Win screen +credits
 		private Texture tex_BlueWins;
@@ -517,14 +521,26 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			if (num3){
 				blueSelected = lane3;
 			}
-			if (num8){
-				redSelected = lane1;
-			}
-			if (num9){
-				redSelected = lane2;
-			}
-			if (num0){
-				redSelected = lane3;
+			if (inSoloMode) {
+				if (AITest.lane1) {
+					redSelected = lane1;
+				}
+				if (AITest.lane2) {
+					redSelected = lane2;
+				}
+				if (AITest.lane3) {
+					redSelected = lane3;
+				}
+			} else if (inDuelMode) {
+				if (num8){
+					redSelected = lane1;
+				}
+				if (num9){
+					redSelected = lane2;
+				}
+				if (num0){
+					redSelected = lane3;
+				}
 			}
 		}
 		
@@ -659,6 +675,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			if(/*Gdx.input.isKeyPressed(Input.Keys.ENTER)*/ highlightedButton() 
 					&& Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 				inTitleSequence = false;
+				inDuelMode = true;
 				return true;
 			}
 			return false;
@@ -768,7 +785,72 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			currentTick2 = 0;
 			//----RED----\\
 			//suicide ship
-			if (I==true){
+			if (inSoloMode) {
+				if (AITest.createAISuicideShip==true){
+					//goes through the list of ships
+					for(int len = allRShips.size(), i = 0; i < len; i++) {
+						//gets current ship
+						BaseshipObject ship = allRShips.get(i);
+						//if it is a suicide ship
+						if (ship.getType().equals(ShipTypes.SuicideShip)){
+							//if you have enough money for it
+							if (redMoney>=5){	
+								//if its create function returns true, break
+								if (ship.create(redSelected,0)==true){
+									I=false;
+									Statistics.redSuicideShipCreation += 1;
+									cooldown2=Constants.shipCool;
+									redMoney-=5;
+									break;
+									}
+								
+								}
+							}
+						}
+					}
+				//shooter ship
+				//same as suicide ship
+					if (AITest.createAIShooterShip==true){
+						for(int len = allRShips.size(), i = 0; i < len; i++) {
+							BaseshipObject ship = allRShips.get(i);
+							if (ship.getType().equals(ShipTypes.ShooterShip)){
+								//if you have enough money for it
+								if (redMoney>=10){	
+									//if its create function returns true, break
+									if (ship.create(redSelected,0)==true){
+										O=false;
+										Statistics.redShooterShipCreation += 1;
+										cooldown2=Constants.shipCool+10;
+										redMoney-=10;
+										break;
+									}
+								
+								}
+							}
+						}
+					}
+				//blocker ship
+					if (AITest.createAIBlockerShip==true){
+						for(int len = allRShips.size(), i = 0; i < len; i++) {
+							BaseshipObject ship = allRShips.get(i);
+							if (ship.getType().equals(ShipTypes.BlockerShip)){
+								//if you have enough money for it
+								if (redMoney>=15){	
+									//if its create function returns true, break
+									if (ship.create(redSelected,0)==true){
+										P=false;
+										Statistics.redBlockerShipCreation += 1;
+										cooldown2 = Constants.shipCool * 2;
+										redMoney-=15;
+										break;
+									}
+								
+								}
+							}
+						}
+					}
+				} else if (inDuelMode) {
+				if (I==true){
 				//goes through the list of ships
 				for(int len = allRShips.size(), i = 0; i < len; i++) {
 					//gets current ship
@@ -784,54 +866,55 @@ public class SpaceWarsCore extends ApplicationAdapter{
 								cooldown2=Constants.shipCool;
 								redMoney-=5;
 								break;
-							}
+								}
 							
+							}
 						}
 					}
 				}
 			}
 			//shooter ship
 			//same as suicide ship
-			if (O==true){
-				for(int len = allRShips.size(), i = 0; i < len; i++) {
-					BaseshipObject ship = allRShips.get(i);
-					if (ship.getType().equals(ShipTypes.ShooterShip)){
-						//if you have enough money for it
-						if (redMoney>=10){	
-							//if its create function returns true, break
-							if (ship.create(redSelected,0)==true){
-								O=false;
-								Statistics.redShooterShipCreation += 1;
-								cooldown2=Constants.shipCool+10;
-								redMoney-=10;
-								break;
-							}
+				if (O==true){
+					for(int len = allRShips.size(), i = 0; i < len; i++) {
+						BaseshipObject ship = allRShips.get(i);
+						if (ship.getType().equals(ShipTypes.ShooterShip)){
+							//if you have enough money for it
+							if (redMoney>=10){	
+								//if its create function returns true, break
+								if (ship.create(redSelected,0)==true){
+									O=false;
+									Statistics.redShooterShipCreation += 1;
+									cooldown2=Constants.shipCool+10;
+									redMoney-=10;
+									break;
+								}
 							
+							}
 						}
 					}
 				}
-			}
 			//blocker ship
-			if (P==true){
-				for(int len = allRShips.size(), i = 0; i < len; i++) {
-					BaseshipObject ship = allRShips.get(i);
-					if (ship.getType().equals(ShipTypes.BlockerShip)){
-						//if you have enough money for it
-						if (redMoney>=15){	
-							//if its create function returns true, break
-							if (ship.create(redSelected,0)==true){
-								P=false;
-								Statistics.redBlockerShipCreation += 1;
-								cooldown2 = Constants.shipCool * 2;
-								redMoney-=15;
-								break;
-							}
+				if (P==true){
+					for(int len = allRShips.size(), i = 0; i < len; i++) {
+						BaseshipObject ship = allRShips.get(i);
+						if (ship.getType().equals(ShipTypes.BlockerShip)){
+							//if you have enough money for it
+							if (redMoney>=15){	
+								//if its create function returns true, break
+								if (ship.create(redSelected,0)==true){
+									P=false;
+									Statistics.redBlockerShipCreation += 1;
+									cooldown2 = Constants.shipCool * 2;
+									redMoney-=15;
+									break;
+								}
 							
+							}
 						}
 					}
 				}
 			}
-		}
 		public static void giveMoney(){
 			if (rcurrentTick < rcooldown){
 				rcurrentTick++;

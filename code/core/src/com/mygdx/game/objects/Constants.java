@@ -17,7 +17,6 @@ public class Constants {
 	public static int display_width;
 	public static int display_height;
 	
-	
 	//animation stuff
 	public static final int animationSpeed = 3; //this divided by 30 is the frames per second
 	public static final float boomSize = 1.5f;
@@ -31,7 +30,7 @@ public class Constants {
 	public static final int bShips = 3;
 	//major gameplay stuff
 	//maximum money
-	public static final int maxmoney = 999999998;
+	public static final int maxmoney = 100;
 	//ship lives
 	public static final int sShipLife = 1;
 	public static final int shShipLife = 3;
