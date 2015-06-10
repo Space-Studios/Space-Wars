@@ -42,7 +42,7 @@ public class Constants {
 	//base stuff
 	public static final int baseLife = 50;
 	//shooter ship shooting cooldown
-	public static final int shotCool = 150;
+	public static final int shotCool = 100;
 	//how long to wait before showing the lose screen
 	public static final int waitBeforeEnd = 200;
 	//how long you sit and stare at the lose screen before the credits pop up and you can stare at something else
