@@ -56,6 +56,8 @@ public class Robot { //Mecha-ship!
 				} else {
 					if (hasPlayerBuiltShip) {
 						lane = core.blueSelected;
+						randomShip();
+						/*
 						if (builtShipID == 1) {
 							if (core.redMoney >= 5) {
 								createAISuicideShip = true;
@@ -71,6 +73,7 @@ public class Robot { //Mecha-ship!
 								createAIBlockerShip = true;
 							}
 						}
+						*/
 					}
 				}
 			}
@@ -162,4 +165,14 @@ public class Robot { //Mecha-ship!
 		}
 	}
 	*/
+	public static void randomShip() {
+		rand = (int) (Math.random()*3+1);
+		if (rand == 1 && core.redMoney >= 5) {
+			createAISuicideShip = true;
+		} else if (rand == 2 && core.redMoney >= 10) {
+			createAIShooterShip = true;
+		} else if (rand == 3 && core.redMoney >= 15) {
+			createAIBlockerShip = true;
+		}
+	}
 }
