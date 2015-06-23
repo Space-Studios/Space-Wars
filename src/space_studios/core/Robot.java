@@ -14,9 +14,12 @@ public class Robot { //Mecha-ship!
 	private static SpaceWarsCore core;
 	public StateMachine<Robot> stateMachine;
 	
+	/*
 	public static boolean lane1 = false;
 	public static boolean lane2 = false;
 	public static boolean lane3 = false;
+	*/
+	public static int lane = core.lane2;
 	public static boolean createAIShooterShip = false;
 	public static boolean createAIBlockerShip = false;
 	public static boolean createAISuicideShip = false;
@@ -31,7 +34,6 @@ public class Robot { //Mecha-ship!
 	}
 	
 	public void update() {
-		selectLane(core.redSelected);
 		stateMachine.update();
 	}
 	
@@ -39,36 +41,37 @@ public class Robot { //Mecha-ship!
 		IDLE() {
 			@Override
 			public void update(Robot robot) {
-				if (core.getQ() || core.getW() || core.getE()) {
+				if (hasPlayerBuiltShip) {
 					robot.stateMachine.changeState(DEFENSIVE);
+					System.out.println("State changed - Defensive");
 				}
 			}
 		},
 		DEFENSIVE() {
 			@Override
 			public void update(Robot robot) {
-				
-				if (core.getBlueMoney() > Constants.maxmoney*0.2) {
+				if (core.getBlueMoney() < Constants.maxmoney*0.2 && (core.shipsInLane1 == 0 || core.shipsInLane2 == 0 || core.shipsInLane3 == 0)) {
 					 robot.stateMachine.changeState(AGGRESSIVE);
+					 System.out.println("State changed - Aggressive");
 				} else {
 					if (hasPlayerBuiltShip) {
-						 if (builtShipID == 1) {
-							 if (core.redMoney >= 5) {
-								 createAISuicideShip = true;
-							 }
-						 }
-						 if (builtShipID == 2) {
-							 if (core.redMoney >= 10) {
-								 createAIShooterShip = true;
-							 }
-						 }
-						 if (builtShipID == 3) {
-							 if (core.redMoney >= 15) {
-								 createAIBlockerShip = true;
-							 }
-						 }
+						lane = core.blueSelected;
+						if (builtShipID == 1) {
+							if (core.redMoney >= 5) {
+								createAISuicideShip = true;
+							}
+						}
+						if (builtShipID == 2) {
+							if (core.redMoney >= 10) {
+								createAIShooterShip = true;
+							}
+						}
+						if (builtShipID == 3) {
+							if (core.redMoney >= 15) {
+								createAIBlockerShip = true;
+							}
+						}
 					}
-					selectLane(core.blueSelected);
 				}
 			}
 		},
@@ -77,50 +80,45 @@ public class Robot { //Mecha-ship!
 			public void update(Robot robot) {
 				if (core.mRedbase.Life < Constants.baseLife*0.4) {
 					robot.stateMachine.changeState(DEFENSIVE);
+					System.out.println("State changed - Defensive");
 				} else {
 					if (core.shipsInLane1 == 0) {
 						rand = (int) (Math.random()*3 + 1);
+						lane = core.lane1;
 						if (rand == 1) {
 							createAISuicideShip = true;
-							lane1 = true;
 						}
 						if (rand == 2) {
 							createAIShooterShip = true;
-							lane1 = true;
 						}
 						if (rand == 3) {
 							createAIShooterShip = true;
-							lane1 = true;
 						}
 					}
 					if (core.shipsInLane2 == 0) {
+						lane = core.lane2;
 						rand = (int) (Math.random()*3 + 1);
 						if (rand == 1) {
 							createAISuicideShip = true;
-							lane2 = true;
 						}
 						if (rand == 2) {
 							createAIShooterShip = true;
-							lane2 = true;
 						}
 						if (rand == 3) {
 							createAIShooterShip = true;
-							lane2 = true;
 						}
 					}
 					if (core.shipsInLane3 == 0) {
 						rand = (int) (Math.random()*3 + 1);
+						lane = core.lane3;
 						if (rand == 1) {
 							createAISuicideShip = true;
-							lane3 = true;
 						}
 						if (rand == 2) {
 							createAIShooterShip = true;
-							lane3 = true;
 						}
 						if (rand == 3) {
 							createAIShooterShip = true;
-							lane3 = true;
 						}
 					}
 				}
@@ -136,6 +134,7 @@ public class Robot { //Mecha-ship!
 		hasPlayerBuiltShip = true;
 		builtShipID = id;
 	}
+	/*
 	public static void selectLane(int lane) {
 		switch (lane) {
 		case ((178-32)*2)+120:
@@ -162,4 +161,5 @@ public class Robot { //Mecha-ship!
 			break;
 		}
 	}
+	*/
 }

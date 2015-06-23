@@ -159,6 +159,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		
 		public static int shipsInLane1 = 0, shipsInLane2 = 0, shipsInLane3 = 0;
 		
+		private static boolean debug = false;
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
@@ -533,15 +534,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				blueSelected = lane3;
 			}
 			if (inSoloMode) {
-				if (robot.lane1) {
-					redSelected = lane1;
-				}
-				if (robot.lane2) {
-					redSelected = lane2;
-				}
-				if (robot.lane3) {
-					redSelected = lane3;
-				}
+				redSelected = robot.lane;
 			} else if (inDuelMode) {
 				if (num8){
 					redSelected = lane1;
@@ -764,7 +757,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 								setLaneQuant(blueSelected, true);
 								break;
 							}
-							
 						}
 					}
 				}
@@ -813,13 +805,12 @@ public class SpaceWarsCore extends ApplicationAdapter{
 							//if you have enough money for it
 							if (redMoney>=5){	
 								//if its create function returns true, break
-								if (ship.create(redSelected,0)==true){
+								if (ship.create(robot.lane,0)==true){
 									I=false;
 									Statistics.redSuicideShipCreation += 1;
 									cooldown2=Constants.shipCool;
 									redMoney-=5;
 									robot.createAISuicideShip = false;
-									robot.deselectLane(redSelected);
 									break;
 									}
 								
@@ -836,13 +827,12 @@ public class SpaceWarsCore extends ApplicationAdapter{
 								//if you have enough money for it
 								if (redMoney>=10){	
 									//if its create function returns true, break
-									if (ship.create(redSelected,0)==true){
+									if (ship.create(robot.lane,0)==true){
 										O=false;
 										Statistics.redShooterShipCreation += 1;
 										cooldown2=Constants.shipCool+10;
 										redMoney-=10;
 										robot.createAIShooterShip = false;
-										robot.deselectLane(redSelected);
 										break;
 									}
 								
@@ -858,13 +848,12 @@ public class SpaceWarsCore extends ApplicationAdapter{
 								//if you have enough money for it
 								if (redMoney>=15){	
 									//if its create function returns true, break
-									if (ship.create(redSelected,0)==true){
+									if (ship.create(robot.lane,0)==true){
 										P=false;
 										Statistics.redBlockerShipCreation += 1;
 										cooldown2 = Constants.shipCool * 2;
 										redMoney-=15;
 										robot.createAIBlockerShip = false;
-										robot.deselectLane(redSelected);
 										break;
 									}
 								
@@ -973,28 +962,32 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			return blueMoney;
 		}
 		public static void setLaneQuant(int lane, boolean add) {
-			switch (lane) {
-			case ((178-32)*2)+120:
-				if (add) {
+			if (add) {
+				if (lane == lane1) {
 					shipsInLane1 ++;
-				} else {
-					shipsInLane1 --;
-				}
-				break;
-			case (178*2)+120:
-				if (add) {
+					if (debug) System.out.println("Ship added - lane 1");
+				} else if (lane == lane2) {
 					shipsInLane2 ++;
-				} else {
-					shipsInLane2 --;
-				}
-				break;
-			case ((178+32)*2)+120:
-				if (add) {
+					if (debug) System.out.println("Ship added - lane 2");
+				} else if (lane == lane3) {
 					shipsInLane3 ++;
+					if (debug) System.out.println("Ship added - lane 3");
 				} else {
-					shipsInLane3 --;
+					System.out.println("Error - invalid lane");
 				}
-				break;
+			} else {
+				if (lane == lane1) {
+					shipsInLane1 --;
+					if (debug) System.out.println("Ship removed - lane 1");
+				} else if (lane == lane2) {
+					shipsInLane2 --;
+					if (debug) System.out.println("Ship removed - lane 2");
+				} else if (lane == lane3) {
+					shipsInLane3 --;
+					if (debug) System.out.println("Ship removed - lane 3");
+				} else {
+					if (debug) System.out.println("Error - invalid lane");
+				}
 			}
 		}
 }
