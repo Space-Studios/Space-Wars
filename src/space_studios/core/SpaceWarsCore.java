@@ -9,6 +9,7 @@ import java.util.List;
 
 
 
+
 import space_studios.objects.BaseshipObject;
 import space_studios.objects.BlockerShip;
 import space_studios.objects.BlueBase;
@@ -24,8 +25,10 @@ import space_studios.objects.SoundPlayer;
 import space_studios.objects.Statistics;
 import space_studios.objects.SuicideShip;
 
+
 //import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -43,13 +46,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //import Music
 //import Statistics
 
-public class SpaceWarsCore extends ApplicationAdapter{
-		
-		//camera
-		private OrthographicCamera camera;
+public class SpaceWarsCore extends Game {
 		
 		//spritebatch for drawing the sprites on
-		private SpriteBatch batch;
+		public SpriteBatch batch;
 		
 		//base
 		public static RedBase mRedbase = new RedBase();
@@ -80,14 +80,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private Sprite spr_StatisticsRED;
 		private static Boolean inStatisticsSequence = false;
 		
-		//title screen
-		private Texture tex_title;
-		private Sprite spr_title;
-		private static Boolean inTitleSequence = true;
-
-			// Start Button Duel
-			private static Texture tex_duel;
-			private static Sprite spr_duel;
 		//lanes
 		public static int lane1 = ((178-32)*2)+120;//y value
 		public static int lane2 = (178*2)+120; //y value
@@ -145,7 +137,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		public static int redMoney;
 		
 		//font
-		private static BitmapFont font;
+		public BitmapFont font;
 		
 		//music
 		private static MusicPlayer music;
@@ -163,27 +155,20 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
-			
-			//initialize hal-9000
-			robot = new Robot(this);
 			//allows you to use constants
 			Constants.setSize(Gdx.graphics.getDesktopDisplayMode().width,Gdx.graphics.getDesktopDisplayMode().height);
 			//FULLSCREEN LINE, this enables fullscreen for your computer\\
 			Gdx.graphics.setDisplayMode(Constants.display_width, Constants.display_height, true);
-			//setting the lanes, it only works here and not higher
-			lane1 = Constants.display_height/2+64; 
-			lane2 =Constants.display_height/2;
-			lane3 = Constants.display_height/2-64;
-				
+			
+			System.out.println("breakpoint");
+			
 			//music\\
 			music=new MusicPlayer();
 			music.init();
 			
 			//sounds\\
-			sounds= new SoundPlayer();
+			sounds=new SoundPlayer();
 			sounds.init();
-			
-			//--font stuff--\\
 			
 			//make font
 			font = new BitmapFont();
@@ -191,80 +176,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//sets font color
 			font.setColor(Color.WHITE);
 			
-			//--Timer stuff--\\
-			
-			//sets currentTick to 0
-			currentTick=0;
-			currentTick2=0;
-			waitTime=0;
-			
-			//--debug stuff--\\
-			blueSelected=lane2;
-			redSelected=lane2;
-			
-			//--Resources stuff--\\
-			
-			//set resources to 20
-			blueMoney=20;
-			redMoney=20;
-			
-			//--Ship Stuff--\\
-			
-			// Create all ships in the game
-			//red first
-			//ten suicide ships
-			for(int i = 0; i<Constants.sShips; i++) {
-				allRShips.add(new RedSuicideShip());
-			}
-			
-			//five shooter ships
-			for(int i = 0; i<Constants.shShips; i++) {
-				allRShips.add(new RedShooterShip());
-			}
-			
-			//three blocker ships
-			for(int i = 0; i<Constants.bShips; i++) {
-				allRShips.add(new RedBlockerShip());
-			}
-			//then blue
-			//ten suicide ships
-			for(int i = 0; i<Constants.sShips; i++) {
-				allBShips.add(new SuicideShip());
-			}
-			
-			//five shooter ships
-			for(int i = 0; i<Constants.shShips; i++) {
-				allBShips.add(new ShooterShip());
-			}
-			
-			//three blocker ships
-			for(int i = 0; i<Constants.bShips; i++) {
-				allBShips.add(new BlockerShip());
-			}
-			//add stuff to the allships list
-			allShips.addAll(allRShips);
-			allShips.addAll(allBShips);
-			// init the ships
-			for(int len = allBShips.size(), i = 0; i < len; i++) {
-				BaseshipObject ship = allBShips.get(i);
-				ship.Init();
-			}
-			for(int len = allRShips.size(), i = 0; i < len; i++) {
-				BaseshipObject ship = allRShips.get(i);
-				ship.Init();
-			}
-			// init the bases
-			mRedbase.Init();
-			mBluebase.Init();
-			
-			//set camera
-			camera=new OrthographicCamera();
-			camera.setToOrtho(false,1024,480);
 			batch=new SpriteBatch();
-	
-			//background for the game
-			tex_space = new Texture(Gdx.files.internal("assets/sprites/SPACE!!!!!.png"));
-			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
 			//sets credits
 			tex_Credits = new Texture(Gdx.files.internal("assets/sprites/Credits.png"));
@@ -279,16 +191,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			tex_RedWins = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Win Screen/Player 2 Red Wins Screen.png"));
 			spr_RedWins = new Sprite(tex_RedWins,0,0,1920,1080);
 			
-			
-			//title
-			tex_title = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/Title Screen Image .png"));
-			spr_title = new Sprite(tex_title,0,0,1920,1080);
-			
-			//Start Button Dual
-			tex_duel = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/StartA.png"));
-			spr_duel = new Sprite(tex_duel);
-			spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
-			
 			//statistics
 			tex_StatisticsBLU = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Statistics Screen/Statistics Screen BLUEWON.png"));
 			spr_StatisticsBLU = new Sprite(tex_StatisticsBLU,0,0,1920,1080);
@@ -297,7 +199,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//resizes all of the screens to your screen size\\
 			//yup, it is just the same command over and over again!!!
-			spr_title.setSize(Constants.display_width, Constants.display_height);
+			//spr_title.setSize(Constants.display_width, Constants.display_height);
 			spr_RedWins.setSize(Constants.display_width, Constants.display_height);
 			spr_BlueWins.setSize(Constants.display_width, Constants.display_height);
 			spr_StatisticsBLU.setSize(Constants.display_width, Constants.display_height);
@@ -308,31 +210,25 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//now the credits have to be put in the correct position
 			creditsYPosition = Constants.display_height*(-3);
-			
-			//sets position for stationary things
-			spr_space.setPosition(0, 0);
-			//red stuff
-			mRedbase.setPlace((Constants.display_width/4)*3, (Constants.display_height/2)-48);
-			//blue stuff
-			mBluebase.setPlace(Constants.display_width/4, (Constants.display_height/2)-48);
+			this.setScreen(new Menu(this));
 		}
 		
 		@Override
 		public void dispose(){
 			//disposes all the game textures and objects
 			batch.dispose();
-			tex_space.dispose();
 		}
 
 		@Override
 		public void render () {
 			
+			super.render();
+			/*
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 			///drawing. The ones drawn first are behind the others
 			batch.begin();
-			
 			
 			//if escape if pushed, exit
 			if (end()){
@@ -340,6 +236,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				dispose();
 				System.exit(0);
 			}
+			/*
 			//if the user hasn't pressed enter, render the title screen
 			if (!endTitle() && inTitleSequence) {
 				spr_title.draw(batch);
@@ -493,11 +390,13 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//update money
 			giveMoney();
+			*/
 			}
 		 
 
 		
 		//-------FUNCTIONS-------\\
+		/*
 		private static void updateShips(List<BaseshipObject> allShips){
 			for(int len = allBShips.size(), i = 0; i < len; i++) {
 				BaseshipObject ship = allBShips.get(i);
@@ -509,7 +408,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
 				ship.bulletTest(mRedbase, mBluebase);
 			}
-			
 		}
 		
 		private static void drawShips(List<BaseshipObject> allShips, SpriteBatch batch){
@@ -634,13 +532,9 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				 num0 = false;
 			 }	 
 		}
-		
-		public static Boolean end(){
-			 if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-				return true; 
-			 }
-			return false;
-		}
+		*/
+
+		/*
 		//If the user presses enter, it changes the status of inTitleSequence to false
 		//This will cause the game to begin rendering
 		
@@ -672,11 +566,10 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			spr_duel.setPosition(Constants.display_width/2 - 128,Constants.display_height/5 - 64);
 			return false;
 		}
-
-		
-		
+		*/
+		/*
 		public static Boolean endTitle(){
-			if(/*Gdx.input.isKeyPressed(Input.Keys.ENTER)*/ highlightedButton() 
+			if(/*Gdx.input.isKeyPressed(Input.Keys.ENTER) highlightedButton() 
 					&& Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 				inTitleSequence = false;
 				inDuelMode = true;
@@ -684,6 +577,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			}
 			return false;
 		}
+		*/
 		public static Boolean endWinScreen(){
 			if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 				inWinScreenSequence = false;

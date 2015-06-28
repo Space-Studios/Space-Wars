@@ -11,7 +11,7 @@ import space_studios.objects.Constants;
 import space_studios.objects.RedBase;
 
 public class Robot { //Mecha-ship!
-	private static SpaceWarsCore core;
+	private static SpaceWarsSolo core;
 	public StateMachine<Robot> stateMachine;
 	
 	/*
@@ -27,8 +27,8 @@ public class Robot { //Mecha-ship!
 	private static boolean hasPlayerBuiltShip = false;
 	private static int rand;
 	
-	public Robot(SpaceWarsCore cor) {
-		core = cor;
+	public Robot(SpaceWarsSolo coreInput) {
+		core = coreInput;
 		stateMachine = new DefaultStateMachine<Robot>(this, RobotState.IDLE);
 		System.out.println("Robot Initialized. Breakpoint 2");
 	}
