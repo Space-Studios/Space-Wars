@@ -33,30 +33,10 @@ public class Boom {
 	
 	public void Init(){
 		//texture and sprite adding
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 1.png")));
-		sprite.add(new Sprite(texture.get(0),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 2.png")));
-		sprite.add(new Sprite(texture.get(1),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 3.png")));
-		sprite.add(new Sprite(texture.get(2),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 4.png")));
-		sprite.add(new Sprite(texture.get(3),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 5.png")));
-		sprite.add(new Sprite(texture.get(4),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 6.png")));
-		sprite.add(new Sprite(texture.get(5),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 7.png")));
-		sprite.add(new Sprite(texture.get(6),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 8.png")));
-		sprite.add(new Sprite(texture.get(7),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 9.png")));
-		sprite.add(new Sprite(texture.get(8),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 10.png")));
-		sprite.add(new Sprite(texture.get(9),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 11.png")));
-		sprite.add(new Sprite(texture.get(10),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 12 (not necessary).png")));
-		sprite.add(new Sprite(texture.get(11),0,0,128,128));
+		for (int i = 0; i < 11; i++) {
+			texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame "+(i+1)+".png")));
+			sprite.add(new Sprite(texture.get(i),0,0,128,128));
+		}
 	}
 	
 	//update
@@ -73,9 +53,9 @@ public class Boom {
 		}
 		//reset counter
 		counter=0;
-		//add one to frame and if twelve, destroy
+		//add one to frame and if eleven, destroy
 		frame++;
-		if (frame>=12){
+		if (frame>=11){
 			frame=0;
 			Show = false;
 		}
@@ -87,7 +67,7 @@ public class Boom {
 	
 	//sets position of the object
 	public void setPlace(float xPosition,float yPosition){
-		if (frame>=12){
+		if (frame>=11){
 			return;
 		}
 		sprite.get(frame).setPosition(xPosition, yPosition);
