@@ -1,5 +1,8 @@
-package space_studios.core;
+package space_studios.screens;
 
+import space_studios.core.SpaceWarsCore;
+import space_studios.core.SpaceWarsDuel;
+import space_studios.core.SpaceWarsSolo;
 import space_studios.objects.Constants;
 
 import com.badlogic.gdx.Gdx;
@@ -69,6 +72,7 @@ public class Menu implements Screen {
 			tex_solo = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/StartSoloB.png"));
 			if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 				core.setScreen(new SpaceWarsSolo(core));
+				SpaceWarsCore.inSoloMode = true;
 				dispose();
 			}
 		} else {

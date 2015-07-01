@@ -15,6 +15,8 @@ import space_studios.objects.ShipTypes;
 import space_studios.objects.ShooterShip;
 import space_studios.objects.Statistics;
 import space_studios.objects.SuicideShip;
+import space_studios.screens.StatisticScreen;
+import space_studios.screens.Win;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -55,12 +57,6 @@ public class SpaceWarsSolo implements Screen{
 	
 	private static int waitTime;
 	private static final int waitMax = Constants.waitBeforeEnd;
-	private static int creditsWait;
-	private static final int creditsWaitMax = Constants.waitBeforeCredits;
-	private static Boolean creditsMoving;
-	private static int creditsYPosition;
-	private static int statisticsWait;
-	private static final int statisticsWaitMax = Constants.waitBeforeStatistics;
 	
 	private static final int rcooldown = Constants.moneyCool;
 	private static int rcurrentTick;
@@ -78,6 +74,8 @@ public class SpaceWarsSolo implements Screen{
 	
 	private Texture tex_space;
 	private Sprite spr_space;
+	
+	private static Boolean playWinSound = true;
 	
 	public static int shipsInLane1 = 0, shipsInLane2 = 0, shipsInLane3 = 0;
 	
@@ -187,6 +185,16 @@ public class SpaceWarsSolo implements Screen{
 			core.batch.end();
 			return;
 		}
+		if ((mBluebase.isDead() || mRedbase.isDead()) && waitTime >= waitMax){
+			if (mRedbase.isDead()) core.setScreen(new Win(core, "blue"));
+			if (mBluebase.isDead()) core.setScreen(new Win(core, "red"));
+			if (playWinSound){
+				core.sounds.playWin();
+				playWinSound = false;
+			}
+			Win.statisticsWait++;
+		}
+		
 		//draw the background
 		spr_space.draw(core.batch);
 		//draw the bases
