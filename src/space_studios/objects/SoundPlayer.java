@@ -39,4 +39,9 @@ public class SoundPlayer {
 		winid = win.play();
 		win.setPitch(winid,0.5f);
 	}
+	public void dispose() {
+		boom.dispose();
+		shootshipLaunch.dispose();
+		win.dispose();
+	}
 }

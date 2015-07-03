@@ -45,7 +45,6 @@ public class Credits implements Screen{
 			else {
 				//if credits are done, make player wait until they push escape
 				creditsMoving = false;
-				if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) System.exit(0);
 			}
 		}
 		// if the credits have not yet been set to their initial position, the credits will start moving next step
@@ -53,10 +52,15 @@ public class Credits implements Screen{
 			creditsMoving = true;
 		}
 		core.batch.end();
+		if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+			core.setScreen(ScreenManager.menu);
+		}
 	}
 	
 	@Override
-	public void dispose() {}
+	public void dispose() {
+		tex_Credits.dispose();
+	}
 	@Override
 	public void hide() {}
 	@Override

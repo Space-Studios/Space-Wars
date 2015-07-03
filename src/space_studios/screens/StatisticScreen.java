@@ -56,11 +56,21 @@ public class StatisticScreen implements Screen{
 		core.font.draw(core.batch, "Blocker Ship Creation: "+Statistics.redBlockerShipCreation, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-602))/1080);
 		core.font.draw(core.batch, "Blue Ships Destroyed: "+Statistics.redKills, (Constants.room_width * 1267)/1920, (Constants.room_height * (1080-710))/1080);
 		core.batch.end();
-		if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) core.setScreen(new Credits(core));
+		if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+			if (ScreenManager.credits == null) {
+				ScreenManager.credits = new Credits(core);
+				core.setScreen(ScreenManager.credits);
+			} else {
+				core.setScreen(ScreenManager.credits);
+			}
+		}
 	}
 	
 	@Override
-	public void dispose() {}
+	public void dispose() {
+		tex_StatisticsBLU.dispose();
+		tex_StatisticsRED.dispose();
+	}
 
 	@Override
 	public void hide() {}

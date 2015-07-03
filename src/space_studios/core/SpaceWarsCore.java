@@ -11,6 +11,8 @@ import java.util.List;
 
 
 
+
+
 import space_studios.objects.BaseshipObject;
 import space_studios.objects.BlockerShip;
 import space_studios.objects.BlueBase;
@@ -28,6 +30,8 @@ import space_studios.objects.SuicideShip;
 
 
 import space_studios.screens.Menu;
+import space_studios.screens.ScreenManager;
+
 
 //import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
@@ -88,18 +92,30 @@ public class SpaceWarsCore extends Game {
 			font.setColor(Color.WHITE);
 			
 			batch=new SpriteBatch();
-			
-			this.setScreen(new Menu(this));
+			if (ScreenManager.menu == null) {
+				ScreenManager.menu = new Menu(this);
+				this.setScreen(ScreenManager.menu);
+			} else {
+				this.setScreen(ScreenManager.menu);
+			}
 		}
 		
 		@Override
 		public void dispose(){
 			//disposes all the game textures and objects
 			batch.dispose();
+			music.dispose();
+			sounds.dispose();
+			font.dispose();
+			super.dispose();
 		}
 
 		@Override
 		public void render () {
+			if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+				dispose();
+				System.exit(0);
+			}
 			super.render();
 		}
 		

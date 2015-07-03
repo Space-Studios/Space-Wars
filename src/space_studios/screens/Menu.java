@@ -57,11 +57,6 @@ public class Menu implements Screen {
 		spr_duel.draw(core.batch);
 		highlightButton();
 		core.batch.end();
-		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
-			core.dispose();
-			dispose();
-			System.exit(0);
-		}
 	}
 	
 	public void highlightButton() {

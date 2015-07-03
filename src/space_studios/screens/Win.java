@@ -50,13 +50,20 @@ public class Win implements Screen{
 			core.batch.end();
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-			core.setScreen(new StatisticScreen(core, win));
-			System.out.println("Screen change - Statistics screen");
+			if (ScreenManager.stat == null) {
+				ScreenManager.stat = new StatisticScreen(core, win);
+				core.setScreen(ScreenManager.stat);
+			} else {
+				core.setScreen(ScreenManager.stat);
+			}
 		}
 	}
 	
 	@Override
-	public void dispose() {}
+	public void dispose() {
+		tex_BlueWins.dispose();
+		tex_RedWins.dispose();
+	}
 	@Override
 	public void hide() {}
 	@Override

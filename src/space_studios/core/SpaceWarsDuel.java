@@ -15,6 +15,7 @@ import space_studios.objects.ShipTypes;
 import space_studios.objects.ShooterShip;
 import space_studios.objects.Statistics;
 import space_studios.objects.SuicideShip;
+import space_studios.screens.ScreenManager;
 import space_studios.screens.Win;
 
 import com.badlogic.gdx.Gdx;
@@ -165,12 +166,6 @@ final SpaceWarsCore core;
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		core.batch.begin();
-		if (end()){
-			core.batch.end();
-			core.dispose();
-			dispose();
-			System.exit(0);
-		}
 		if ((mBluebase.isDead() || mRedbase.isDead()) && waitTime < waitMax){
 			waitTime++;
 			//update ships
@@ -191,14 +186,20 @@ final SpaceWarsCore core;
 		}
 		if ((mBluebase.isDead() || mRedbase.isDead()) && waitTime >= waitMax){
 			if (mRedbase.isDead()) {
-				if (debug) System.out.println("Red base destroyed.");
-				core.setScreen(new Win(core, "blue"));
-				if (debug) System.out.println("Screen change - Win");
+				if (ScreenManager.win == null) {
+					ScreenManager.win = new Win(core, "blue");
+					core.setScreen(ScreenManager.win);
+				} else {
+					core.setScreen(ScreenManager.win);
+				}
 			}
 			if (mBluebase.isDead()) {
-				if (debug) System.out.println("Blue base destroyed.");
-				core.setScreen(new Win(core, "red"));
-				if (debug) System.out.println("Screen change - Win");
+				if (ScreenManager.win == null) {
+					ScreenManager.win = new Win(core, "red");
+					core.setScreen(ScreenManager.win);
+				} else {
+					core.setScreen(ScreenManager.win);
+				}
 			}
 			if (playWinSound){
 				core.sounds.playWin();
@@ -547,7 +548,9 @@ final SpaceWarsCore core;
 	}
 	
 	@Override
-	public void dispose() {}
+	public void dispose() {
+		tex_space.dispose();
+	}
 	@Override
 	public void hide() {}
 	@Override

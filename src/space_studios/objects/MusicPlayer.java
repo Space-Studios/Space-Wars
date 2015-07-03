@@ -16,4 +16,7 @@ public class MusicPlayer {
 	public static void update(){
 
 	}
+	public void dispose() {
+		music.dispose();
+	}
 }
