@@ -14,7 +14,9 @@ import com.badlogic.gdx.math.Rectangle;
 public class RedBase {
 	public Rectangle mask;
 	private Sprite sprite;
+	private Sprite yard;
 	private Texture texture;
+	private Texture ships;
 	private float X;
 	private float Y;
 	public int Life = Constants.baseLife;
@@ -31,12 +33,17 @@ public class RedBase {
 		//make font
 		font = new BitmapFont();
 		font.setColor(Color.WHITE);
+		font.getData().setScale(Constants.FontScale());
 		//make mask, texture and sprite
 		mask = new Rectangle (0.0f,0.0f,128.0f*Constants.ScreenScaleX(),128.0f*Constants.ScreenScaleY());
 		texture = new Texture(Gdx.files.internal("assets/sprites/Ships & Bases/Red Sprites/Other/RedBase.png"));
+		ships = new Texture(Gdx.files.internal("assets/sprites/Ships & Bases/Shipyards/P2 Shipyard.png"));
 		sprite = new Sprite(texture,0,0,128,128);
+		yard = new Sprite (ships,0,0,128,64);
+		yard.setPosition(0, 0);
 		this.setPlace(0, 0);
 		sprite.scale(0.8f*Constants.ScreenScaleX());
+		yard.scale(0.8f*Constants.ScreenScaleX());
 		sounds.init();
 	}
 	//returns colliding
@@ -93,6 +100,8 @@ public class RedBase {
 		sprite.setPosition(xPosition, yPosition);
 		X=xPosition;
 		Y=yPosition;
+		//yard.setPosition(xPosition, yPosition-((128+32)*Constants.ScreenScaleY()));
+		yard.setPosition(xPosition+((128+32)*Constants.ScreenScaleY()), yPosition);
 	}
 	//returns true if dead
 	public Boolean takeDamage(int amount){
@@ -119,8 +128,9 @@ public class RedBase {
 			this.setPlace(0, 0);
 			return;
 		}
-		font.draw(batch, "Life: "+Life, X, Y+128+64);
+		font.draw(batch, "Life: "+Life, X, Y+100*Constants.ScreenScaleX());
 		sprite.draw(batch);
+		yard.draw(batch);
 	}
 	
 }

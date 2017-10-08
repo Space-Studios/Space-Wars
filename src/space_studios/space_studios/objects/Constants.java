@@ -16,10 +16,10 @@ public class Constants {
 	public static int display_height;
 	
 	//animation stuff
-	public static final int animationSpeed = 3; //this divided by 30 is the frames per second
+	public static final int animationSpeed = 1; //this divided by 30 is animation speed
 	public static final float boomSize = 1.5f;
 	//minor gameplay stuff
-	public static final int shipCool = 30; //if s ship, this value, if sh ship, this value + 10, if b ship, this value *2
+	public static final int shipCool = 14; //if s ship, this value, if sh ship, this value + 10, if b ship, this value *2
 	public static final int moneyCool = 15;
 	public static final int income = 1;
 	//gameplay stuff
@@ -61,6 +61,9 @@ public class Constants {
 	}
 	public static float ScreenScaleY(){
 		return (display_height/1080)*scaleFactor;
+	}
+	public static float FontScale(){
+		return (display_width/1920)*1.3f;
 	}
 	
 }

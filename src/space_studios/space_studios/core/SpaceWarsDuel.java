@@ -98,9 +98,9 @@ final SpaceWarsCore core;
 		core = coreInput;
 		
 		//sets lanes
-		lane1 = (int) (Constants.display_height/2+(64*Constants.ScreenScaleY()));
+		lane1 = (int) (Constants.display_height/2+(64));
 		lane2 =Constants.display_height/2;
-		lane3 = (int) (Constants.display_height/2-(64*Constants.ScreenScaleY()));
+		lane3 = (int) (Constants.display_height/2-(64));
 		
 		blueSelected=lane2;
 		redSelected=lane2;
@@ -227,16 +227,16 @@ final SpaceWarsCore core;
 		
 		//draw Money
 		if (blueMoney==Constants.maxmoney) {
-			core.font.draw(core.batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Constants.display_width/4)-32, (Constants.display_height/2)-(128*Constants.ScreenScaleY()));
+			core.font.draw(core.batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Constants.display_width/4)-32, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
 		}
 		else{
-			core.font.draw(core.batch, "Money:$"+blueMoney, (Constants.display_width/4), (Constants.display_height/2)-(128*Constants.ScreenScaleY()));
+			core.font.draw(core.batch, "Money:$"+blueMoney, (Constants.display_width/4), (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
 		}
 		if (redMoney==Constants.maxmoney) {
-			core.font.draw(core.batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Constants.display_width/4)*3)-32, (Constants.display_height/2)-(128*Constants.ScreenScaleY()));
+			core.font.draw(core.batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Constants.display_width/4)*3)-32, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
 		}
 		else{
-			core.font.draw(core.batch, "Money:$"+redMoney, (Constants.display_width/4)*3, (Constants.display_height/2)-(128*Constants.ScreenScaleY()));
+			core.font.draw(core.batch, "Money:$"+redMoney, (Constants.display_width/4)*3, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
 		}
 		
 		
@@ -265,12 +265,12 @@ final SpaceWarsCore core;
 	private static void updateShips(List<BaseshipObject> allShips){
 		for(int len = allBShips.size(), i = 0; i < len; i++) {
 			BaseshipObject ship = allBShips.get(i);
-			ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
+			ship.update(Gdx.graphics.getDeltaTime(), allShips);
 			ship.bulletTest(mRedbase, mBluebase);
 		}
 		for(int len = allRShips.size(), i = 0; i < len; i++) {
 			BaseshipObject ship = allRShips.get(i);
-			ship.update(Gdx.graphics.getRawDeltaTime(), allShips);
+			ship.update(Gdx.graphics.getDeltaTime(), allShips);
 			ship.bulletTest(mRedbase, mBluebase);
 		}
 	}

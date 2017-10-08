@@ -25,8 +25,8 @@ public class Boom {
 	public Boom(float Xpo,float Ypo,float howBig){
 		frame = 0;
 		counter=0;
-		X = (int) Xpo-4;
-		Y = (int) Ypo-80;
+		X = (int) (Xpo-(4*Constants.ScreenScaleX()));
+		Y = (int) (Ypo-(60*Constants.ScreenScaleY()));
 		Show = true;
 		Size=howBig;
 	}

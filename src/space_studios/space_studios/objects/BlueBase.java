@@ -14,7 +14,9 @@ import com.badlogic.gdx.math.Rectangle;
 public class BlueBase {
 	public Rectangle mask;
 	private Sprite sprite;
+	private Sprite yard;
 	private Texture texture;
+	private Texture ships;
 	public int Life = Constants.baseLife;
 	private float X;
 	private float Y;
@@ -29,11 +31,15 @@ public class BlueBase {
 		//make font
 		font = new BitmapFont();
 		font.setColor(Color.WHITE);
+		font.getData().setScale(Constants.FontScale());
 		mask = new Rectangle (0.0f,0.0f,128.0f*Constants.ScreenScaleX(),128.0f*Constants.ScreenScaleY());
 		texture = new Texture(Gdx.files.internal("assets/sprites/Ships & Bases/Blue Sprites/Other/BlueBase.png"));
+		ships = new Texture(Gdx.files.internal("assets/sprites/Ships & Bases/Shipyards/P2 Shipyard.png"));
 		sprite = new Sprite(texture,0,0,128,128);
+		yard = new Sprite (ships,0,0,128,64);
 		this.setPlace(0, 0);
 		sprite.scale(0.8f*Constants.ScreenScaleX());
+		yard.scale(0.8f*Constants.ScreenScaleX());
 		X=0;
 		Y=0;
 		sounds.init();
@@ -93,6 +99,7 @@ public class BlueBase {
 		sprite.setPosition(xPosition, yPosition);
 		X = xPosition;
 		Y = yPosition;
+		yard.setPosition(xPosition, yPosition-((128+32)*Constants.ScreenScaleY()));
 	}
 	
 	//returns true if dead
@@ -120,8 +127,9 @@ public class BlueBase {
 			this.setPlace(99999, 99999);
 			return;
 		}
-		font.draw(batch, "Life: "+Life, X, Y+128+64);
+		font.draw(batch, "Life: "+Life, X, Y+100*Constants.ScreenScaleX());
 		sprite.draw(batch);
+		yard.draw(batch);
 
 	}
 	

@@ -58,10 +58,10 @@ public class BaseBullet {
 		}
 		Speed+=acc;
 		//if out of play
-		if (X<-64){
+		if (X<-64*Constants.ScreenScaleX()){
 			Created=false;
 		}
-		if (X>1024*2){
+		if (X>1024*2*Constants.ScreenScaleX()){
 			Created=false;
 		}
 	}

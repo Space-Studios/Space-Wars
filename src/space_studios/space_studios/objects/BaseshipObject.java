@@ -54,6 +54,7 @@ public class BaseshipObject {
 	private void inittwo() {
 		Sprite.scale(Constants.ScreenScaleX());
 		this.Speed *= Constants.ScreenScaleX();
+		this.Speed *= 10;
 		
 	};
 	
@@ -92,8 +93,8 @@ public class BaseshipObject {
 			bulletFront = allBullets.get(bulletLen-1);
 		}
 		
-		//Goal: 30 fps
-		delta /= 30; //delta is never used...
+		
+		
 		//this piece of code checks if it is colliding with a ship. that ship is called the collider
 		Boolean colliding = false; //if it is colliding
 		BaseshipObject collider = null; //what it is colliding with
@@ -130,10 +131,10 @@ public class BaseshipObject {
 		//if not colliding, move this object
 		if (colliding == false){
 			if (Blue == true){
-				this.setPlace(X + (Speed), Y);
+				this.setPlace(X + (Speed*delta), Y);
 			}
 			else{
-				this.setPlace(X - (Speed), Y);
+				this.setPlace(X - (Speed*delta), Y);
 			}
 		}
 		

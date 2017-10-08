@@ -18,6 +18,10 @@ public class DesktopLauncher {
 		config.height = Constants.room_height;
 		//this line sets fullscreen
 		config.fullscreen=Constants.fullscreen;
+		
+		config.foregroundFPS = 60;
+		config.vSyncEnabled = false;
+		config.samples = 4;
 		//This line creates the window after all the variables have been set
 		new LwjglApplication(new SpaceWarsCore(), config);
 	}

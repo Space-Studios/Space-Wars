@@ -88,8 +88,9 @@ public class SpaceWarsCore extends Game {
 			//make font
 			font = new BitmapFont();
 			
-			//sets font color
+			//sets font color and size based on screen
 			font.setColor(Color.WHITE);
+			font.getData().setScale(Constants.FontScale());
 			
 			batch=new SpriteBatch();
 			if (ScreenManager.menu == null) {
