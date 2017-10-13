@@ -48,6 +48,12 @@ public class Constants {
 	//Win screen splash screen wait time
 	public static final int waitBeforeStatistics = 200;
 	
+	//Ship Texture Arrays
+	private static final String p = "assets/sprites/Ships & Bases/Ships/";
+	public static final String[] suicideShipPaths = {p+"Basic Suicide Drone.png",p+"Red Basic Suicide Drone.png"};
+	public static final String[] shooterShipPaths = {p+"Basic Blocker.png",p+"Red Basic Blocker.png"};
+	public static final String[] blockerShipPaths = {p+"Basic Shooter Ship.png",p+"Red Basic Shooter Ship.png"};
+	
 	//sets display_width
 	public static void setSize(int width, int height){
 		display_width = width;
@@ -65,5 +71,6 @@ public class Constants {
 	public static float FontScale(){
 		return (display_width/1920)*1.3f;
 	}
+
 	
 }
