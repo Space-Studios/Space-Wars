@@ -4,37 +4,21 @@
 	<classpathentry kind="src" path="assets"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
-	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/jars/gdx-backend-jglfw-natives.jar"/>
-	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/jars/gdx-backend-lwjgl.jar"/>
-	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/jars/gdx-natives.jar"/>
-	<classpathentry kind="lib" path="lib/ashley-1.4.0.jar"/>
-	<classpathentry kind="lib" path="lib/gdx-1.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/gdx-ai-1.5.0.jar"/>
-	<classpathentry kind="lib" path="lib/gdx-backend-headless-1.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/gdx-backend-lwjgl-1.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/gdx-box2d.dll"/>
-	<classpathentry kind="lib" path="lib/gdx-box2d64.dll"/>
-	<classpathentry kind="lib" path="lib/gdx-natives.jar"/>
-	<classpathentry kind="lib" path="lib/gdx-platform-1.6.2-natives-desktop.jar"/>
-	<classpathentry kind="lib" path="lib/gdx-tools-1.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/gdx.dll"/>
-	<classpathentry kind="lib" path="lib/gdx64.dll"/>
-	<classpathentry kind="lib" path="lib/jinput-2.0.5.jar"/>
-	<classpathentry kind="lib" path="lib/jinput-dx8_64.dll"/>
-	<classpathentry kind="lib" path="lib/jinput-dx8.dll"/>
-	<classpathentry kind="lib" path="lib/jinput-platform-2.0.5-natives-windows.jar"/>
-	<classpathentry kind="lib" path="lib/jinput-raw_64.dll"/>
-	<classpathentry kind="lib" path="lib/jinput-raw.dll"/>
-	<classpathentry kind="lib" path="lib/jinput-wintab.dll"/>
-	<classpathentry kind="lib" path="lib/jlayer-1.0.1-gdx.jar"/>
-	<classpathentry kind="lib" path="lib/jorbis-0.0.17.jar"/>
-	<classpathentry kind="lib" path="lib/jutils-1.0.0.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl_util-2.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl-2.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl-platform-2.9.2-natives-windows.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl.dll"/>
-	<classpathentry kind="lib" path="lib/lwjgl64.dll"/>
-	<classpathentry kind="lib" path="lib/OpenAL32.dll"/>
-	<classpathentry kind="lib" path="lib/OpenAL64.dll"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/ashley-1.4.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/gdx-1.6.2.jar" sourcepath="C:/Users/leonl/.m2/repository/com/badlogicgames/gdx/gdx/1.6.2/gdx-1.6.2-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/gdx-ai-1.5.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/gdx-backend-headless-1.6.2.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/gdx-backend-lwjgl-1.6.2.jar" sourcepath="C:/Users/leonl/.m2/repository/com/badlogicgames/gdx/gdx-backend-lwjgl/1.6.2/gdx-backend-lwjgl-1.6.2-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/gdx-natives.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/gdx-platform-1.6.2-natives-desktop.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/gdx-tools-1.6.2.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/jinput-2.0.5.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/jinput-platform-2.0.5-natives-windows.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/jlayer-1.0.1-gdx.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/jorbis-0.0.17.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/jutils-1.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/lwjgl_util-2.9.2.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/lwjgl-2.9.2.jar"/>
+	<classpathentry kind="lib" path="D:/Users/leonl/Documents/GitHub/Space-Wars/lib/lwjgl-platform-2.9.2-natives-windows.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
