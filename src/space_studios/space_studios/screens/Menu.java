@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 
 public class Menu implements Screen{
 	private Texture tex_title;
@@ -53,10 +54,11 @@ public class Menu implements Screen{
 		
 		//for buttons, we need a selector sprite
 		Texture seltex = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/selector.png"));
-		Sprite selspr = new Sprite(seltex);
+		Sprite selspr = new Sprite(seltex,128,128);
+		Sprite selspr2 = new Sprite(seltex,128,128);
 		//buttons!
 		solo = new Button(spr_solo,selspr);
-		duel = new Button(spr_duel,selspr);
+		duel = new Button(spr_duel,selspr2);
 		
 		solo.SetPosition(Constants.display_width/2, Constants.display_height/8);
 		duel.SetPosition(Constants.display_width/2-256,Constants.display_height/8);
@@ -67,9 +69,11 @@ public class Menu implements Screen{
 	@Override
 	public void render(float delta) {
 		core.batch.begin();
+		cam.unproject(new Vector3().set(Gdx.input.getX(), Gdx.input.getY(), 0));
 		spr_title.draw(core.batch);
 		//spr_solo.draw(core.batch);
 		//spr_duel.draw(core.batch);
+		updateButtons();
 		solo.draw(core.batch);
 		duel.draw(core.batch);
 		
@@ -77,8 +81,8 @@ public class Menu implements Screen{
 		core.batch.end();
 	}
 	public void updateButtons(){ //10/10 vry simple
-		solo.Update();
-		duel.Update();
+		solo.Update(Gdx.input.getX(),Constants.display_height - Gdx.input.getY());
+		duel.Update(Gdx.input.getX(),Constants.display_height - Gdx.input.getY());
 		
 		if(solo.pressed){
 			core.setScreen(new SpaceWarsSolo(core));
