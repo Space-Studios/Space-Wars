@@ -60,8 +60,8 @@ public class Menu implements Screen{
 		solo = new Button(spr_solo,selspr);
 		duel = new Button(spr_duel,selspr2);
 		
-		solo.SetPosition(Constants.display_width/2, Constants.display_height/8);
-		duel.SetPosition(Constants.display_width/2-256,Constants.display_height/8);
+		solo.SetPosition(Constants.display_width/2+20, Constants.display_height/8);
+		duel.SetPosition(Constants.display_width/2-260,Constants.display_height/8);
 		
 		spr_title.setSize(Constants.display_width, Constants.display_height);
 	}

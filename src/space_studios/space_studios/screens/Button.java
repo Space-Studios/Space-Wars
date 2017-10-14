@@ -59,7 +59,6 @@ public class Button {
 		
 		if(Intersector.overlaps(bounds.getBoundingRectangle(), mouse.getBoundingRectangle()) && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
 			pressed = true;
-			System.out.println("high");
 		}
 		else{
 			pressed = false;
