@@ -100,8 +100,8 @@ public class RedBase {
 		sprite.setPosition(xPosition, yPosition);
 		X=xPosition;
 		Y=yPosition;
-		//yard.setPosition(xPosition, yPosition-((128+32)*Constants.ScreenScaleY()));
-		yard.setPosition(xPosition+((128+32)*Constants.ScreenScaleY()), yPosition);
+		yard.setPosition(xPosition, yPosition-((128+32)*Constants.ScreenScaleY()));
+		//yard.setPosition(xPosition+((128+32)*Constants.ScreenScaleY()), yPosition);
 	}
 	//returns true if dead
 	public Boolean takeDamage(int amount){

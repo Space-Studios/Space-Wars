@@ -25,6 +25,7 @@ public class Button {
 	public Button (Sprite spr,Sprite selected1){
 		sprite = spr;
 		select = selected1;
+		select.setSize(sprite.getWidth(), sprite.getHeight()); //set to correct scale
 		selectable = true;
 		bounds = new Rectangle (0,0,sprite.getWidth(), sprite.getHeight());
 	}
@@ -63,10 +64,14 @@ public class Button {
 		sprite.setPosition(x1, y1);
 		bounds.setPosition(x1, y1);
 	}
-	public void Render (SpriteBatch batch){
+	public void draw (SpriteBatch batch){
 		sprite.draw(batch);
 		if(selected){
 			select.draw(batch);
 		}
 	}
+	public void Dispose(){
+		
+	}
+	
 }

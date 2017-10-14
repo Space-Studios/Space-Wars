@@ -24,6 +24,9 @@ public class Menu implements Screen{
 	private Texture tex_solo;
 	private Sprite spr_solo;
 	
+	private Button duel;
+	private Button solo;
+	
 	private OrthographicCamera cam;
 	final SpaceWarsCore core;
 	
@@ -36,15 +39,27 @@ public class Menu implements Screen{
 		tex_title = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/Title Screen Image .png"));
 		spr_title = new Sprite(tex_title,0,0,1920,1080);
 		
+		
 		//duel start screen
 		tex_duel = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/StartDuelA.png"));
 		spr_duel = new Sprite(tex_duel);
 		spr_duel.setPosition(Constants.display_width/2-256,Constants.display_height/8);
+
 		
 		//solo start screen
 		tex_solo = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/StartSoloA.png"));
 		spr_solo = new Sprite(tex_solo);
 		spr_solo.setPosition(Constants.display_width/2,Constants.display_height/8);
+		
+		//for buttons, we need a selector sprite
+		Texture seltex = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/selector.png"));
+		Sprite selspr = new Sprite(seltex);
+		//buttons!
+		solo = new Button(spr_solo,selspr);
+		duel = new Button(spr_duel,selspr);
+		
+		solo.SetPosition(Constants.display_width/2, Constants.display_height/8);
+		duel.SetPosition(Constants.display_width/2-256,Constants.display_height/8);
 		
 		spr_title.setSize(Constants.display_width, Constants.display_height);
 	}
@@ -53,12 +68,30 @@ public class Menu implements Screen{
 	public void render(float delta) {
 		core.batch.begin();
 		spr_title.draw(core.batch);
-		spr_solo.draw(core.batch);
-		spr_duel.draw(core.batch);
-		highlightButton();
+		//spr_solo.draw(core.batch);
+		//spr_duel.draw(core.batch);
+		solo.draw(core.batch);
+		duel.draw(core.batch);
+		
+		//highlightButton();
 		core.batch.end();
 	}
+	public void updateButtons(){ //10/10 vry simple
+		solo.Update();
+		duel.Update();
+		
+		if(solo.pressed){
+			core.setScreen(new SpaceWarsSolo(core));
+			SpaceWarsCore.inSoloMode = true;
+			dispose();
+		}
+		if(duel.pressed){
+			core.setScreen(new SpaceWarsDuel(core));
+			dispose();
+		}
+	}
 	
+	/*
 	public void highlightButton() {
 		if (Gdx.input.getX() > Constants.display_width/2 
 			&& Gdx.input.getX() < Constants.display_width/2+256
@@ -88,6 +121,7 @@ public class Menu implements Screen{
 		spr_solo.setTexture(tex_solo);
 		spr_duel.setTexture(tex_duel);
 	}
+	*/
 	
 	@Override
 	public void dispose() {
