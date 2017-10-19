@@ -29,9 +29,10 @@ public class BlueBase {
 	}
 	public void Init(){
 		//make font
-		font = new BitmapFont();
-		font.setColor(Color.WHITE);
-		font.getData().setScale(Constants.FontScale());
+		//font = new BitmapFont();
+		//font.setColor(Color.WHITE);
+		//font.getData().setScale(Constants.FontScale());
+		font = Constants.font;
 		mask = new Rectangle (0.0f,0.0f,128.0f*Constants.ScreenScaleX(),128.0f*Constants.ScreenScaleY());
 		texture = new Texture(Gdx.files.internal("assets/sprites/Ships & Bases/Blue Sprites/Other/BlueBase.png"));
 		ships = new Texture(Gdx.files.internal("assets/sprites/Ships & Bases/Shipyards/P2 Shipyard.png"));
@@ -127,7 +128,7 @@ public class BlueBase {
 			this.setPlace(99999, 99999);
 			return;
 		}
-		font.draw(batch, "Life: "+Life, X, Y+100*Constants.ScreenScaleX());
+		font.draw(batch, "Life: "+Life, X-16*Constants.ScreenScaleX(), Y+110*Constants.ScreenScaleX());
 		sprite.draw(batch);
 		yard.draw(batch);
 

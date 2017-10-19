@@ -13,6 +13,7 @@ import java.util.List;
 
 
 
+
 import space_studios.objects.BaseshipObject;
 import space_studios.objects.BlockerShip;
 import space_studios.objects.BlueBase;
@@ -33,6 +34,7 @@ import space_studios.screens.Menu;
 import space_studios.screens.ScreenManager;
 
 
+
 //import libgdx game stuff
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
@@ -42,6 +44,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -57,7 +60,7 @@ public class SpaceWarsCore extends Game {
 		
 		//spritebatch for drawing the sprites on
 		public SpriteBatch batch;
-		
+	
 		//font
 		public BitmapFont font;
 		
@@ -86,11 +89,17 @@ public class SpaceWarsCore extends Game {
 			sounds.init();
 			
 			//make font
-			font = new BitmapFont();
+			font = new BitmapFont(Gdx.files.internal("assets/fonts/hurryup.fnt"),
+					Gdx.files.internal("assets/fonts/hurryup_0.png"),
+					false);
 			
 			//sets font color and size based on screen
 			font.setColor(Color.WHITE);
+			font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+			//font.setColor(1.0f, 1.0f, 0.0f, 1.0f);
 			font.getData().setScale(Constants.FontScale());
+			Constants.font = font;
+			
 			
 			batch=new SpriteBatch();
 			if (ScreenManager.menu == null) {
