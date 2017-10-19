@@ -90,12 +90,12 @@ public class ShipSelection implements Screen{
 		//spr_title.setPosition(x, y);
 		
 		//make buttons based on arrows
-		Button r1 = new Button(spr_rarrow);
-		Button l1 = new Button(spr_larrow);
-		Button r2 = new Button(spr_rarrow);
-		Button l2 = new Button(spr_larrow);
-		Button r3 = new Button(spr_rarrow);
-		Button l3 = new Button(spr_larrow);
+		Button r1 = new Button(spr_rarrow,new Sprite(spr_selector));
+		Button l1 = new Button(spr_larrow,new Sprite(spr_selector));
+		Button r2 = new Button(spr_rarrow,new Sprite(spr_selector));
+		Button l2 = new Button(spr_larrow,new Sprite(spr_selector));
+		Button r3 = new Button(spr_rarrow,new Sprite(spr_selector));
+		Button l3 = new Button(spr_larrow,new Sprite(spr_selector));
 		
 		//set their positions
 		r1.SetPosition(900*Constants.ScreenScaleX(), 750*Constants.ScreenScaleY());

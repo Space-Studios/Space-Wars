@@ -48,6 +48,9 @@ public class Constants {
 	//Win screen splash screen wait time
 	public static final int waitBeforeStatistics = 200;
 	
+	//button selector texture path
+	public static final String selector = "assets/sprites/Menu & Title Screens/selector.png";
+	
 	//Ship Texture Arrays
 	private static final String p = "assets/sprites/Ships & Bases/Ships/";
 	public static final String[] suicideShipPaths = {p+"Basic Suicide Drone.png",p+"Red Basic Suicide Drone.png"};
