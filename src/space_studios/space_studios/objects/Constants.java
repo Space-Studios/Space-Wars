@@ -1,10 +1,12 @@
 package space_studios.objects;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
 
 public class Constants {
 	//----------define constants----------\\
 	//room stuff
-	public static String versionNumber = "v1.0.1";
+	public static String versionNumber = "v1.0.5";
 	
 	public static final String title = "Space Wars" + " " + versionNumber;
 	public static final boolean fullscreen = false; //this must stay false
@@ -14,6 +16,8 @@ public class Constants {
 	
 	public static int display_width;
 	public static int display_height;
+	
+	public static BitmapFont font;
 	
 	//animation stuff
 	public static final int animationSpeed = 1; //this divided by 30 is animation speed

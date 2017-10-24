@@ -31,9 +31,10 @@ public class RedBase {
 	
 	public void Init(){
 		//make font
-		font = new BitmapFont();
-		font.setColor(Color.WHITE);
-		font.getData().setScale(Constants.FontScale());
+		//font = new BitmapFont();
+		//font.setColor(Color.WHITE);
+		//font.getData().setScale(Constants.FontScale());
+		font = Constants.font;
 		//make mask, texture and sprite
 		mask = new Rectangle (0.0f,0.0f,128.0f*Constants.ScreenScaleX(),128.0f*Constants.ScreenScaleY());
 		texture = new Texture(Gdx.files.internal("assets/sprites/Ships & Bases/Red Sprites/Other/RedBase.png"));
@@ -128,7 +129,7 @@ public class RedBase {
 			this.setPlace(0, 0);
 			return;
 		}
-		font.draw(batch, "Life: "+Life, X, Y+100*Constants.ScreenScaleX());
+		font.draw(batch, "Life: "+Life, X-16*Constants.ScreenScaleX(), Y+110*Constants.ScreenScaleX());
 		sprite.draw(batch);
 		yard.draw(batch);
 	}

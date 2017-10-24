@@ -227,16 +227,16 @@ final SpaceWarsCore core;
 		
 		//draw Money
 		if (blueMoney==Constants.maxmoney) {
-			core.font.draw(core.batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Constants.display_width/4)-32, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
+			core.font.draw(core.batch, "Money:$"+blueMoney+"   MONEY CAP REACHED", (Constants.display_width/4)-256, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
 		}
 		else{
-			core.font.draw(core.batch, "Money:$"+blueMoney, (Constants.display_width/4), (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
+			core.font.draw(core.batch, "Money:$"+blueMoney, (Constants.display_width/4)-128, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
 		}
 		if (redMoney==Constants.maxmoney) {
-			core.font.draw(core.batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Constants.display_width/4)*3)-32, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
+			core.font.draw(core.batch, "Money:$"+redMoney+"   MONEY CAP REACHED", ((Constants.display_width/4)*3)-256, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
 		}
 		else{
-			core.font.draw(core.batch, "Money:$"+redMoney, (Constants.display_width/4)*3, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
+			core.font.draw(core.batch, "Money:$"+redMoney, ((Constants.display_width/4)*3)-128, (Constants.display_height/2)-(100*Constants.ScreenScaleY()));
 		}
 		
 		

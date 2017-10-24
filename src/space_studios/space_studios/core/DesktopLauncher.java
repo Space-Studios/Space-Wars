@@ -1,7 +1,10 @@
 package space_studios.core;
 
+
+import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+
 import space_studios.core.SpaceWarsCore;
 import space_studios.objects.Constants;
 
@@ -17,11 +20,17 @@ public class DesktopLauncher {
 		config.width = Constants.room_width;
 		config.height = Constants.room_height;
 		//this line sets fullscreen
-		config.fullscreen=Constants.fullscreen;
+		
+		//DisplayMode displayMode = LwjglApplicationConfiguration.getDesktopDisplayMode();
+		//config.setFromDisplayMode(displayMode);
+		
+		//config.fullscreen=Constants.fullscreen;
 		
 		config.foregroundFPS = 60;
 		config.vSyncEnabled = false;
 		config.samples = 4;
+		
+		
 		//This line creates the window after all the variables have been set
 		new LwjglApplication(new SpaceWarsCore(), config);
 	}
